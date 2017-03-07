@@ -32,7 +32,7 @@ public class MultiLayerPerceptron {
             totalSet.sort(0);
             // Percent split
 
-            int trainSize = totalSet.size()-100;
+            int trainSize = totalSet.size()-200;
 //            (int) Math.round(totalSet.numInstances() * 80.5
 //                    / 100);
             int testSize = totalSet.numInstances() - trainSize;
@@ -44,8 +44,8 @@ public class MultiLayerPerceptron {
             rm.setAttributeIndices("1");  // remove id
             // classifier
             MultilayerPerceptron mlp = new MultilayerPerceptron();
-            mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.25 -N 6000 -V 0 -S 0 -E 20 -H \"13, 6\" -R"));
-            Attribute clas=train.attribute(14);
+            mlp.setOptions(Utils.splitOptions(" -L 0.05 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"15, 7\" -R"));
+            Attribute clas=train.attribute(16);
             train.setClass(clas);
 
             // meta-classifier
@@ -93,11 +93,11 @@ public class MultiLayerPerceptron {
 
 System.out.println("--------------------------------TEST SET---------------------------------------------");
 
-            Instances datapredict = new Instances(
-                    new BufferedReader(
-                            new FileReader("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/testset2.arff")));
-            datapredict.setClassIndex(test.numAttributes()-1);
-             Attribute clas2=test.attribute(14);
+//            Instances datapredict = new Instances(
+//                    new BufferedReader(
+//                            new FileReader("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/testset2.arff")));
+//            datapredict.setClassIndex(test.numAttributes()-1);
+             Attribute clas2=test.attribute(16);
             test.setClass(clas2);
             fc.setFilter(rm);
 

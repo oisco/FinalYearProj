@@ -44,9 +44,9 @@ public class StartupService {
     //service to populate db with data from UFC API on startup if database is currently empty
    @PostConstruct
     public void onStartup() {
-        if(fighterRepository.findAll().size()>1) {
+        if(fighterRepository.findAll().size()>0) {
            RestTemplate restTemplate = new RestTemplate();
-            //events
+//            events
 //           ResponseEntity<Event[]> responseEntity = restTemplate.getForEntity("http://ufc-data-api.ufc.com/api/v3/us/events", Event[].class);
 //           Event[] events = responseEntity.getBody();
 //           eventRepository.save(Arrays.asList(events));
@@ -55,7 +55,7 @@ public class StartupService {
 //           Fighter[] fighters = responseEntity2.getBody();
 //           fighterRepository.save(Arrays.asList(fighters));
 
-//                //get all matchups for the event ids
+                //get all matchups for the event ids
 //            ArrayList<Event> events1 = new ArrayList<>();
 //            events1.add(eventRepository.findOne(611352));
             List<Event> events1 = eventRepository.findToGetMatchups();
@@ -70,9 +70,9 @@ public class StartupService {
                 }
             }
             System.out.println("event data got");
-         calculateStats.getFighterStatsAtTimeOfMatchup();
+//         calculateStats.getFighterStatsAtTimeOfMatchup();
             csvFileWriter.writeCsvFile();
-            multiLayerPerceptron.simpleWekaTrain();
+//            multiLayerPerceptron.simpleWekaTrain();
    }
 
     private void addMatchupToFighter(int id, Matchup m) {

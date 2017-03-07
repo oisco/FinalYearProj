@@ -23,11 +23,11 @@ import java.util.List;
                 query = "select m.id as matchupId,m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
                         "m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm" +
                         " ,m.fighter1_strikingdefense,m.fighter1_takedownaverage, \n" +
-                        "m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1number_of_ufc_fights,\n" +
-                        "m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +
+                        "m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1number_of_ufc_fights,m.fighter1number_of_ufc_wins,m.fighter1number_of_ufc_losses,\n" +
+                        "m.fighter2height,m.fighter2reach,m.fighter2record,\n" +
                         "m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm" +
                         " ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
-                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2number_of_ufc_fights \n" +
+                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2number_of_ufc_fights,m.fighter2number_of_ufc_wins,m.fighter2number_of_ufc_losses \n" +
                         "from matchup m\n" +
                         "where m.fighter1_is_winner\n" +
                         "and m.fighter1reach>0  and m.fighter1height>0 and m.fighter1record!=\"\" "+
@@ -36,10 +36,10 @@ import java.util.List;
                         " union \n" +
                         "select m.id,m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +
                         " m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
-                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2number_of_ufc_fights \n" +
-                        ",m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
+                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2number_of_ufc_fights ,m.fighter2number_of_ufc_wins,m.fighter2number_of_ufc_losses\n" +
+                        ",m.fighter1height,m.fighter1reach,m.fighter1record,\n" +
                         "m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm ,m.fighter1_strikingdefense,m.fighter1_takedownaverage\n" +
-                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1number_of_ufc_fights\n" +
+                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1number_of_ufc_fights,m.fighter1number_of_ufc_wins,m.fighter1number_of_ufc_losses\n" +
                         "from matchup m\n" +
                         "where m.fighter2_is_winner\n" +
                         "and m.status='valid'" +
@@ -50,10 +50,10 @@ import java.util.List;
         ,@NamedNativeQuery(name = "Matchup.findMLClass0Inputs",
                 query = "select m.id as matchupId,m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
                         "m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm ,m.fighter1_strikingdefense,m.fighter1_takedownaverage\n" +
-                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1number_of_ufc_fights \n" +
-                         ",m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +
+                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1number_of_ufc_fights,m.fighter1number_of_ufc_wins,m.fighter1number_of_ufc_losses \n" +
+                         ",m.fighter2height,m.fighter2reach,m.fighter2record,\n" +
                         "m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
-                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2number_of_ufc_fights\n" +
+                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2number_of_ufc_fights,m.fighter2number_of_ufc_wins,m.fighter2number_of_ufc_losses \n" +
                         "from matchup m\n" +
                         "where m.fighter2_is_winner\n" +
                         " and m.status='valid'" +
@@ -62,10 +62,10 @@ import java.util.List;
                         "union \n" +
                         "select m.id,m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +
                         "m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
-                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2number_of_ufc_fights\n" +
-                        ",m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class \n" +
+                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2number_of_ufc_fights,m.fighter2number_of_ufc_wins,m.fighter2number_of_ufc_losses\n" +
+                        ",m.fighter1height,m.fighter1reach,m.fighter1record \n" +
                         ",m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm ,m.fighter1_strikingdefense,m.fighter1_takedownaverage\n" +
-                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1number_of_ufc_fights\n" +
+                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1number_of_ufc_fights,m.fighter1number_of_ufc_wins,m.fighter1number_of_ufc_losses\n" +
                         "from matchup m\n" +
                         "where m.fighter1_is_winner\n" +
                         "and m.status='valid'" +
@@ -94,6 +94,18 @@ import java.util.List;
                 "and m.date< ?2\n" +
                 "and m.result_id=r.id\n" +
                 "and r.is_valid ;")
+
+        , @NamedNativeQuery(name = "Matchup.fightersNoOfWins",
+        query="select count(*) from matchup where \n" +
+                "(fighter1_id=?1 and fighter1_is_winner and date <?2)\n" +
+                "or\n" +
+                "(fighter2_id=?1 and fighter2_is_winner and date <?2);"),
+
+        @NamedNativeQuery(name = "Matchup.fightersNoOfLosses",
+                query="select count(*) from matchup where \n" +
+                    "(fighter2_id=?1 and fighter1_is_winner and date <?2)\n" +
+                        "or\n" +
+                        "(fighter1_id=?1 and fighter2_is_winner and date <?2);")
 })
 
 public class Matchup {
@@ -121,6 +133,8 @@ public class Matchup {
     private int fighter2_id;
 
     private int fighter1NumberOfUfcFights,fighter2NumberOfUfcFights;
+    private int fighter1NumberOfUfcWins,fighter2NumberOfUfcWins;
+    private int fighter1NumberOfUfcLosses,fighter2NumberOfUfcLosses;
 
     public String fighter1_first_name, fighter2_first_name,fighter2_last_name, fighter1_last_name;
     public String fighter1_profile_image,fighter2_profile_image;
@@ -130,22 +144,14 @@ public class Matchup {
     int fighter1reach,fighter2reach;
     int fighter1height,fighter2height;
 
-    @Nullable
     double fighter2_strikingaccuracy;
-    @Nullable
     double fighter1_strikingaccuracy;
-    @Nullable
     double fighter1_sapm ,fighter2_sapm ;
-    @Nullable
     double fighter1_slpm ,fighter2_slpm ;
 
-    @Nullable
     double fighter1_strikingdefense,fighter2_strikingdefense;
-    @Nullable
     double fighter2_takedownaverage,fighter1_takedownaverage;
-    @Nullable
     double fighter1_takedownaccuracy,fighter2_takedownaccuracy;
-    @Nullable
     double fighter1_takedowndefense,fighter2_takedowndefense;
 
     double fighter1_submissionsaverage,fighter2_submissionsaverage;
@@ -160,8 +166,7 @@ public class Matchup {
     public String fighter1record, fighter2record;
 
 
-
-    public Matchup(int id, boolean fighter1_is_winner, boolean fighter2_is_winner, Event event, List<Fighter> fighters, Result result, Prediction prediction, int fighter1_id, int fighter2_id, int fighter1NumberOfUfcFights, int fighter2NumberOfUfcFights, String fighter1_first_name, String fighter2_first_name, String fighter2_last_name, String fighter1_last_name, String fighter1_profile_image, String fighter2_profile_image, String fighter2_weight_class, String fighter1_weight_class, int fighter1reach, int fighter2reach, int fighter1height, int fighter2height, double fighter2_strikingaccuracy, double fighter1_strikingaccuracy, double fighter1_sapm, double fighter2_sapm, double fighter1_slpm, double fighter2_slpm, double fighter1_strikingdefense, double fighter2_strikingdefense, double fighter2_takedownaverage, double fighter1_takedownaverage, double fighter1_takedownaccuracy, double fighter2_takedownaccuracy, double fighter1_takedowndefense, double fighter2_takedowndefense, double fighter1_submissionsaverage, double fighter2_submissionsaverage, String weightClass, Date date, String status, String fm_stats_feed_url, String fighter1record, String fighter2record) {
+    public Matchup(int id, boolean fighter1_is_winner, boolean fighter2_is_winner, Event event, List<Fighter> fighters, Result result, Prediction prediction, int fighter1_id, int fighter2_id, int fighter1NumberOfUfcFights, int fighter2NumberOfUfcFights, int fighter1NumberOfUfcWins, int fighter2NumberOfUfcWins, int fighter1NumberOfUfcLosses, int fighter2NumberOfUfcLosses, String fighter1_first_name, String fighter2_first_name, String fighter2_last_name, String fighter1_last_name, String fighter1_profile_image, String fighter2_profile_image, String fighter2_weight_class, String fighter1_weight_class, int fighter1reach, int fighter2reach, int fighter1height, int fighter2height, double fighter2_strikingaccuracy, double fighter1_strikingaccuracy, double fighter1_sapm, double fighter2_sapm, double fighter1_slpm, double fighter2_slpm, double fighter1_strikingdefense, double fighter2_strikingdefense, double fighter2_takedownaverage, double fighter1_takedownaverage, double fighter1_takedownaccuracy, double fighter2_takedownaccuracy, double fighter1_takedowndefense, double fighter2_takedowndefense, double fighter1_submissionsaverage, double fighter2_submissionsaverage, String weightClass, Date date, String status, String fm_stats_feed_url, String fighter1record, String fighter2record) {
         this.id = id;
         this.fighter1_is_winner = fighter1_is_winner;
         this.fighter2_is_winner = fighter2_is_winner;
@@ -173,6 +178,10 @@ public class Matchup {
         this.fighter2_id = fighter2_id;
         this.fighter1NumberOfUfcFights = fighter1NumberOfUfcFights;
         this.fighter2NumberOfUfcFights = fighter2NumberOfUfcFights;
+        this.fighter1NumberOfUfcWins = fighter1NumberOfUfcWins;
+        this.fighter2NumberOfUfcWins = fighter2NumberOfUfcWins;
+        this.fighter1NumberOfUfcLosses = fighter1NumberOfUfcLosses;
+        this.fighter2NumberOfUfcLosses = fighter2NumberOfUfcLosses;
         this.fighter1_first_name = fighter1_first_name;
         this.fighter2_first_name = fighter2_first_name;
         this.fighter2_last_name = fighter2_last_name;
@@ -215,6 +224,38 @@ public class Matchup {
 
     public void setFighter1NumberOfUfcFights(int fighter1NumberOfUfcFights) {
         this.fighter1NumberOfUfcFights = fighter1NumberOfUfcFights;
+    }
+
+    public int getFighter1NumberOfUfcWins() {
+        return fighter1NumberOfUfcWins;
+    }
+
+    public void setFighter1NumberOfUfcWins(int fighter1NumberOfUfcWins) {
+        this.fighter1NumberOfUfcWins = fighter1NumberOfUfcWins;
+    }
+
+    public int getFighter2NumberOfUfcWins() {
+        return fighter2NumberOfUfcWins;
+    }
+
+    public void setFighter2NumberOfUfcWins(int fighter2NumberOfUfcWins) {
+        this.fighter2NumberOfUfcWins = fighter2NumberOfUfcWins;
+    }
+
+    public int getFighter1NumberOfUfcLosses() {
+        return fighter1NumberOfUfcLosses;
+    }
+
+    public void setFighter1NumberOfUfcLosses(int fighter1NumberOfUfcLosses) {
+        this.fighter1NumberOfUfcLosses = fighter1NumberOfUfcLosses;
+    }
+
+    public int getFighter2NumberOfUfcLosses() {
+        return fighter2NumberOfUfcLosses;
+    }
+
+    public void setFighter2NumberOfUfcLosses(int fighter2NumberOfUfcLosses) {
+        this.fighter2NumberOfUfcLosses = fighter2NumberOfUfcLosses;
     }
 
     public int getFighter2NumberOfUfcFights() {

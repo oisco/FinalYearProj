@@ -86,19 +86,24 @@ public ArrayList<Inputs> listGetClassStats(List<Object[]> matchups, int clas){
         int fighter1_numberOfUfcFights=Integer.parseInt(matchups.get(i)[13].toString());
         double fighterwinPct=getFighterWinPct(fighter1record);
         int totalFights=getTotalFightsAndWins(fighter1record)[0];
+        int fighter1_ufc_wins=Integer.parseInt(matchups.get(i)[14].toString());
+        int fighter1_ufc_losses=Integer.parseInt(matchups.get(i)[15].toString());
 
-        int fighter2height=Integer.parseInt(matchups.get(i)[14].toString());
-        int fighter2reach=Integer.parseInt(matchups.get(i)[15].toString());
-        String fighter2record=matchups.get(i)[16].toString();
-        double fighter2_strikingaccuracy=Double.parseDouble(matchups.get(i)[18].toString());
-        double fighter2_sapm=Double.parseDouble(matchups.get(i)[19].toString());
-        double fighter2_slpm=Double.parseDouble(matchups.get(i)[20].toString());
-        double fighter2_strikingdefense=Double.parseDouble(matchups.get(i)[21].toString());
-        double fighter2_takedownaverage =Double.parseDouble(matchups.get(i)[22].toString());
-        double fighter2_takedownaccuracy=Double.parseDouble(matchups.get(i)[23].toString());
-        double fighter2_takedowndefense=Double.parseDouble(matchups.get(i)[24].toString());
-        double fighter2_submissionsaverage=Double.parseDouble(matchups.get(i)[25].toString());
-        int fighter2_numberOfUfcFights=Integer.parseInt(matchups.get(i)[26].toString());
+        int fighter2height=Integer.parseInt(matchups.get(i)[16].toString());
+        int fighter2reach=Integer.parseInt(matchups.get(i)[17].toString());
+        String fighter2record=matchups.get(i)[18].toString();
+        double fighter2_strikingaccuracy=Double.parseDouble(matchups.get(i)[19].toString());
+        double fighter2_sapm=Double.parseDouble(matchups.get(i)[20].toString());
+        double fighter2_slpm=Double.parseDouble(matchups.get(i)[21].toString());
+        double fighter2_strikingdefense=Double.parseDouble(matchups.get(i)[22].toString());
+        double fighter2_takedownaverage =Double.parseDouble(matchups.get(i)[23].toString());
+        double fighter2_takedownaccuracy=Double.parseDouble(matchups.get(i)[24].toString());
+        double fighter2_takedowndefense=Double.parseDouble(matchups.get(i)[25].toString());
+        double fighter2_submissionsaverage=Double.parseDouble(matchups.get(i)[26].toString());
+        int fighter2_numberOfUfcFights=Integer.parseInt(matchups.get(i)[27].toString());
+        int fighter2_ufc_wins=Integer.parseInt(matchups.get(i)[28].toString());
+        int fighter2_ufc_losses=Integer.parseInt(matchups.get(i)[29].toString());
+
         double fighter2winPct=getFighterWinPct(fighter2record);
         int totalFights2=getTotalFightsAndWins(fighter2record)[0];
 
@@ -115,8 +120,10 @@ public ArrayList<Inputs> listGetClassStats(List<Object[]> matchups, int clas){
          fighter1_takedowndefense=fighter1_takedowndefense-fighter2_takedowndefense;
          fighter1_submissionsaverage=fighter1_submissionsaverage-fighter2_submissionsaverage;
         fighter1_numberOfUfcFights=fighter1_numberOfUfcFights-fighter2_numberOfUfcFights;
-
-        Inputs in=new Inputs(matchupId,totalFights,fighterwinPct, fighter1height,  fighter1reach, weightClass, fighter1_strikingaccuracy, fighter1_sapm, fighter1_slpm, fighter1_strikingdefense, fighter1_takedownaverage, fighter1_takedownaccuracy, fighter1_takedowndefense, fighter1_submissionsaverage,fighter1_numberOfUfcFights,clas);
+        fighter1_ufc_wins=fighter1_ufc_wins-fighter2_ufc_wins;
+        fighter1_ufc_losses=(0);
+//                fighter1_ufc_losses-fighter2_ufc_losses;
+        Inputs in=new Inputs(matchupId,totalFights,fighterwinPct, fighter1height,  fighter1reach, weightClass, fighter1_strikingaccuracy, fighter1_sapm, fighter1_slpm, fighter1_strikingdefense, fighter1_takedownaverage, fighter1_takedownaccuracy, fighter1_takedowndefense, fighter1_submissionsaverage,fighter1_numberOfUfcFights,fighter1_ufc_wins,fighter1_ufc_losses,clas);
         inputs.add(in);
     }
     return inputs;

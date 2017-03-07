@@ -38,19 +38,28 @@ public class CalculateStats {
                 double strikingDefense=0,strikingAccuracy=0,strikesAbsorbedPerMinute=0,strikesLandedPerMinute=0;
                 double takedownAccuracy=0,takedownDefense=0,takedownAverage=0, submissionAverage=0;
 
+                int numOfUfcFights = 0;
+                int numOfUfcWins = 0;
+                int numOfUfcLosses = 0;
+
                 List<Object[]> fightersPastMatchups;
                 if(currentFighter==1){
+                    numOfUfcWins = matchupRepository.fightersNoOfWins(matchups.get(i).getFighter1_id(), matchups.get(i).getDate());
+                    numOfUfcLosses = matchupRepository.fightersNoOfLosses(matchups.get(i).getFighter1_id(), matchups.get(i).getDate());
                     //query to find a list of strikes/takedowns landed by the current fighter we are dealing with
                     //all results are from fights which have happend before the above matchup
                     fightersPastMatchups = matchupRepository.findPastFightersMatchupStats(matchups.get(i).getFighter1_id(), matchups.get(i).getDate());
                 }
                 else {
+                    numOfUfcWins = matchupRepository.fightersNoOfWins(matchups.get(i).getFighter2_id(), matchups.get(i).getDate());
+                    numOfUfcLosses = matchupRepository.fightersNoOfLosses(matchups.get(i).getFighter2_id(), matchups.get(i).getDate());
                    fightersPastMatchups = matchupRepository.findPastFightersMatchupStats(matchups.get(i).getFighter2_id(), matchups.get(i).getDate());
                 }
 
                 //update stats for fighter 1
                 ///for each matchup calculate each fighters Stats as it was at the time of going into the matchup
-                int numOfUfcFights = 0;
+
+
                 //for each PREVIOUS matchups results update the career stats
                 for (int p = 0; p < fightersPastMatchups.size(); p++) {
                     numOfUfcFights++;
@@ -107,6 +116,9 @@ public class CalculateStats {
                     submissionAverage = getAverage(careerFightTime, careerSubmissionsAttempted);
                     if (currentFighter == 1) {
                         matchups.get(i).setFighter1NumberOfUfcFights(numOfUfcFights);
+                        matchups.get(i).setFighter1NumberOfUfcLosses(numOfUfcLosses);
+                        matchups.get(i).setFighter1NumberOfUfcWins(numOfUfcWins);
+
                         //update the matchup
                         matchups.get(i).setFighter1_takedownaverage(takedownAverage);
                         matchups.get(i).setFighter1_submissionsaverage(submissionAverage);
@@ -130,6 +142,9 @@ public class CalculateStats {
                     } else if (currentFighter == 2) {
                         //update the matchup
                         matchups.get(i).setFighter2NumberOfUfcFights(numOfUfcFights);
+                        matchups.get(i).setFighter2NumberOfUfcLosses(numOfUfcLosses);
+                        matchups.get(i).setFighter2NumberOfUfcWins(numOfUfcWins);
+
                         matchups.get(i).setFighter2_takedownaverage(takedownAverage);
                         matchups.get(i).setFighter2_submissionsaverage(submissionAverage);
                         //striking
