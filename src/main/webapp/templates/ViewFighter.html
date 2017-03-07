@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading">{{vm.fighter.first_name}} {{vm.fighter.last_name}}</div>
+            <div class="panel-body" >
+
+
+
+
+
+                <div class="fighterTop">
+                    <div class="MainFighterImage">
+                        <img src={{vm.fighterImage}}/>
+                    </div>
+
+                    <div class="stats">
+                        <ul>
+                            <li><b>Weight class:</b> {{vm.fighter.weight_class}}</li>
+                            <li><b>Rank:</b> {{vm.fighter.rank}}</li>
+                            <li><b>Reach:</b> {{vm.fighter.reach}}</li>
+                            <li><b>Height:</b> {{vm.fighter.height}}</li>
+                        </ul>
+                    </div>
+                    <div class="recordPie">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <div class="lineChart">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <tr><td>Previous fights</td></tr>
+                    <tr ng-repeat="matchup in vm.fighter.matchups | orderBy:'-date'" ng-class="rowClass(matchup)">
+                        <td><a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a>
+                        </td><td>vs</td>
+                        <td><a ng-click="vm.goToFighter(matchup.fighter2_id)">{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a> </td>
+                        <td><div ng-if="matchup.result==null">(Upcoming)</div>{{matchup.result.method}}-{{matchup.result.ending_time}}</td>
+                        <td>{{matchup.date | date}}</td>
+                        <td> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
+                    </tr>
+                </table>
+
+        </div>
+    </div>
+
+</div>
+    </div>

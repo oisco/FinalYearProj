@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-success">
+      <div class="panel-heading">{{vm.event.base_title}}  {{vm.event.event_date | date}}</div>
+      <div class="panel-body">
+        <div class="eventImage">
+          <img src="{{vm.event.feature_image}}">
+        </div>
+
+        <table class="table table-bordered table-striped">
+          <tr>Fight Predictions</tr>
+          <tr ng-repeat="matchup in vm.event.matchups">
+            <td ng-class="cellClass(matchup.fighter1_id)"><a ng-click="vm.goToFighter(matchup.fighter1_id)">
+              <img src="{{matchup.fighter1_profile_image}}"><br>{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}  </a></td>
+            <td>vs</td>
+            <td ng-class="cellClass(matchup.fighter2_id)"><a ng-click="vm.goToFighter(matchup.fighter2_id)">
+              <img src="{{matchup.fighter2_profile_image}}"><br>{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

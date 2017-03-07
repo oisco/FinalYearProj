@@ -1,0 +1,21 @@
+<div class="container">
+    <h2>Fighters</h2>
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Search for Fighter" ng-model="searchFish"/>
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-striped">
+        <tr><td>Fighter Name</td><td>Fighter Image</td></tr>
+        <tr ng-repeat="fighter in vm.fighters | filter:searchFish">
+            <td>{{fighter[1]}} {{fighter[2]}}</td><td><img src={{fighter[3]}}></td>
+            <td>
+                <button type="button" class="btn btn-default" ng-click="vm.goToFighter(fighter[0])">View Fighter</button>
+            </td>
+
+        </tr>
+    </table>
+</div>

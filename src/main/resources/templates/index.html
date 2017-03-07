@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>MMA APP</title>
+    <!--css -->
+    <link rel="stylesheet" type="text/css" href="app/css/styles.css"/>
+    <!--bootstrapp, thymeleaf, jquery scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="http://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    <!--angular scripts-->
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app/app.module.js"></script>
+    <script type="text/javascript" src="app/Controllers/home.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/view.event.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/view.upcoming.event.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/view.upcoming.events.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/view.fighter.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/view.event.predictions.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/fighter.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/event.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/view.upcoming.matchup.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/view.matchup.controller.js"></script>
+    <script type="text/javascript" src="app/Controllers/view.predictions.controller.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js" ></script>
+    <!-- -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+
+</head>
+<body ng-app="app" >
+
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="images/Logo.png" height="34"/></a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="#allFighters">View Fighters</a></li>
+                <li><a href="#allEvents">View Past Events</a></li>
+                <li><a href="#upcomingEvents">View Upcoming Events and Predictions</a></li>
+                <li><a href="#viewAllPredictions">View Prediction History</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="ng-view">
+    <!--
+    -->
+</div>
+
+<footer class="footer" style="position:absolute; bottom: 0; background-color: #c1ffa5">
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>All Predictions</h2>
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Search for Matchup" ng-model="searchFish"/>
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-striped">
+        <tr><td>Event Name</td><td>Fighter 1</td><td></td><td>Fighter 2</td><td>Date</td> <td>was Prediction correct?</td></tr>
+        <tr ng-repeat=" in vm.events | filter:searchFish | orderBy:'event_date'">
+        </tr>
+    </table>
+</div>

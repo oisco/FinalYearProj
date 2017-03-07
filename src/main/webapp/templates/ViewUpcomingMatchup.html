@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading"> <h2>{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}  vs  {{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</h2></div>
+        </div>
+        <table class="table">
+            <tr><td bgcolor="#0066ff" > <img src="{{vm.matchup.fighter1_profile_image}}"></td>
+                <td bgcolor="#ff5050"> <img src="{{vm.matchup.fighter2_profile_image}}"></td></tr>
+            <tr>
+                <td><a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a></td>
+                <td><a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</a></td>
+            </tr>
+        </table>
+    </div>
+
+</div>

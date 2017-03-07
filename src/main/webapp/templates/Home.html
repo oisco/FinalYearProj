@@ -1,0 +1,10 @@
+<img id="homePoster" src="{{vm.nextEventPic}}">
+    <div class="upcomingEventInfo">
+        <h1>Next Event</h1>
+        <br>
+        <h2>{{vm.event.base_title}}</h2>
+        <h2>{{vm.event.title_tag_line}}</h2><p>{{vm.event.event_date |date}}</p><p>{{vm.event.location}}</p>
+        <br>
+        <button type="button" class="btn btn-info" ng-click="vm.goToUpcomingEvent(vm.event.id)" >View Fight card</button> <button type="button" class="btn btn-info">View Predictions</button>
+    </div>
+

@@ -1,0 +1,46 @@
+.recordGraph {
+    display: block;
+    width: 50%;
+    float: right;
+}
+
+.fighterTop div {
+    float: left;
+    clear: none;
+    margin-right: 10%;
+}
+
+.recordPie{
+    width:30%;
+}
+.lineChart{
+    width:70%;
+    height: 600%;
+}
+
+.MainFighterImage{
+    width: 10%;
+}
+.eventImage{
+    float:inherit;
+    width:100%;
+}
+.img{
+    height: auto;
+    width: auto;
+}
+.homePoster{
+    width: 80%;
+    margin-right: 20%;
+    float: right;
+}
+
+.upcomingEventInfo{
+    float: right;
+    margin-right: 10%;
+    text-align: justify;
+}
+
+p{
+    size: 10px;
+}
