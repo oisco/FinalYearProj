@@ -49,7 +49,7 @@ public class CsvFileWriter {
                       "  @attribute submissionAverage NUMERIC\n" +
                       "  @attribute numberOfUfcFights NUMERIC\n" +
                       "  @attribute numberOfUfcWins NUMERIC\n" +
-                      "  @attribute numberOfUfcLosses NUMERIC\n" +
+//                      "  @attribute numberOfUfcLosses NUMERIC\n" +
                       "  @attribute class NUMERIC" +
                       "\n"+
                       "@data");
@@ -84,12 +84,12 @@ public class CsvFileWriter {
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getFighter1_submissionsaverage()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getNumberOfUfcFights()));
+                fileWriter.append(String.valueOf(inputs.getufcFinishPct()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getNumberOfUfcWins()));
+                fileWriter.append(String.valueOf(inputs.getufcWinPct()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getNumberOfUfcLosses()));
-                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(inputs.getufcLossPct()));
+//                fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getClas()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
@@ -120,12 +120,12 @@ public class CsvFileWriter {
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getFighter1_submissionsaverage()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getNumberOfUfcFights()));
+                fileWriter.append(String.valueOf(inputs.getufcFinishPct()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getNumberOfUfcWins()));
+                fileWriter.append(String.valueOf(inputs.getufcWinPct()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getNumberOfUfcLosses()));
-                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(inputs.getufcLossPct()));
+//                fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getClas()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }

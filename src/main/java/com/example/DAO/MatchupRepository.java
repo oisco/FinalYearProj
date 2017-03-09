@@ -24,4 +24,6 @@ public interface MatchupRepository extends JpaRepository<Matchup,Integer> {
     public List<Matchup> findByStatus(String status);
 
     List<Object[]> findPastFightersMatchupStats(int fighterId,Date date);
+
+    int findNoOfPastUfcFinishes(int fighterId, Date date);
 }

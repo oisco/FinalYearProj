@@ -68,11 +68,11 @@ public class StartupService {
                     //check if it is a future event if so predict and save otherwise just save and retrieve stats
                     saveMatchups(matchups, events1.get(i));
                 }
-            }
-            System.out.println("event data got");
+            //            System.out.println("event data got");
 //         calculateStats.getFighterStatsAtTimeOfMatchup();
-            csvFileWriter.writeCsvFile();
-//            multiLayerPerceptron.simpleWekaTrain();
+//            csvFileWriter.writeCsvFile();
+            multiLayerPerceptron.simpleWekaTrain();
+            }
    }
 
     private void addMatchupToFighter(int id, Matchup m) {

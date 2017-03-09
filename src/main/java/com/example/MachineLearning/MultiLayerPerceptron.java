@@ -22,30 +22,41 @@ import java.io.FileWriter;
 public class MultiLayerPerceptron {
     public MultiLayerPerceptron(){}
 
+    public void crossValidate(){
+        int startingPoint=0;
+        do{
+            simpleWekaTrain(startingPoint);
+            startingPoint=startingPoint+300;
+            
+        }while (startingPoint<1501);
+    }
+
 //    @PostConstruct
-    public void simpleWekaTrain()
+    public void simpleWekaTrain(int testAmt)
     {
+//        String filepath="C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/TRAIN3.arff";
         String filepath="C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/airline.arff";
         try{
             FileReader trainreader = new FileReader(filepath);
-            Instances totalSet = new Instances(trainreader);
-            totalSet.sort(0);
+            Instances train = new Instances(trainreader);
+            train.sort(0);
+
+            //below will remove create a test set from the total/traing set at a specified index and remove said test set from the training set
             // Percent split
-
-            int trainSize = totalSet.size()-200;
-//            (int) Math.round(totalSet.numInstances() * 80.5
-//                    / 100);
-            int testSize = totalSet.numInstances() - trainSize;
-            Instances train = new Instances(totalSet, 0, trainSize);
-            Instances test = new Instances(totalSet, trainSize, testSize);
-
+//            int testAmt=300;
+            int startingPoint=1400;
+            Instances test=new Instances(train,  startingPoint,  testAmt);
+            for (int i=0;i<testAmt;i++){
+                train.delete(startingPoint);
+            }
             // filter
             Remove rm = new Remove();
             rm.setAttributeIndices("1");  // remove id
             // classifier
             MultilayerPerceptron mlp = new MultilayerPerceptron();
-            mlp.setOptions(Utils.splitOptions(" -L 0.05 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"15, 7\" -R"));
-            Attribute clas=train.attribute(16);
+            ///increase by 1.25 for every 10% DECREASE IN learing set size
+            mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.25  -N 4000 -V 0 -S 0 -E 20 -H \"13,4\" -R"));
+            Attribute clas=train.attribute(15);
             train.setClass(clas);
 
             // meta-classifier
@@ -88,16 +99,16 @@ public class MultiLayerPerceptron {
             System.out.println(eval.errorRate()); //Printing Training Mean root squared Error
             System.out.println(eval.toSummaryString()); //Summary of Training
             System.out.println(eval.numInstances()/2); //Summary of Training
-            System.out.println("NUM CORRECT"+numCorrect);
+            System.out.println("NUM CORRECT"+numCorrect+" TOTAL: "+eval.numInstances()/2+" PCT:"+(numCorrect/((train.size()/2)/100.0f)));
 
 
 System.out.println("--------------------------------TEST SET---------------------------------------------");
-
-//            Instances datapredict = new Instances(
+//
+//            Instances test= new Instances(
 //                    new BufferedReader(
-//                            new FileReader("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/testset2.arff")));
-//            datapredict.setClassIndex(test.numAttributes()-1);
-             Attribute clas2=test.attribute(16);
+//                            new FileReader("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/t3.arff")));
+            test.setClassIndex(test.numAttributes()-1);
+             Attribute clas2=test.attribute(15);
             test.setClass(clas2);
             fc.setFilter(rm);
 
@@ -125,7 +136,7 @@ System.out.println("--------------------------------TEST SET--------------------
                         }
                     }
             }
-            System.out.println("test set correct "+numCorrect+"/"+test.size()/2);
+            System.out.println("test set correct "+numCorrect+"/"+test.size()/2+" pct: "+(numCorrect/((test.size()/2)/100.0f)));
 ////            //Storing again in arff
 ////            BufferedWriter writer = new BufferedWriter(
 ////                    new FileWriter("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/predioctedoutput.arff"));
