@@ -29,15 +29,15 @@ public class Inputs {
     double fighter1_takedownaccuracy;
     double fighter1_takedowndefense;
     double fighter1_submissionsaverage;
-    int numberOfUfcFights;
-    int numberOfUfcWins;
-    int numberOfUfcLosses;
+    double ufcFinishPct;
+    double ufcWinPct;
+    double ufcLossPct;
     
 
     //define win/loss 1/0
     int clas;
 
-    public Inputs(int matchupId,int totalFights, double winPct, int fighter1height, int fighter1reach, String weightClass, double fighter1_strikingaccuracy, double fighter1_sapm, double fighter1_slpm, double fighter1_strikingdefense, double fighter1_takedownaverage, double fighter1_takedownaccuracy, double fighter1_takedowndefense, double fighter1_submissionsaverage, int numberOfUfcFights, int numberOfUfcWins, int numberOfUfcLosses, int clas) {
+    public Inputs(int matchupId,int totalFights, double winPct, int fighter1height, int fighter1reach, String weightClass, double fighter1_strikingaccuracy, double fighter1_sapm, double fighter1_slpm, double fighter1_strikingdefense, double fighter1_takedownaverage, double fighter1_takedownaccuracy, double fighter1_takedowndefense, double fighter1_submissionsaverage, double ufcFinishPct, double ufcWinPct, double ufcLossPct, int clas) {
         this.totalFights = totalFights;
         this.winPct = winPct;
         this.matchupId = matchupId;
@@ -52,9 +52,9 @@ public class Inputs {
         this.fighter1_takedownaccuracy = fighter1_takedownaccuracy;
         this.fighter1_takedowndefense = fighter1_takedowndefense;
         this.fighter1_submissionsaverage = fighter1_submissionsaverage;
-        this.numberOfUfcFights = numberOfUfcFights;
-        this.numberOfUfcWins = numberOfUfcWins;
-        this.numberOfUfcLosses = numberOfUfcLosses;
+        this.ufcFinishPct = ufcFinishPct;
+        this.ufcWinPct = ufcWinPct;
+        this.ufcLossPct = ufcLossPct;
         this.clas = clas;
     }
 
@@ -66,28 +66,28 @@ public class Inputs {
         this.matchupId = matchupId;
     }
 
-    public int getNumberOfUfcWins() {
-        return numberOfUfcWins;
+    public double getufcWinPct() {
+        return ufcWinPct;
     }
 
-    public void setNumberOfUfcWins(int numberOfUfcWins) {
-        this.numberOfUfcWins = numberOfUfcWins;
+    public void setufcWinPct(double ufcWinPct) {
+        this.ufcWinPct = ufcWinPct;
     }
 
-    public int getNumberOfUfcLosses() {
-        return numberOfUfcLosses;
+    public double getufcLossPct() {
+        return ufcLossPct;
     }
 
-    public void setNumberOfUfcLosses(int numberOfUfcLosses) {
-        this.numberOfUfcLosses = numberOfUfcLosses;
+    public void setufcLossPct(double ufcLossPct) {
+        this.ufcLossPct = ufcLossPct;
     }
 
-    public int getNumberOfUfcFights() {
-        return numberOfUfcFights;
+    public double getufcFinishPct() {
+        return ufcFinishPct;
     }
 
-    public void setNumberOfUfcFights(int numberOfUfcFights) {
-        this.numberOfUfcFights = numberOfUfcFights;
+    public void setufcFinishPct(double ufcFinishPct) {
+        this.ufcFinishPct = ufcFinishPct;
     }
 
     public int getClas() {

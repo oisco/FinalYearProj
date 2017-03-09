@@ -1,7 +1,6 @@
 package com.example.MachineLearning;
 
 import com.example.DAO.MatchupRepository;
-import com.example.Entity.Matchup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -83,11 +82,11 @@ public ArrayList<Inputs> listGetClassStats(List<Object[]> matchups, int clas){
         double fighter1_takedownaccuracy=Double.parseDouble(matchups.get(i)[10].toString());
         double fighter1_takedowndefense=Double.parseDouble(matchups.get(i)[11].toString());
         double fighter1_submissionsaverage=Double.parseDouble(matchups.get(i)[12].toString());
-        int fighter1_numberOfUfcFights=Integer.parseInt(matchups.get(i)[13].toString());
+        double fighter1_UFCFinishPct=Double.parseDouble(matchups.get(i)[13].toString());
         double fighterwinPct=getFighterWinPct(fighter1record);
         int totalFights=getTotalFightsAndWins(fighter1record)[0];
-        int fighter1_ufc_wins=Integer.parseInt(matchups.get(i)[14].toString());
-        int fighter1_ufc_losses=Integer.parseInt(matchups.get(i)[15].toString());
+        double fighter1UFCWinPct=Double.parseDouble(matchups.get(i)[14].toString());
+        double fighter1UFCLossPct=Double.parseDouble(matchups.get(i)[15].toString());
 
         int fighter2height=Integer.parseInt(matchups.get(i)[16].toString());
         int fighter2reach=Integer.parseInt(matchups.get(i)[17].toString());
@@ -100,9 +99,9 @@ public ArrayList<Inputs> listGetClassStats(List<Object[]> matchups, int clas){
         double fighter2_takedownaccuracy=Double.parseDouble(matchups.get(i)[24].toString());
         double fighter2_takedowndefense=Double.parseDouble(matchups.get(i)[25].toString());
         double fighter2_submissionsaverage=Double.parseDouble(matchups.get(i)[26].toString());
-        int fighter2_numberOfUfcFights=Integer.parseInt(matchups.get(i)[27].toString());
-        int fighter2_ufc_wins=Integer.parseInt(matchups.get(i)[28].toString());
-        int fighter2_ufc_losses=Integer.parseInt(matchups.get(i)[29].toString());
+        double fighter2_UFCFinishPct=Double.parseDouble(matchups.get(i)[27].toString());
+        double fighter2UFCWinPct=Double.parseDouble(matchups.get(i)[28].toString());
+        double fighter2UFCLossPct=Double.parseDouble(matchups.get(i)[29].toString());
 
         double fighter2winPct=getFighterWinPct(fighter2record);
         int totalFights2=getTotalFightsAndWins(fighter2record)[0];
@@ -119,11 +118,11 @@ public ArrayList<Inputs> listGetClassStats(List<Object[]> matchups, int clas){
          fighter1_takedownaccuracy=fighter1_takedownaccuracy-fighter2_takedownaccuracy;
          fighter1_takedowndefense=fighter1_takedowndefense-fighter2_takedowndefense;
          fighter1_submissionsaverage=fighter1_submissionsaverage-fighter2_submissionsaverage;
-        fighter1_numberOfUfcFights=fighter1_numberOfUfcFights-fighter2_numberOfUfcFights;
-        fighter1_ufc_wins=fighter1_ufc_wins-fighter2_ufc_wins;
-        fighter1_ufc_losses=(0);
-//                fighter1_ufc_losses-fighter2_ufc_losses;
-        Inputs in=new Inputs(matchupId,totalFights,fighterwinPct, fighter1height,  fighter1reach, weightClass, fighter1_strikingaccuracy, fighter1_sapm, fighter1_slpm, fighter1_strikingdefense, fighter1_takedownaverage, fighter1_takedownaccuracy, fighter1_takedowndefense, fighter1_submissionsaverage,fighter1_numberOfUfcFights,fighter1_ufc_wins,fighter1_ufc_losses,clas);
+        fighter1_UFCFinishPct= fighter1_UFCFinishPct-fighter2_UFCFinishPct;///actually finishes!
+        fighter1UFCWinPct=fighter1UFCWinPct-fighter2UFCWinPct;
+        fighter1UFCLossPct=(fighter1UFCWinPct-fighter1UFCLossPct)-(fighter2UFCWinPct-fighter2UFCLossPct);///actually performance
+//                fighter1UFCLossPct-fighter2UFCLossPct;
+        Inputs in=new Inputs(matchupId,totalFights,fighterwinPct, fighter1height,  fighter1reach, weightClass, fighter1_strikingaccuracy, fighter1_sapm, fighter1_slpm, fighter1_strikingdefense, fighter1_takedownaverage, fighter1_takedownaccuracy, fighter1_takedowndefense, fighter1_submissionsaverage,fighter1_UFCFinishPct,fighter1UFCWinPct,fighter1UFCLossPct,clas);
         inputs.add(in);
     }
     return inputs;

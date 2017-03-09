@@ -71,7 +71,7 @@ public class StartupService {
             //            System.out.println("event data got");
 //         calculateStats.getFighterStatsAtTimeOfMatchup();
 //            csvFileWriter.writeCsvFile();
-            multiLayerPerceptron.simpleWekaTrain();
+            multiLayerPerceptron.crossValidate();
             }
    }
 
