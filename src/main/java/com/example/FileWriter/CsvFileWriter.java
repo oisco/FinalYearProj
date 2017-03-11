@@ -39,7 +39,7 @@ public class CsvFileWriter {
                       "  @attribute WinPct NUMERIC\n" +
                       "  @attribute height NUMERIC\n" +
                       "  @attribute reach NUMERIC\n" +
-                      "  @attribute WeightClass {Welterweight,Heavyweight,Middleweight,Light_Heavyweight,Lightweight,Featherweight,Bantamweight,Flyweight,Women_Bantamweight,Women_Featherweight,Women_Strawweight}\n" +
+//                      "  @attribute WeightClass {Welterweight,Heavyweight,Middleweight,Light_Heavyweight,Lightweight,Featherweight,Bantamweight,Flyweight,Women_Bantamweight,Women_Featherweight,Women_Strawweight}\n" +
                       "  @attribute strikingaccuracy NUMERIC\n" +
                       "  @attribute sapm NUMERIC\n" +
                       "  @attribute slpm NUMERIC\n" +
@@ -48,7 +48,7 @@ public class CsvFileWriter {
                       "  @attribute takedownDefense NUMERIC\n" +
                       "  @attribute submissionAverage NUMERIC\n" +
                       "  @attribute numberOfUfcFights NUMERIC\n" +
-                      "  @attribute numberOfUfcWins NUMERIC\n" +
+//                      "  @attribute numberOfUfcWins NUMERIC\n" +
 //                      "  @attribute numberOfUfcLosses NUMERIC\n" +
                       "  @attribute class NUMERIC" +
                       "\n"+
@@ -68,8 +68,8 @@ public class CsvFileWriter {
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getFighter1reach()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getWeightClass()));
-                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(inputs.getWeightClass()));
+//                fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getFighter1_strikingaccuracy()));
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getFighter1_sapm()));
@@ -86,8 +86,8 @@ public class CsvFileWriter {
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getufcFinishPct()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getufcWinPct()));
-                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(inputs.getufcWinPct()));
+//                fileWriter.append(COMMA_DELIMITER);
 //                fileWriter.append(String.valueOf(inputs.getufcLossPct()));
 //                fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getClas()));
@@ -103,8 +103,8 @@ public class CsvFileWriter {
                 fileWriter.append(String.valueOf(inputs.getFighter1height()));
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getFighter1reach()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getWeightClass()));
+//                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(inputs.getWeightClass()));
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getFighter1_strikingaccuracy()));
                 fileWriter.append(COMMA_DELIMITER);
@@ -122,8 +122,8 @@ public class CsvFileWriter {
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getufcFinishPct()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getufcWinPct()));
-                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(inputs.getufcWinPct()));
+//                fileWriter.append(COMMA_DELIMITER);
 //                fileWriter.append(String.valueOf(inputs.getufcLossPct()));
 //                fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(inputs.getClas()));

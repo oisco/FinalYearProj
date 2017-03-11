@@ -77,7 +77,7 @@ import java.util.List;
                 "        ,r.fighter1knockdowns_landed,r.fighter1strikes_attempted,r.fighter1strikes_landed,r.fighter1ground_control_time,r.fighter1ground_time\n" +
                 ",r.fighter1standing_time,r.fighter1standups_landed,r.fighter1submissions_attempted,r.fighter1takedowns_attempted,r.fighter1takedowns_landed,r.fighter2knockdowns_landed\n" +
                 ",r.fighter2strikes_attempted,r.fighter2strikes_landed,r.fighter2ground_control_time,r.fighter2ground_time,r.fighter2standing_time\n" +
-                ",r.fighter2standups_landed,r.fighter2submissions_attempted,r.fighter2takedowns_attempted,r.fighter2takedowns_landed,r.ending_round\n" +
+                ",r.fighter2standups_landed,r.fighter2submissions_attempted,r.fighter2takedowns_attempted,r.fighter2takedowns_landed,r.ending_round,m.date as date\n" +
                 "from matchup m,result r\n" +
                 "where m.fighter1_id=?1\n" +
                 "and m.date< ?2 \n" +
@@ -88,12 +88,13 @@ import java.util.List;
                 ",r.fighter2strikes_attempted,r.fighter2strikes_landed,r.fighter2ground_control_time,r.fighter2ground_time,r.fighter2standing_time,r.fighter2standups_landed,\n" +
                 "r.fighter2submissions_attempted,r.fighter2takedowns_attempted,r.fighter2takedowns_landed,r.fighter1knockdowns_landed,r.fighter1strikes_attempted,r.fighter1strikes_landed,\n" +
                 "r.fighter1ground_control_time,r.fighter1ground_time,r.fighter1standing_time,r.fighter1standups_landed," +
-                "r.fighter1submissions_attempted,r.fighter1takedowns_attempted,r.fighter1takedowns_landed,r.ending_round \n" +
+                "r.fighter1submissions_attempted,r.fighter1takedowns_attempted,r.fighter1takedowns_landed,r.ending_round ,m.date as date\n" +
                 "from matchup m,result r\n" +
                 "where m.fighter2_id=?1\n" +
                 "and m.date< ?2\n" +
                 "and m.result_id=r.id\n" +
-                "and r.is_valid ;"),
+                "and r.is_valid " +
+                "order by date limit 2;"),
         //next
         @NamedNativeQuery(name = "Matchup.findNoOfPastUfcFinishes",
                 query = "select count(*) from matchup m,result r where \n" +

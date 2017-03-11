@@ -1,10 +1,14 @@
 package com.example.MachineLearning;
 
+import com.example.DAO.MatchupRepository;
+import com.example.Entity.Prediction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Attribute;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Utils;
 import weka.filters.unsupervised.attribute.Remove;
@@ -16,15 +20,27 @@ import java.io.FileReader;
  */
 @Service
 public class MultiLayerPerceptron {
+
+    int totalCorrect=0;
+    int testSize=0;
+    int numiInstances=239;
+    @Autowired
+    private MatchupRepository matchupRepository;
     public MultiLayerPerceptron(){}
-
+    
     public void crossValidate(){
-        int startingPoint=100;
+        double pctCorrect=0;
+        int p=0;
+        //can increase test size for every 8 new matchups
+        testSize=216;//200
+        int startingPoint=0;
         do{
-            System.out.println(simpleWekaTrain(startingPoint)+'%');
-            startingPoint=startingPoint+300;
+            p++;
+            pctCorrect+=simpleWekaTrain(startingPoint);
+            startingPoint=startingPoint+testSize;
+        }while (startingPoint<1740-testSize);
 
-        }while (startingPoint<1501);
+        System.out.println("full amt %: "+(pctCorrect/p)+"%");
     }
 
 //    @PostConstruct
@@ -35,11 +51,12 @@ public class MultiLayerPerceptron {
         try{
             FileReader trainreader = new FileReader(filepath);
             Instances train = new Instances(trainreader);
+            numiInstances=train.numInstances();
             train.sort(0);
 
             //below will remove create a test set from the total/traing set at a specified index and remove said test set from the training set
             // Percent split
-            int testAmt=300;
+            int testAmt=testSize;
 //            int startingPoint=1400;
             Instances test=new Instances(train,  startingPoint,  testAmt);
             for (int i=0;i<testAmt;i++){
@@ -51,10 +68,11 @@ public class MultiLayerPerceptron {
             // classifier
             MultilayerPerceptron mlp = new MultilayerPerceptron();
             ///increase by 1.25 for every 10% DECREASE IN learing set size
-            mlp.setOptions(Utils.splitOptions(" -L 0.285 -M 0.285  -N 4000 -V 0 -S 0 -E 20 -H \"14,3,1\" -R"));//tried 11
-            Attribute clas=train.attribute(15);
+            mlp.setOptions(Utils.splitOptions(" -L 0.3125 -M 0.15 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));//m.15 size 200 then UI!!
+//            mlp.setOptions(Utils.splitOptions(" -L 0.3125 -M 0.15 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));//m.15 size 200 then UI!!
+            Attribute clas=train.attribute(13); //275 l
             train.setClass(clas);
-
+//14-2-1 NOLIMIT .04 .16
             // meta-classifier
             FilteredClassifier fc = new FilteredClassifier();
             fc.setFilter(rm);
@@ -90,21 +108,17 @@ public class MultiLayerPerceptron {
             //evauluate training data
             Evaluation eval = new Evaluation(train);
 //            train.sort(train.attribute(0));
-            train.deleteAttributeAt(0);
-            eval.evaluateModel(mlp,train);
-            System.out.println(eval.errorRate()); //Printing Training Mean root squared Error
-            System.out.println(eval.toSummaryString()); //Summary of Training
-            System.out.println(eval.numInstances()/2); //Summary of Training
-            System.out.println("NUM CORRECT"+numCorrect+" TOTAL: "+eval.numInstances()/2+" PCT:"+(numCorrect/((train.size()/2)/100.0f)));
+//            train.deleteAttributeAt(0);
+//            eval.evaluateModel(mlp,train);
+//            System.out.println(eval.errorRate()); //Printing Training Mean root squared Error
+//            System.out.println(eval.toSummaryString()); //Summary of Training
+//            System.out.println(eval.numInstances()/2); //Summary of Training
+            System.out.println("train set CORRECT"+numCorrect+" TOTAL: "+eval.numInstances()/2+" PCT:"+(numCorrect/((train.size()/2)/100.0f)));
 
 
 System.out.println("--------------------------------TEST SET---------------------------------------------");
-//
-//            Instances test= new Instances(
-//                    new BufferedReader(
-//                            new FileReader("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/t3.arff")));
             test.setClassIndex(test.numAttributes()-1);
-             Attribute clas2=test.attribute(15);
+             Attribute clas2=test.attribute(13);
             test.setClass(clas2);
             fc.setFilter(rm);
 
@@ -122,12 +136,19 @@ System.out.println("--------------------------------TEST SET--------------------
                             if(fc.classifyInstance(test.instance(i))<fc.classifyInstance(test.instance(i+1)))
                             {
                                 numCorrect++;
+                                totalCorrect+=numCorrect;
+                                //create a prediction object and set the matchup and winner
+                                createPrediction()
                             }
                         }
                         else {
                             if(fc.classifyInstance(test.instance(i))>fc.classifyInstance(test.instance(i+1)))
                             {
                                 numCorrect++;
+                                totalCorrect+=numCorrect;
+                                Prediction prediction=new Prediction();
+                                prediction.setMatchup(matchupRepository.findOne());
+                                prediction.setWinner();
                             }
                         }
                     }
@@ -146,6 +167,13 @@ System.out.println("--------------------------------TEST SET--------------------
             ex.printStackTrace();
         }
         return 0;
+    }
+
+    private void savePrediction(Instance i) {
+        Prediction prediction=new Prediction();
+        prediction.setMatchup(matchupRepository.findOne(i.attribute(1)));
+        prediction.;
+
     }
 
     public void predit(){
