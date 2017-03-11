@@ -1,5 +1,6 @@
 package com.example.MachineLearning;
 
+import com.example.Entity.Fighter;
 import com.example.Entity.Matchup;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Id;
  * Created by Oisín on 2/16/2017.
  */
 //@Entity
-public class Inputs {
+public class Input {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
 //    private int id;
@@ -32,12 +33,13 @@ public class Inputs {
     double ufcFinishPct;
     double ufcWinPct;
     double ufcLossPct;
-    
+
+     int currentFighter;
 
     //define win/loss 1/0
     int clas;
 
-    public Inputs(int matchupId,int totalFights, double winPct, int fighter1height, int fighter1reach, String weightClass, double fighter1_strikingaccuracy, double fighter1_sapm, double fighter1_slpm, double fighter1_strikingdefense, double fighter1_takedownaverage, double fighter1_takedownaccuracy, double fighter1_takedowndefense, double fighter1_submissionsaverage, double ufcFinishPct, double ufcWinPct, double ufcLossPct, int clas) {
+    public Input(int matchupId, int totalFights, double winPct, int fighter1height, int fighter1reach, String weightClass, double fighter1_strikingaccuracy, double fighter1_sapm, double fighter1_slpm, double fighter1_strikingdefense, double fighter1_takedownaverage, double fighter1_takedownaccuracy, double fighter1_takedowndefense, double fighter1_submissionsaverage, double ufcFinishPct, double ufcWinPct, double ufcLossPct, int currentFighter, int clas) {
         this.totalFights = totalFights;
         this.winPct = winPct;
         this.matchupId = matchupId;
@@ -55,11 +57,21 @@ public class Inputs {
         this.ufcFinishPct = ufcFinishPct;
         this.ufcWinPct = ufcWinPct;
         this.ufcLossPct = ufcLossPct;
+        this.currentFighter=currentFighter;
         this.clas = clas;
+
     }
 
     public int getMatchupId() {
         return matchupId;
+    }
+
+    public int getCurrentFighter() {
+        return currentFighter;
+    }
+
+    public void setCurrentFighter(int currentFighter) {
+        this.currentFighter = currentFighter;
     }
 
     public void setMatchupId(int matchupId) {

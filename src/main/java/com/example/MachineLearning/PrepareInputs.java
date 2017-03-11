@@ -19,7 +19,7 @@ public class PrepareInputs {
     PrepareInputs(){}
 
     //
-    public List<Inputs> getClass0Inputs(){
+    public List<Input> getClass0Inputs(){
         //look at first half
 //        int toEvaluate=matchupRepository.findByStatus("valid").size()/2;
 //        List<Object[]> losers=matchupRepository.findMLClass0Inputs(toEvaluate);
@@ -28,7 +28,7 @@ public class PrepareInputs {
     }
 
     ///class 1 (winners)--> status reach,record and height in comparison to their opponents
-    public List<Inputs> getClass1Inputs(){
+    public List<Input> getClass1Inputs(){
         //look at second half
 //        int toEvaluate=matchupRepository.findByStatus("valid").size()/2;
 //        List<Object[]> winners=matchupRepository.findMLClass1Inputs(toEvaluate,toEvaluate*2);
@@ -64,9 +64,9 @@ public class PrepareInputs {
         return totalfights;
     }
 
-public ArrayList<Inputs> listGetClassStats(List<Object[]> matchups, int clas){
+public ArrayList<Input> listGetClassStats(List<Object[]> matchups, int clas){
     //find reach advantage/disadvantage
-    ArrayList<Inputs> inputs=new ArrayList<>();
+    ArrayList<Input> inputs=new ArrayList<>();
     for (int i=0;i<matchups.size();i++){
 
         int matchupId=Integer.parseInt(matchups.get(i)[0].toString());
@@ -103,6 +103,8 @@ public ArrayList<Inputs> listGetClassStats(List<Object[]> matchups, int clas){
         double fighter2UFCWinPct=Double.parseDouble(matchups.get(i)[28].toString());
         double fighter2UFCLossPct=Double.parseDouble(matchups.get(i)[29].toString());
 
+        int currentFighterId= Integer.parseInt(matchups.get(i)[30].toString());
+
         double fighter2winPct=getFighterWinPct(fighter2record);
         int totalFights2=getTotalFightsAndWins(fighter2record)[0];
 
@@ -122,7 +124,8 @@ public ArrayList<Inputs> listGetClassStats(List<Object[]> matchups, int clas){
         fighter1UFCWinPct=fighter1UFCWinPct-fighter2UFCWinPct;
         fighter1UFCLossPct=(fighter1UFCWinPct-fighter1UFCLossPct)-(fighter2UFCWinPct-fighter2UFCLossPct);///actually performance
 //                fighter1UFCLossPct-fighter2UFCLossPct;
-        Inputs in=new Inputs(matchupId,totalFights,fighterwinPct, fighter1height,  fighter1reach, weightClass, fighter1_strikingaccuracy, fighter1_sapm, fighter1_slpm, fighter1_strikingdefense, fighter1_takedownaverage, fighter1_takedownaccuracy, fighter1_takedowndefense, fighter1_submissionsaverage,fighter1_UFCFinishPct,fighter1UFCWinPct,fighter1UFCLossPct,clas);
+
+        Input in=new Input(matchupId,totalFights,fighterwinPct, fighter1height,  fighter1reach, weightClass, fighter1_strikingaccuracy, fighter1_sapm, fighter1_slpm, fighter1_strikingdefense, fighter1_takedownaverage, fighter1_takedownaccuracy, fighter1_takedowndefense, fighter1_submissionsaverage,fighter1_UFCFinishPct,fighter1UFCWinPct,fighter1UFCLossPct,currentFighterId,clas);
         inputs.add(in);
     }
     return inputs;

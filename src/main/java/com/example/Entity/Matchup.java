@@ -23,11 +23,11 @@ import java.util.List;
                 query = "select m.id as matchupId,m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
                         "m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm" +
                         " ,m.fighter1_strikingdefense,m.fighter1_takedownaverage, \n" +
-                        "m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct,\n" +
+                        "m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct, \n" +
                         "m.fighter2height,m.fighter2reach,m.fighter2record,\n" +
                         "m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm" +
                         " ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
-                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct \n" +
+                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct,m.fighter1_id as currentFighter \n" +
                         "from matchup m\n" +
                         "where m.fighter1_is_winner\n" +
                         "and m.fighter1reach>0  and m.fighter1height>0 and m.fighter1record!=\"\" "+
@@ -39,7 +39,7 @@ import java.util.List;
                         ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct ,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct\n" +
                         ",m.fighter1height,m.fighter1reach,m.fighter1record,\n" +
                         "m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm ,m.fighter1_strikingdefense,m.fighter1_takedownaverage\n" +
-                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct\n" +
+                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct ,m.fighter2_id as currentFighter\n" +
                         "from matchup m\n" +
                         "where m.fighter2_is_winner\n" +
                         "and m.status='valid'" +
@@ -53,7 +53,7 @@ import java.util.List;
                         ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct \n" +
                          ",m.fighter2height,m.fighter2reach,m.fighter2record,\n" +
                         "m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
-                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct \n" +
+                        ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct, m.fighter1_id as currentFighter \n" +
                         "from matchup m\n" +
                         "where m.fighter2_is_winner\n" +
                         " and m.status='valid'" +
@@ -65,7 +65,7 @@ import java.util.List;
                         ",m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct\n" +
                         ",m.fighter1height,m.fighter1reach,m.fighter1record \n" +
                         ",m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm ,m.fighter1_strikingdefense,m.fighter1_takedownaverage\n" +
-                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct\n" +
+                        ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct, m.fighter2_id as currentFighter \n" +
                         "from matchup m\n" +
                         "where m.fighter1_is_winner\n" +
                         "and m.status='valid'" +

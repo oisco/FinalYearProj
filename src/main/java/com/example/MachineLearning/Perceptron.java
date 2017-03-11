@@ -47,8 +47,8 @@ class Perceptron
 //    public void work(){
 //
 //        //get the winners (class1 matchup instances)
-//        List<Inputs> cl1Inputs=prepareInputs.getClass1Inputs();
-//        List<Inputs> cl0Inputs=prepareInputs.getClass0Inputs();
+//        List<Input> cl1Inputs=prepareInputs.getClass1Inputs();
+//        List<Input> cl0Inputs=prepareInputs.getClass0Inputs();
 //
 //        NUM_INSTANCES=cl0Inputs.size();
 //

@@ -29,4 +29,8 @@ public class PredictionService {
         List<Integer> result =  predictionRepository.getEventPredictions(eventId);
         return result;
     }
+
+    public List<Prediction> findAll() {
+    return predictionRepository.findAll();
+    }
 }

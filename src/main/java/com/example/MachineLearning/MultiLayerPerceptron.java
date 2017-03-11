@@ -1,6 +1,10 @@
 package com.example.MachineLearning;
 
+import com.example.DAO.FighterRepository;
 import com.example.DAO.MatchupRepository;
+import com.example.DAO.PredictionRepository;
+import com.example.Entity.Fighter;
+import com.example.Entity.Matchup;
 import com.example.Entity.Prediction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +30,15 @@ public class MultiLayerPerceptron {
     int numiInstances=239;
     @Autowired
     private MatchupRepository matchupRepository;
+    @Autowired
+    private FighterRepository fighterRepository;
+    @Autowired
+    private PredictionRepository predictionRepository;
+
     public MultiLayerPerceptron(){}
     
     public void crossValidate(){
+        predictionRepository.deleteAll();
         double pctCorrect=0;
         int p=0;
         //can increase test size for every 8 new matchups
@@ -46,7 +56,6 @@ public class MultiLayerPerceptron {
 //    @PostConstruct
     public float simpleWekaTrain(int startingPoint)
     {
-//        String filepath="C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/TRAIN3.arff";
         String filepath="C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/airline.arff";
         try{
             FileReader trainreader = new FileReader(filepath);
@@ -64,13 +73,14 @@ public class MultiLayerPerceptron {
             }
             // filter
             Remove rm = new Remove();
-            rm.setAttributeIndices("1");  // remove id
+            //remove fighter and matchup id
+            rm.setAttributeIndices("1,2");
             // classifier
             MultilayerPerceptron mlp = new MultilayerPerceptron();
             ///increase by 1.25 for every 10% DECREASE IN learing set size
-            mlp.setOptions(Utils.splitOptions(" -L 0.3125 -M 0.15 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));//m.15 size 200 then UI!!
-//            mlp.setOptions(Utils.splitOptions(" -L 0.3125 -M 0.15 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));//m.15 size 200 then UI!!
-            Attribute clas=train.attribute(13); //275 l
+//            mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.175 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));60%%%%
+            mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.1725 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));
+            Attribute clas=train.attribute(14); //275 l
             train.setClass(clas);
 //14-2-1 NOLIMIT .04 .16
             // meta-classifier
@@ -90,6 +100,7 @@ public class MultiLayerPerceptron {
 //                System.out.println(", predicted: " + pred);
                 if(i+1!=train.size())
                     if (train.get(i).value(0)==train.get(i+1).value(0)) {
+                        
                         if(train.get(i).classValue()==0) {
                             if(fc.classifyInstance(train.instance(i))<fc.classifyInstance(train.instance(i+1)))
                             {
@@ -118,27 +129,30 @@ public class MultiLayerPerceptron {
 
 System.out.println("--------------------------------TEST SET---------------------------------------------");
             test.setClassIndex(test.numAttributes()-1);
-             Attribute clas2=test.attribute(13);
+             Attribute clas2=test.attribute(14);
             test.setClass(clas2);
             fc.setFilter(rm);
 
             //Predict Part
             numCorrect=0;
+            test.sort(test.attribute(test.numAttributes()-1));
             test.sort(test.attribute(0));
-            for (int i = 0; i < test.numInstances(); i++) {
+            for (int i = 0; i < test.numInstances(); i=i+2) {
                 double pred = fc.classifyInstance(test.instance(i));
 //                System.out.print("ID: " + test.instance(i).value(0));
 //                System.out.print(", actual: " + test.instance(i).classValue());
 //                System.out.println(", predicted: " + pred);
                 if(i+1!=test.size())
-                    if (test.get(i).value(0)==test.get(i+1).value(0)) {
+                    if (test.get(i).value(0)==test.get(i+1).value(0)) {//2 records of same matchup
+                        //is the loser 
                         if(test.get(i).classValue()==0) {
                             if(fc.classifyInstance(test.instance(i))<fc.classifyInstance(test.instance(i+1)))
                             {
                                 numCorrect++;
                                 totalCorrect+=numCorrect;
-                                //create a prediction object and set the matchup and winner
-                                createPrediction()
+                                savePrediction(test.instance(i+1),true);
+                            }else {
+                                savePrediction(test.instance(i+1),false);
                             }
                         }
                         else {
@@ -146,9 +160,11 @@ System.out.println("--------------------------------TEST SET--------------------
                             {
                                 numCorrect++;
                                 totalCorrect+=numCorrect;
-                                Prediction prediction=new Prediction();
-                                prediction.setMatchup(matchupRepository.findOne());
-                                prediction.setWinner();
+                                savePrediction(test.instance(i),true);
+                            }
+                            else {
+                                savePrediction(test.instance(i),false);
+
                             }
                         }
                     }
@@ -157,7 +173,7 @@ System.out.println("--------------------------------TEST SET--------------------
 ////            //Storing again in arff
 ////            BufferedWriter writer = new BufferedWriter(
 ////                    new FileWriter("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/predioctedoutput.arff"));
-////            writer.write(predicteddata.toString());
+////            writer.write(predicted.data.toString());
 ////            writer.newLine();
 //            writer.flush();
 //            writer.close();
@@ -169,11 +185,18 @@ System.out.println("--------------------------------TEST SET--------------------
         return 0;
     }
 
-    private void savePrediction(Instance i) {
+    private void savePrediction(Instance instance,boolean wasCorrect) {
         Prediction prediction=new Prediction();
-        prediction.setMatchup(matchupRepository.findOne(i.attribute(1)));
-        prediction.;
+        int matchupId= (int) instance.value(0);
+        int fighterId= (int) instance.value(1);
+        Matchup matchup =matchupRepository.findOne(matchupId);
+        Fighter fighter=fighterRepository.findOne(fighterId);
 
+        prediction.setMatchup(matchupRepository.findOne(matchupId));
+        String label=matchup.fighter1_first_name+' '+matchup.getFighter1_last_name()+" vs "+matchup.fighter2_first_name+' '+matchup.getFighter2_last_name();
+        prediction.setCorrect(wasCorrect);
+        prediction.setWinner(fighter);
+        predictionRepository.save(prediction);
     }
 
     public void predit(){

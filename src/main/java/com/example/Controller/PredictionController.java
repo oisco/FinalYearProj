@@ -35,10 +35,10 @@ public class PredictionController {
         return predictionService.getEventPredictions(eventId);
     }
 
-//    @RequestMapping(value = "/event/{eventId}",method = RequestMethod.GET)
-//    public List<> view(@PathVariable int eventId) {
-//        return predictionService.getEventPredictions(eventId);
-//    }
+    @RequestMapping(value = "/all",method = RequestMethod.GET)
+    public List<Prediction> findAll() {
+        return predictionService.findAll();
+    }
 //
 //    @
 

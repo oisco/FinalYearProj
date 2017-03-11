@@ -1,11 +1,10 @@
 package com.example.FileWriter;
 
-import com.example.MachineLearning.Inputs;
+import com.example.MachineLearning.Input;
 import com.example.MachineLearning.PrepareInputs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -19,14 +18,13 @@ public class CsvFileWriter {
     @Autowired
     public PrepareInputs prepareInputs;
 
+    private FileWriter fileWriter;
     public CsvFileWriter(){}
     public void writeCsvFile() {
 
         //get the winners (class1 matchup instances)
-        List<Inputs> cl1Inputs=prepareInputs.getClass1Inputs();
-        List<Inputs> cl0Inputs=prepareInputs.getClass0Inputs();
-
-        FileWriter fileWriter = null;
+        List<Input> cl1Inputs=prepareInputs.getClass1Inputs();
+        List<Input> cl0Inputs=prepareInputs.getClass0Inputs();
 
         try {
             fileWriter = new FileWriter("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/airline.arff");
@@ -35,6 +33,7 @@ public class CsvFileWriter {
               fileWriter.append("@relation matchups\n" +
                       "\n" +
                       " @attribute matchupId  NUMERIC\n" +
+                      " @attribute fighterId  NUMERIC\n" +
                       "  @attribute TotalFight NUMERIC\n" +
                       "  @attribute WinPct NUMERIC\n" +
                       "  @attribute height NUMERIC\n" +
@@ -57,78 +56,8 @@ public class CsvFileWriter {
             //Add a new line separator after the header
             fileWriter.append(NEW_LINE_SEPARATOR);
             //Write a new student object list to the CSV file
-            for (Inputs inputs : cl0Inputs) {
-                fileWriter.append(String.valueOf(inputs.getMatchupId()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getTotalFights()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getWinPct()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1height()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1reach()));
-                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(inputs.getWeightClass()));
-//                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_strikingaccuracy()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_sapm()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_slpm()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_strikingdefense()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_takedownaverage()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_takedowndefense()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_submissionsaverage()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getufcFinishPct()));
-                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(inputs.getufcWinPct()));
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(inputs.getufcLossPct()));
-//                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getClas()));
-                fileWriter.append(NEW_LINE_SEPARATOR);
-            }
-            for (Inputs inputs : cl1Inputs) {
-                fileWriter.append(String.valueOf(inputs.getMatchupId()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getTotalFights()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getWinPct()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1height()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1reach()));
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(inputs.getWeightClass()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_strikingaccuracy()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_sapm()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_slpm()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_strikingdefense()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_takedownaverage()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_takedowndefense()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getFighter1_submissionsaverage()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getufcFinishPct()));
-                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(inputs.getufcWinPct()));
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(inputs.getufcLossPct()));
-//                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(inputs.getClas()));
-                fileWriter.append(NEW_LINE_SEPARATOR);
-            }
+            writeFile(cl0Inputs);
+            writeFile(cl1Inputs);
 
 
 
@@ -146,6 +75,48 @@ public class CsvFileWriter {
                 System.out.println("Error while flushing/closing fileWriter !!!");
                 e.printStackTrace();
             }
+
+        }
+    }
+
+    public void writeFile(List<Input> inputs) throws IOException {
+        for (Input input : inputs) {
+            fileWriter.append(String.valueOf(input.getMatchupId()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getCurrentFighter()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getTotalFights()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getWinPct()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1height()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1reach()));
+//                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(input.getWeightClass()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1_strikingaccuracy()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1_sapm()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1_slpm()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1_strikingdefense()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1_takedownaverage()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1_takedowndefense()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getFighter1_submissionsaverage()));
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getufcFinishPct()));
+            fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(input.getufcWinPct()));
+//                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(input.getufcLossPct()));
+//                fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append(String.valueOf(input.getClas()));
+                fileWriter.append(NEW_LINE_SEPARATOR);
 
         }
     }
