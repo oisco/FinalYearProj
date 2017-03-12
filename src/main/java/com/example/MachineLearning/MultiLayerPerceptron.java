@@ -79,10 +79,9 @@ public class MultiLayerPerceptron {
             MultilayerPerceptron mlp = new MultilayerPerceptron();
             ///increase by 1.25 for every 10% DECREASE IN learing set size
 //            mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.175 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));60%%%%
-            mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.1725 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));
+            mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.175 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));
             Attribute clas=train.attribute(14); //275 l
             train.setClass(clas);
-//14-2-1 NOLIMIT .04 .16
             // meta-classifier
             FilteredClassifier fc = new FilteredClassifier();
             fc.setFilter(rm);

@@ -1,9 +1,12 @@
 angular.module('app').controller("ViewAllPredictionsController", function ($scope,$http, $location) {
     var vm=this;
-    vm.values=[1,2,3,4];
-    vm.labels=["h","h","h","j"];
+    vm.values=[];
+    vm.labels=[];
     vm.predictions=[];
     vm.wl=0;
+    vm.accuracy=0;
+    vm.numCorrect=0;
+    vm.totalFights=0;
 
     function getPredictions() {
         var url="predictions/all/";
@@ -16,17 +19,22 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
     }
 
     function setUpGraphData(){
+        var p=0;
         angular.forEach(vm.predictions, function (prediction) {
-         if(prediction.correct) {
+            vm.totalFights++;
+            if(prediction.correct) {
              vm.wl++;
              vm.values.push((vm.wl));
              vm.labels.push("correct");
+             vm.numCorrect++;
          }else {
              vm.wl--;
              vm.values.push((vm.wl));
              vm.labels.push("incorrect");
          }
+
         });
+        vm.accuracy=(vm.numCorrect/(vm.totalFights/100));
     }
     function setUpGraph() {
         var ctx = document.getElementById('myChart').getContext('2d');
