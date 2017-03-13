@@ -15,6 +15,8 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Utils;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Normalize;
 import weka.filters.unsupervised.attribute.Remove;
 
 import java.io.FileReader;
@@ -42,13 +44,13 @@ public class MultiLayerPerceptron {
         double pctCorrect=0;
         int p=0;
         //can increase test size for every 8 new matchups
-        testSize=216;//200
+        testSize=222;//200
         int startingPoint=0;
         do{
             p++;
             pctCorrect+=simpleWekaTrain(startingPoint);
             startingPoint=startingPoint+testSize;
-        }while (startingPoint<1740-testSize);
+        }while (startingPoint<=1776-testSize);
 
         System.out.println("full amt %: "+(pctCorrect/p)+"%");
     }
@@ -56,6 +58,9 @@ public class MultiLayerPerceptron {
 //    @PostConstruct
     public float simpleWekaTrain(int startingPoint)
     {
+        //scale data
+        Normalize norm = new Normalize();
+
         String filepath="C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/airline.arff";
         try{
             FileReader trainreader = new FileReader(filepath);
@@ -77,16 +82,19 @@ public class MultiLayerPerceptron {
             rm.setAttributeIndices("1,2");
             // classifier
             MultilayerPerceptron mlp = new MultilayerPerceptron();
-            ///increase by 1.25 for every 10% DECREASE IN learing set size
-//            mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.175 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));60%%%%
-            mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.175 -N 5000 -V 0 -S 0 -E 20 -H \"8\" -R"));
-            Attribute clas=train.attribute(14); //275 l
+            mlp.setOptions(Utils.splitOptions(" -L 0.225 -M 0.2 -N 5000 -V 0 -S 0 -E 20 -H \"9\" -R"));
+            Attribute clas=train.attribute(15); //275 l
             train.setClass(clas);
             // meta-classifier
             FilteredClassifier fc = new FilteredClassifier();
             fc.setFilter(rm);
             fc.setClassifier(mlp);
             //build on training set
+
+
+//            norm.setInputFormat(train);
+//            train= Filter.useFilter(train,norm);//?
+
             fc.buildClassifier(train);
 
             int numCorrect=0;
@@ -128,14 +136,14 @@ public class MultiLayerPerceptron {
 
 System.out.println("--------------------------------TEST SET---------------------------------------------");
             test.setClassIndex(test.numAttributes()-1);
-             Attribute clas2=test.attribute(14);
+             Attribute clas2=test.attribute(15);
             test.setClass(clas2);
             fc.setFilter(rm);
 
             //Predict Part
             numCorrect=0;
-            test.sort(test.attribute(test.numAttributes()-1));
             test.sort(test.attribute(0));
+
             for (int i = 0; i < test.numInstances(); i=i+2) {
                 double pred = fc.classifyInstance(test.instance(i));
 //                System.out.print("ID: " + test.instance(i).value(0));

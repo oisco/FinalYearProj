@@ -94,7 +94,7 @@ import java.util.List;
                 "and m.date< ?2\n" +
                 "and m.result_id=r.id\n" +
                 "and r.is_valid " +
-                "order by date limit 2;"),
+                "order by date limit 3;"),
         //next
         @NamedNativeQuery(name = "Matchup.findNoOfPastUfcFinishes",
                 query = "select count(*) from matchup m,result r where \n" +

@@ -33,4 +33,8 @@ public class PredictionService {
     public List<Prediction> findAll() {
     return predictionRepository.findAll();
     }
+
+    public List<Object[]> getAllPredictions() {
+        return predictionRepository.getAllPredictions();
+    }
 }

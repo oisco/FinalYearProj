@@ -1,6 +1,8 @@
 package com.example.MachineLearning;
 
+import com.example.DAO.FighterRepository;
 import com.example.DAO.MatchupRepository;
+import com.example.Entity.Fighter;
 import com.example.Entity.Matchup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ public class CalculateStats {
     @Autowired
     MatchupRepository matchupRepository;
 
+    @Autowired
+    FighterRepository fighterRepository;
     public CalculateStats(){}
 
     //iterates through every matchup and updates each fighters stats to be that of the time of going into the matchup
@@ -144,9 +148,15 @@ public class CalculateStats {
                     takedownAverage = getAverage(careerFightTime, careerTakedownsLanded);
                     submissionAverage = getAverage(careerFightTime, careerSubmissionsAttempted);
                     if (currentFighter == 1) {
-//                        matchups.get(i).setfighter1UFCFinishPct(finishPct);
-//                        matchups.get(i).setfighter1UFCLossPct(UFCLossPct);
-//                        matchups.get(i).setfighter1UFCFinishPct(UFCWinPct);
+                        
+                        //try and get the current fighters height and reach if available
+                        if(matchups.get(i).getFighter1height()==0 || matchups.get(i).getFighter1reach()==0){
+                            Fighter fighter=fighterRepository.findOne(matchups.get(i).getFighter1_id());
+                            if(fighter!=null){
+                                matchups.get(i).setFighter1height(fighter.getHeight());
+                                matchups.get(i).setFighter1height(fighter.getReach());
+                            }
+                        }
 
                         //update the matchup
                         matchups.get(i).setFighter1_takedownaverage(takedownAverage);
@@ -173,6 +183,15 @@ public class CalculateStats {
 //                        matchups.get(i).setfighter2UFCFinishPct(finishPct);
 //                        matchups.get(i).setfighter2UFCLossPct(UFCLossPct);
 //                        matchups.get(i).setfighter2UFCFinishPct(UFCWinPct);
+
+                        //try and get the current fighters height and reach if available
+                        if(matchups.get(i).getFighter2height()==0 || matchups.get(i).getFighter2reach()==0){
+                            Fighter fighter=fighterRepository.findOne(matchups.get(i).getFighter2_id());
+                            if(fighter!=null){
+                                matchups.get(i).setFighter2height(fighter.getHeight());
+                                matchups.get(i).setFighter2height(fighter.getReach());
+                            }
+                        }
 
                         matchups.get(i).setFighter2_takedownaverage(takedownAverage);
                         matchups.get(i).setFighter2_submissionsaverage(submissionAverage);

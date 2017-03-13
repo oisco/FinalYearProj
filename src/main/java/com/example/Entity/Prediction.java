@@ -2,6 +2,7 @@ package com.example.Entity;
 
 //import com.example.EntityWrappers.PredictionWinner;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.sym.Name;
 
 import javax.persistence.*;
 
@@ -9,9 +10,15 @@ import javax.persistence.*;
  * Created by Oisín on 1/24/2017.
  */
 @Entity
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Prediction.getAllPredictions",query = "SELECT m.fighter1_profile_image,m.fighter1_first_name,m.fighter1_last_name,m.fighter2_profile_image,m.fighter2_first_name,m.fighter2_last_name,p.is_correct,m.date\n" +
+                "FROM \n" +
+                "matchup m, prediction p\n" +
+                "WHERE\n" +
+                "m.id=p.matchup_id;"),
 @NamedNativeQuery(name = "Prediction.getEventPredictions",
         query = "select p.winner_id from prediction p,matchup m,fighter f where p.matchup_id=m.id and m.event_id=?1 and p.winner_id=f.id ORDER BY p.winner_id ASC;")
-
+})
 public class Prediction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

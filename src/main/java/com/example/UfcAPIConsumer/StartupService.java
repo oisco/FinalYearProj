@@ -57,7 +57,7 @@ public class StartupService {
 
                 //get all matchups for the event ids
 //            ArrayList<Event> events1 = new ArrayList<>();
-//            events1.add(eventRepository.findOne(611352));
+//            events1.add(eventRepository.findOne(611356));
             List<Event> events1 = eventRepository.findToGetMatchups();
 //                List<Event> events1 = eventRepository.findByDateGreaterThan();
                 for (int i = 1; i < 1; i++) {
@@ -70,7 +70,7 @@ public class StartupService {
                                 System.out.println("event data got");
                 }
 //         calculateStats.getFighterStatsAtTimeOfMatchup();
-//            csvFileWriter.writeCsvFile();
+            csvFileWriter.writeCsvFile();
             multiLayerPerceptron.crossValidate();
             }
    }

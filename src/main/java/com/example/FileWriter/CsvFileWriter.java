@@ -47,7 +47,7 @@ public class CsvFileWriter {
                       "  @attribute takedownDefense NUMERIC\n" +
                       "  @attribute submissionAverage NUMERIC\n" +
                       "  @attribute numberOfUfcFights NUMERIC\n" +
-//                      "  @attribute numberOfUfcWins NUMERIC\n" +
+                      "  @attribute numberOfUfcWins NUMERIC\n" +
 //                      "  @attribute numberOfUfcLosses NUMERIC\n" +
                       "  @attribute class NUMERIC" +
                       "\n"+
@@ -111,8 +111,8 @@ public class CsvFileWriter {
             fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getufcFinishPct()));
             fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(input.getufcWinPct()));
-//                fileWriter.append(COMMA_DELIMITER);
+                fileWriter.append(String.valueOf(input.getufcWinPct()));
+                fileWriter.append(COMMA_DELIMITER);
 //                fileWriter.append(String.valueOf(input.getufcLossPct()));
 //                fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getClas()));

@@ -15,4 +15,5 @@ public interface PredictionRepository extends JpaRepository<Prediction,Integer>{
 
 
     public List<Integer> getEventPredictions(int eventId);
+    public List<Object[]> getAllPredictions();
 }

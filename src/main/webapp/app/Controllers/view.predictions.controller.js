@@ -22,7 +22,7 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
         var p=0;
         angular.forEach(vm.predictions, function (prediction) {
             vm.totalFights++;
-            if(prediction.correct) {
+            if(prediction[6]) {
              vm.wl++;
              vm.values.push((vm.wl));
              vm.labels.push("correct");
@@ -50,7 +50,14 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
             }
         });
     }
-
+    $scope.rowClass = function(prediction) {
+            if (prediction[6]) {
+                return "success";
+            }
+            else {
+                return "danger";
+            }
+    }
     getPredictions();
 
 });

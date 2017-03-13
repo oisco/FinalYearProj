@@ -36,8 +36,8 @@ public class PredictionController {
     }
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public List<Prediction> findAll() {
-        return predictionService.findAll();
+    public List<Object[]> findAll() {
+        return predictionService.getAllPredictions();
     }
 //
 //    @
