@@ -118,11 +118,9 @@ public ArrayList<Input> listGetClassStats(List<Object[]> matchups, int clas){
          fighter1_strikingdefense=fighter1_strikingdefense-fighter2_strikingdefense;
          fighter1_takedownaverage=fighter1_takedownaverage-fighter2_takedownaverage;
          fighter1_takedownaccuracy=fighter1_takedownaccuracy-fighter2_takedownaccuracy;
-//         fighter1_takedowndefense=fighter1_takedowndefense-fighter2_takedowndefense;
          fighter1_takedowndefense=fighter1_takedowndefense-fighter2_takedowndefense;
          fighter1_submissionsaverage=fighter1_submissionsaverage-fighter2_submissionsaverage;
         fighter1_UFCFinishPct= fighter1_UFCFinishPct-fighter2_UFCFinishPct;///actually finishes!
-//        fighter1UFCWinPct=fighter1UFCWinPct-fighter2UFCWinPct;
         fighter1UFCWinPct=(fighter1UFCWinPct-fighter1UFCLossPct)-(fighter2UFCWinPct-fighter2UFCLossPct);
         fighter1UFCLossPct=(fighter1UFCWinPct-fighter1UFCLossPct)-(fighter2UFCWinPct-fighter2UFCLossPct);///actually performance
 //                fighter1UFCLossPct-fighter2UFCLossPct;

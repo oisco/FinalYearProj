@@ -82,18 +82,15 @@ public class MultiLayerPerceptron {
             rm.setAttributeIndices("1,2");
             // classifier
             MultilayerPerceptron mlp = new MultilayerPerceptron();
-            mlp.setOptions(Utils.splitOptions(" -L 0.225 -M 0.2 -N 5000 -V 0 -S 0 -E 20 -H \"9\" -R"));
+//            mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
+            mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.0 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
             Attribute clas=train.attribute(15); //275 l
             train.setClass(clas);
             // meta-classifier
             FilteredClassifier fc = new FilteredClassifier();
             fc.setFilter(rm);
             fc.setClassifier(mlp);
-            //build on training set
-
-
-//            norm.setInputFormat(train);
-//            train= Filter.useFilter(train,norm);//?
+            //build on training se
 
             fc.buildClassifier(train);
 
