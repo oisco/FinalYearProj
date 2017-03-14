@@ -11,7 +11,8 @@ import javax.persistence.*;
  */
 @Entity
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "Prediction.getAllPredictions",query = "SELECT m.fighter1_profile_image,m.fighter1_first_name,m.fighter1_last_name,m.fighter2_profile_image,m.fighter2_first_name,m.fighter2_last_name,p.is_correct,m.date\n" +
+        @NamedNativeQuery(name = "Prediction.getAllPredictions",
+                query = "SELECT m.fighter1_profile_image,m.fighter1_first_name,m.fighter1_last_name,m.fighter2_profile_image,m.fighter2_first_name,m.fighter2_last_name,p.is_correct,m.date\n" +
                 "FROM \n" +
                 "matchup m, prediction p\n" +
                 "WHERE\n" +

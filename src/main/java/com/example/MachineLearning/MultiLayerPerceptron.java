@@ -69,9 +69,7 @@ public class MultiLayerPerceptron {
             train.sort(0);
 
             //below will remove create a test set from the total/traing set at a specified index and remove said test set from the training set
-            // Percent split
             int testAmt=testSize;
-//            int startingPoint=1400;
             Instances test=new Instances(train,  startingPoint,  testAmt);
             for (int i=0;i<testAmt;i++){
                 train.delete(startingPoint);
@@ -83,7 +81,7 @@ public class MultiLayerPerceptron {
             // classifier
             MultilayerPerceptron mlp = new MultilayerPerceptron();
 //            mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
-            mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.0 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
+            mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
             Attribute clas=train.attribute(15); //275 l
             train.setClass(clas);
             // meta-classifier
@@ -197,13 +195,10 @@ System.out.println("--------------------------------TEST SET--------------------
         Fighter fighter=fighterRepository.findOne(fighterId);
 
         prediction.setMatchup(matchupRepository.findOne(matchupId));
-        String label=matchup.fighter1_first_name+' '+matchup.getFighter1_last_name()+" vs "+matchup.fighter2_first_name+' '+matchup.getFighter2_last_name();
+//        String label=matchup.fighter1_first_name+' '+matchup.getFighter1_last_name()+" vs "+matchup.fighter2_first_name+' '+matchup.getFighter2_last_name();
         prediction.setCorrect(wasCorrect);
         prediction.setWinner(fighter);
         predictionRepository.save(prediction);
     }
 
-    public void predit(){
-
-    }
 }
