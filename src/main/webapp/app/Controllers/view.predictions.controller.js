@@ -25,12 +25,12 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
             if(prediction[6]) {
              vm.wl++;
              vm.values.push((vm.wl));
-             vm.labels.push("correct");
+             // vm.labels.push("correct");
              vm.numCorrect++;
          }else {
              vm.wl--;
              vm.values.push((vm.wl));
-             vm.labels.push("incorrect");
+             // vm.labels.push("incorrect");
          }
 
         });

@@ -24,7 +24,6 @@ angular.module('app').controller("ViewEventPredictionsController", function ($sc
         //check if fighter is in predictions
         if(vm.predictions.indexOf(id)>=0)
         {
-            debugger
             return "success";
         }
         else{

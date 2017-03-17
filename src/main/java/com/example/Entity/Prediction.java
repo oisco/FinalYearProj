@@ -16,7 +16,8 @@ import javax.persistence.*;
                 "FROM \n" +
                 "matchup m, prediction p\n" +
                 "WHERE\n" +
-                "m.id=p.matchup_id;"),
+                "m.id=p.matchup_id" +
+                        " and m.date<now();"),
 @NamedNativeQuery(name = "Prediction.getEventPredictions",
         query = "select p.winner_id from prediction p,matchup m,fighter f where p.matchup_id=m.id and m.event_id=?1 and p.winner_id=f.id ORDER BY p.winner_id ASC;")
 })
@@ -26,11 +27,11 @@ public class Prediction {
     private int id;
 
     @JsonIgnore
-    @OneToOne(targetEntity = Matchup.class,fetch = FetchType.LAZY)
+    @OneToOne(targetEntity = Matchup.class,fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
     private Matchup matchup;
 
     @JsonIgnore
-    @ManyToOne(targetEntity = Fighter.class,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Fighter.class,fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
     private Fighter winner;
 
 

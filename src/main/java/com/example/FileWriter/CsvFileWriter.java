@@ -20,15 +20,17 @@ public class CsvFileWriter {
 
     private FileWriter fileWriter;
     public CsvFileWriter(){}
-    public void writeCsvFile() {
 
-        //get the winners (class1 matchup instances)
-        List<Input> cl1Inputs=prepareInputs.getClass1Inputs();
-        List<Input> cl0Inputs=prepareInputs.getClass0Inputs();
+    public void setFileWriter(String filepath){
+        try {
+            fileWriter = new FileWriter(filepath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void writeCsvFile(boolean past) {
 
         try {
-            fileWriter = new FileWriter("C:/Users/Oisín/Documents/SHIT TO DO/fyp/testMLData/airline.arff");
-
             //Write the CSV file header
               fileWriter.append("@relation matchups\n" +
                       "\n" +
@@ -55,28 +57,46 @@ public class CsvFileWriter {
 
             //Add a new line separator after the header
             fileWriter.append(NEW_LINE_SEPARATOR);
-            //Write a new student object list to the CSV file
-            writeFile(cl0Inputs);
-            writeFile(cl1Inputs);
-
-
-
-            System.out.println("CSV file was created successfully !!!");
+            //if we are creating an arff data file for future or past matchups
+            if(past){
+                createPastMatchupData();
+            }else {
+                createFutureMatchupData();
+            }
 
         } catch (Exception e) {
             System.out.println("Error in CsvFileWriter !!!");
             e.printStackTrace();
         } finally {
-
-            try {
-                fileWriter.flush();
-                fileWriter.close();
-            } catch (IOException e) {
-                System.out.println("Error while flushing/closing fileWriter !!!");
-                e.printStackTrace();
-            }
-
+            closeFileWriter();
         }
+    }
+
+    public void closeFileWriter(){
+        try {
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error while flushing/closing fileWriter !!!");
+            e.printStackTrace();
+        }
+    }
+
+    public void createPastMatchupData()  {
+        //get the winners (class1 matchup instances)
+        List<Input> cl1Inputs=prepareInputs.getClass1Inputs();
+        List<Input> cl0Inputs=prepareInputs.getClass0Inputs();
+        try {
+            writeFile(cl0Inputs);
+            writeFile(cl1Inputs);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void createFutureMatchupData() throws IOException {
+        //get info for future matchups
+        List<Input> futureMatchups=prepareInputs.createFutureMatchupInputs();
+        writeFile(futureMatchups);
     }
 
     public void writeFile(List<Input> inputs) throws IOException {

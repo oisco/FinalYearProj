@@ -45,7 +45,6 @@ public class StartupService {
    @PostConstruct
     public void onStartup() {
         if(fighterRepository.findAll().size()>0) {
-           RestTemplate restTemplate = new RestTemplate();
 //            events
 //           ResponseEntity<Event[]> responseEntity = restTemplate.getForEntity("http://ufc-data-api.ufc.com/api/v3/us/events", Event[].class);
 //           Event[] events = responseEntity.getBody();
@@ -58,22 +57,34 @@ public class StartupService {
                 //get all matchups for the event ids
 //            ArrayList<Event> events1 = new ArrayList<>();
 //            events1.add(eventRepository.findOne(611356));
-            List<Event> events1 = eventRepository.findToGetMatchups();
 //                List<Event> events1 = eventRepository.findByDateGreaterThan();
-                for (int i = 1; i < 1; i++) {
-                    ResponseEntity<String> responseEntity3 = restTemplate.getForEntity("http://ufc-data-api.ufc.com/api/v3/us/events/" + events1.get(i).getId() + "/fights", String.class);
-                    String matchupString = responseEntity3.getBody();
-                    Gson gson = new GsonBuilder().create();
-                    Matchup[] matchups = gson.fromJson(matchupString, Matchup[].class);
-                    //check if it is a future event if so predict and save otherwise just save and retrieve stats
-                    saveMatchups(matchups, events1.get(i));
-                                System.out.println("event data got");
-                }
+
+
 //         calculateStats.getFighterStatsAtTimeOfMatchup();
-            csvFileWriter.writeCsvFile();
-            multiLayerPerceptron.crossValidate();
+//            createArffMLInputs();
+//            multiLayerPerceptron.crossValidate();
+            multiLayerPerceptron.PredictUpcoming();
             }
    }
+
+   //goes to an event url and gets its fights , gets matchup results if it past and if upcming will save the matchup -->and calculate its stats for each fighter
+   public void getEventInfo(Event event){
+       RestTemplate restTemplate=new RestTemplate();
+           ResponseEntity<String> responseEntity3 = restTemplate.getForEntity("http://ufc-data-api.ufc.com/api/v3/us/events/" + event.getId() + "/fights", String.class);
+           String matchupString = responseEntity3.getBody();
+           Gson gson = new GsonBuilder().create();
+           Matchup[] matchups = gson.fromJson(matchupString, Matchup[].class);
+           //check if it is a future event if so predict and save otherwise just save and retrieve stats
+           saveMatchups(matchups, event);
+           System.out.println("event data got");
+   }
+    private void createArffMLInputs() {
+        csvFileWriter.setFileWriter("src/main/resources/PerceptronInputs/PastMatchups.arff");
+        csvFileWriter.writeCsvFile(true);
+        csvFileWriter.setFileWriter("src/main/resources/PerceptronInputs/FutureMatchups.arff");
+        csvFileWriter.writeCsvFile(false);
+
+    }
 
     private void addMatchupToFighter(int id, Matchup m) {
         Fighter fighter = fighterRepository.findOne(id);

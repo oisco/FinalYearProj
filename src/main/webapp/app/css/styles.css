@@ -17,11 +17,18 @@
     width:70%;
     height: 600%;
 }
+
 .predictionLineChart{
     width:100%;
     height: 600%;
 }
 
+td {
+    vertical-align: baseline;
+}
+td img {
+    vertical-align: top;
+}
 .MainFighterImage{
     width: 10%;
 }

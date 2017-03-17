@@ -33,6 +33,7 @@ import java.util.List;
                         "and m.fighter1reach>0  and m.fighter1height>0 and m.fighter1record!=\"\" "+
                         "and m.fighter2reach>0  and m.fighter2height>0 and m.fighter2record!=\"\" "+
                         "and m.status='valid'" +
+                        "and m.date<now()" +
                         " union \n" +
                         "select m.id,m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +
                         " m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
@@ -44,7 +45,9 @@ import java.util.List;
                         "where m.fighter2_is_winner\n" +
                         "and m.status='valid'" +
                         "and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\" "+
-                        "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\"   order by matchupId  ;")
+                        "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\" " +
+                        "and m.date<now()" +
+                        "  order by matchupId  ;")
 
         //the same as above but this time the losers of all matchups will appear first
         ,@NamedNativeQuery(name = "Matchup.findMLClass0Inputs",
@@ -72,6 +75,29 @@ import java.util.List;
                         " and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\" "+
                         "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\" order by matchupId ;")
         ,
+        @NamedNativeQuery(name = "Matchup.findFutureMatchupsToPredict",query = "select m.id as matchupId,m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
+                "                m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm\n" +
+                "                 ,m.fighter1_strikingdefense,m.fighter1_takedownaverage, \n" +
+                "                m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct, \n" +
+                "                m.fighter2height,m.fighter2reach,m.fighter2record,\n" +
+                "                m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm\n" +
+                "                 ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
+                "                ,m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct,m.fighter1_id as currentFighter \n" +
+                "                from matchup m\n" +
+                "                where \n" +
+                "\t\t\t\tm.date>now()\n" +
+                "                and m.status='valid'\n" +
+                "                 union \n" +
+                "                select m.id,m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +
+                "                 m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
+                "                ,m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct ,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct\n" +
+                "                ,m.fighter1height,m.fighter1reach,m.fighter1record,\n" +
+                "                m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm ,m.fighter1_strikingdefense,m.fighter1_takedownaverage\n" +
+                "                ,m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct ,m.fighter2_id as currentFighter\n" +
+                "                from matchup m\n" +
+                "                where m.status='valid'\n" +
+                "                and m.date>now()\n" +
+                "                  order by matchupId  ;"),
         @NamedNativeQuery(name = "Matchup.findPastFightersMatchupStats",
         query="select r.ending_time\n" +
                 "        ,r.fighter1knockdowns_landed,r.fighter1strikes_attempted,r.fighter1strikes_landed,r.fighter1ground_control_time,r.fighter1ground_time\n" +
@@ -140,6 +166,7 @@ public class Matchup {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private Prediction prediction;
+
     private int fighter1_id;
     private int fighter2_id;
 

@@ -20,22 +20,21 @@ public class PrepareInputs {
 
     //
     public List<Input> getClass0Inputs(){
-        //look at first half
-//        int toEvaluate=matchupRepository.findByStatus("valid").size()/2;
-//        List<Object[]> losers=matchupRepository.findMLClass0Inputs(toEvaluate);
      List<Object[]> losers=matchupRepository.findMLClass0Inputs();
         return listGetClassStats(losers,0);
     }
 
     ///class 1 (winners)--> status reach,record and height in comparison to their opponents
     public List<Input> getClass1Inputs(){
-        //look at second half
-//        int toEvaluate=matchupRepository.findByStatus("valid").size()/2;
-//        List<Object[]> winners=matchupRepository.findMLClass1Inputs(toEvaluate,toEvaluate*2);
         List<Object[]> winners=matchupRepository.findMLClass1Inputs();
         return listGetClassStats(winners,1);
     }
 
+//create inputs for upcoming matchups to predict
+    public List<Input> createFutureMatchupInputs(){
+        List<Object[]> futureMatchups=matchupRepository.findFutureMatchupsToPredict();
+        return listGetClassStats(futureMatchups,1);
+    }
 
 
     private double getFighterWinPct(String s) {

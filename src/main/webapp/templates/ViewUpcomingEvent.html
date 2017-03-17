@@ -9,11 +9,23 @@
                 <button type="button" class="btn btn-info"  ng-click="vm.viewPredictions()">View Predictions</button>
 
                 <table class="table table-bordered table-striped">
-                    <tr><td>Fight2s</td></tr>
+                    <tr><td><h4>Fights</h4></td></tr>
                     <tr ng-repeat="matchup in vm.event.matchups" ng-class="rowClass(matchup)">
-                        <td><a ng-click="vm.goToFighter(matchup.fighter1_id)"><img src="{{matchup.fighter1_profile_image}}"><br>{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}  </a></td>
+                        <td>
+                            <div style="float:left;" >
+                                <b>Name :</b><a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a></div>
+                            <br>
+                            <div style="float:left;" ><b>Record :</b>{{matchup.fighter1record}}</div>
+                            <div style="float:right;"><img src="{{matchup.fighter1_profile_image}}"></div>
+                        </td>
                         <td>vs</td>
-                        <td><a ng-click="vm.goToFighter(matchup.fighter2_id)"><img src="{{matchup.fighter2_profile_image}}"><br>{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a></td>
+                        <td>
+                            <div style="float:left;" >
+                                <b>Name :</b><a ng-click="vm.goToFighter(matchup.fighter2_id)">{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a></div>
+                                <br>
+                                <div style="float:left;" ><b>Record :</b>{{matchup.fighter2record}}</div>
+                            <div style="float:right;"><img src="{{matchup.fighter2_profile_image}}"></div>
+                        </td>
                         <td> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
                     </tr>
                 </table>

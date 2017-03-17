@@ -8,7 +8,7 @@
         </div>
 
         <table class="table table-bordered table-striped">
-          <tr>Fight Predictions</tr>
+          <tr><h4>Fight Predictions</h4></tr>
           <tr ng-repeat="matchup in vm.event.matchups">
             <td ng-class="cellClass(matchup.fighter1_id)"><a ng-click="vm.goToFighter(matchup.fighter1_id)">
               <img src="{{matchup.fighter1_profile_image}}"><br>{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}  </a></td>

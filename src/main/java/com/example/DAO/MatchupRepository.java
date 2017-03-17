@@ -17,6 +17,7 @@ public interface MatchupRepository extends JpaRepository<Matchup,Integer> {
 
     public List<Object[]> findMLClass1Inputs();
     public List<Object[]> findMLClass0Inputs();
+    public List<Object[]> findFutureMatchupsToPredict();
 
     public int fightersNoOfLosses(int id, Date date);
     public int fightersNoOfWins(int id, Date date);
