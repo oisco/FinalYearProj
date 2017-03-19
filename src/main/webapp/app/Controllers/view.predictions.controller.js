@@ -19,18 +19,17 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
     }
 
     function setUpGraphData(){
-        var p=0;
         angular.forEach(vm.predictions, function (prediction) {
             vm.totalFights++;
             if(prediction[6]) {
              vm.wl++;
              vm.values.push((vm.wl));
-             // vm.labels.push("correct");
+             vm.labels.push("");
              vm.numCorrect++;
          }else {
              vm.wl--;
              vm.values.push((vm.wl));
-             // vm.labels.push("incorrect");
+             vm.labels.push("");
          }
 
         });
@@ -41,9 +40,9 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: vm.labels,
+                 labels: vm.labels,
                 datasets: [{
-                    label: 'Prediction  History: Wins - Losses',
+                    label: 'Prediction  History',
                     data: vm.values,
                     backgroundColor: "rgba(153,255,51,0.4)"
                 }]

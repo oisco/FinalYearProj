@@ -50,8 +50,8 @@ public class MultiLayerPerceptron {
         double pctCorrect=0;
         int p=0;
         //can increase test size for every 8 new matchups
-        testSize=222;//200
-        int startingPoint=0;
+        testSize=224;//200
+        int startingPoint=4;
         do{
             p++;
             FileReader trainreader = null;
@@ -78,7 +78,7 @@ public class MultiLayerPerceptron {
                 e.printStackTrace();
             }
 
-        }while (startingPoint<=1776-testSize);
+        }while (startingPoint<=1796-testSize);
 
         System.out.println("full amt %: "+(pctCorrect/p)+"%");
     }
@@ -163,7 +163,7 @@ System.out.println("--------------------------------TEST SET--------------------
         rm.setAttributeIndices("1,2");
         // classifier
         mlp = new MultilayerPerceptron();
-        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
+        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
         Attribute clas=train.attribute(15); //275 l
         train.setClass(clas);
         // meta-classifier

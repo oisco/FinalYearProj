@@ -4,6 +4,7 @@
     <div class="predictionLineChart">
         <canvas id="myChart"></canvas>
     </div>
+
 <h1>{{vm.accuracy| number: 2}}% accuracy</h1><p>{{vm.numCorrect}} in a test set of {{vm.totalFights}} matchups</p>
     <form>
         <div class="form-group">
@@ -22,7 +23,7 @@
             <td></td>
             <td>{{prediction[4]}} {{prediction[5]}}</td>
             <td>{{prediction[7]|date:'dd-MMM-yy HH:mm'}}</td>
-            <td ng-if="{{prediction[6]}}==true">correct</td>
+            <td ng-if="prediction[6]">correct</td>
         </tr>
     </table>
 </div>
