@@ -45,6 +45,9 @@
                 templateUrl : "/templates/ViewUpcomingMatchup.html",
                 controller : "ViewUpcomingMatchupController as vm"
             })
+            .when("/HowItWorks", {
+                templateUrl : "/templates/HowItWorks.html",
+            })
             .otherwise({
                 templateUrl : "/templates/Home.html",
                 controller : "HomeController as vm"
