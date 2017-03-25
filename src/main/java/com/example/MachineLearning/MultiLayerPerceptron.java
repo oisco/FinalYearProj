@@ -50,8 +50,8 @@ public class MultiLayerPerceptron {
         double pctCorrect=0;
         int p=0;
         //can increase test size for every 8 new matchups
-        testSize=224;//200
-        int startingPoint=4;
+        testSize=138;//898 total fights
+        int startingPoint=2;
         do{
             p++;
             FileReader trainreader = null;
@@ -161,9 +161,11 @@ System.out.println("--------------------------------TEST SET--------------------
         Remove rm = new Remove();
         //remove fighter and matchup id
         rm.setAttributeIndices("1,2");
-        // classifier
+        // classifier1
         mlp = new MultilayerPerceptron();
-        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
+//        mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.3 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));//;//59.04
+        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //61.43
+//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //61.43
         Attribute clas=train.attribute(15); //275 l
         train.setClass(clas);
         // meta-classifier
@@ -250,7 +252,7 @@ System.out.println("--------------------------------TEST SET--------------------
     private void savePrediction(Instance instance,boolean wasCorrect) {
         Prediction prediction=new Prediction();
         int matchupId= (int) instance.value(0);
-        int fighterId= (int) instance.value(1);//winner
+        int fighterId= (int) instance.value(1);//actual winner
         Matchup matchup =matchupRepository.findOne(matchupId);
         Fighter fighter=fighterRepository.findOne(fighterId);
 

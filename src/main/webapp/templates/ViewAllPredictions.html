@@ -1,29 +1,54 @@
 <div class="container">
-    <h2>All Predictions</h2>
-
-    <div class="predictionLineChart">
-        <canvas id="myChart"></canvas>
+    <h1 align="center" >How the Algorithm Performs</h1>
+    <br>
+    <div id="predictionTesting">
+        <div class="predictionLineChart"><canvas id="myChart"></canvas></div></div>
+        <div id="crossValidation">
+            <h2 align="center">How its tested</h2>
+            <p>In order to determine accuracy, a machine learning testing technique known as
+                <a href="https://www.youtube.com/watch?v=TIgfjmp-4BA">k-fold cross validation</a>
+                (where k=13) is used, whereby the list of fights below are essentially continously subdivided into
+                <b>training and testing sets</b>(13 times) and the algorithims ability to learn to spot a winner is trained on
+                the training set and it's actual ability to predict a winner is tested on the test sets. The graph to the left
+                Illustrates how it performed on each of the 13 test sets where the left axis represents the percentage of fights predicted correctly on
+                each fold.
+            </p>
     </div>
+</div>
 
-<h1>{{vm.accuracy| number: 2}}% accuracy</h1><p>{{vm.numCorrect}} in a test set of {{vm.totalFights}} matchups</p>
-    <form>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                <input type="text" class="form-control" placeholder="Search for Matchup" ng-model="searchFish"/>
-            </div>
-        </div>
-    </form>
+
+<div id="predictionResults">
+    <div id="resultExplanation">
+    <h2 align="center">The Results</h2>
+    <p>
+        Using the above technique and calulating the average  of each  fold's results enables us to reasonably <br>
+        say that the algorithm is able to predict a matchup correctly <b> {{vm.accuracy| number: 2}} %</b>  of the time.
+        In total it managed to predict <b>{{vm.numCorrect}} out of {{vm.totalFights}} matchups correctly</b>.
+        The matchups which were predicted correctly and incorrectly are listed below
+    </p>
+    </div>
+    <div id="resultDonut">    <canvas id="accuracyDoughnut"></canvas> </div>
+</div>
+
+   <div class="pastPredictionTable" >
+       <form>
+       <div class="form-group">
+           <div class="input-group">
+               <div class="input-group-addon"><i class="fa fa-search"></i></div>
+               <input type="text" class="form-control" placeholder="Search for Matchup" ng-model="searchFish"/>
+           </div>
+       </div>
+   </form>
     <table class="table table-bordered table-striped">
-        <tr><td>Event Name</td><td>Fighter 1</td><td></td><td>Fighter 2</td><td>Date</td> <td>was Prediction correct?</td></tr>
-        <tr ng-repeat="prediction in vm.predictions | filter:searchFish |orderBy:'date':true" ng-class="rowClass(prediction)">
+        <tr><td>Event Name</td><td>Fighter 1</td><td>Fighter 2</td><td>Date</td> <td>was Prediction correct?</td></tr>
+        <tr ng-repeat="prediction in vm.predictions | filter:searchFish |orderBy:'date':true">
+        <!--<tr ng-repeat="prediction in vm.predictions | filter:searchFish |orderBy:'date':true" ng-class="rowClass(prediction)">-->
             <td></td>
-            <!--<td><img src={{prediction[0]}}/></td>-->
             <td>{{prediction[1]}} {{prediction[2]}}</td>
-            <td></td>
             <td>{{prediction[4]}} {{prediction[5]}}</td>
             <td>{{prediction[7]|date:'dd-MMM-yy HH:mm'}}</td>
-            <td ng-if="prediction[6]">correct</td>
+            <td ng-if="prediction[6]"><img src="../images/correct.png" height="30" width="40"/></td>
+            <td ng-if="!prediction[6]"><img src="../images/incorrect.png" height="30" width="40"/></td>
         </tr>
     </table>
-</div>
+   </div>

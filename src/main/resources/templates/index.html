@@ -12,6 +12,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
     <!--angular scripts-->
     <script type="text/javascript" src="angular.min.js"></script>
+    <!--<script type="text/javascript" src="canvasjs.min.js"></script>-->
+    <script type="text/javascript" src="jquery.canvasjs.min.js"></script>
+
     <script type="text/javascript" src="app/app.module.js"></script>
     <script type="text/javascript" src="app/Controllers/home.controller.js"></script>
     <script type="text/javascript" src="app/Controllers/view.event.controller.js"></script>
@@ -42,7 +45,16 @@
                 <li><a href="#allFighters">View Fighters</a></li>
                 <li><a href="#allEvents">View Past Events</a></li>
                 <li><a href="#upcomingEvents">View Upcoming Events and Predictions</a></li>
-                <li><a href="#viewAllPredictions">View Prediction History</a></li>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" >The Algorithm
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">How it works</a></li>
+                            <li><a href="#viewAllPredictions">How it Performs</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </ul>
         </div>
     </nav>

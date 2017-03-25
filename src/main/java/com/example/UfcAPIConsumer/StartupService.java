@@ -63,8 +63,8 @@ public class StartupService {
 //         calculateStats.getFighterStatsAtTimeOfMatchup();
 //            getEventInfo(eventRepository.findOne(611205));
 //            createArffMLInputs();
-            multiLayerPerceptron.crossValidate();
-            multiLayerPerceptron.PredictUpcoming();
+//            multiLayerPerceptron.crossValidate();
+//            multiLayerPerceptron.PredictUpcoming();
             }
    }
 

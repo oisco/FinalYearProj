@@ -131,7 +131,7 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
             data: {
                 labels: vm.labels,
                 datasets: [{
-                    label: 'Performance History: Wins - Losses',
+                    label: 'UFC Performance History: Wins - Losses',
                     data: vm.values,
                     backgroundColor: "rgba(153,255,51,0.4)"
                 }]

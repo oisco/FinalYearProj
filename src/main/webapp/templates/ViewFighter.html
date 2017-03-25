@@ -31,9 +31,19 @@
                 <table class="table table-bordered table-striped">
                     <tr><td>Previous fights</td></tr>
                     <tr ng-repeat="matchup in vm.fighter.matchups | orderBy:'-date'" ng-class="rowClass(matchup)">
-                        <td><a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a>
+                        <td>
+                            <a ng-click="vm.goToFighter(matchup.fighter1_id)">
+                            {{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}
+                            </a>
+                            <div style="float:right;"><img src="{{matchup.fighter1_profile_image}}" height="60"></div>
                         </td><td>vs</td>
-                        <td><a ng-click="vm.goToFighter(matchup.fighter2_id)">{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a> </td>
+                        <td>
+                            <a ng-click="vm.goToFighter(matchup.fighter2_id)">
+                            {{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}
+                             </a>
+                            <div style="float:right;"><img src="{{matchup.fighter2_profile_image}}" height="60"></div>
+
+                        </td>
                         <td><div ng-if="matchup.result==null">(Upcoming)</div>{{matchup.result.method}}-{{matchup.result.ending_time}}</td>
                         <td>{{matchup.date | date}}</td>
                         <td> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
