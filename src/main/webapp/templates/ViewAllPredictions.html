@@ -4,14 +4,16 @@
     <div id="predictionTesting">
         <div class="predictionLineChart"><canvas id="myChart"></canvas></div></div>
         <div id="crossValidation">
-            <h2 align="center">How its tested</h2>
+            <h2 align="center">Testing</h2>
             <p>In order to determine accuracy, a machine learning testing technique known as
                 <a href="https://www.youtube.com/watch?v=TIgfjmp-4BA">k-fold cross validation</a>
-                (where k=13) is used, whereby the list of fights below are essentially continously subdivided into
-                <b>training and testing sets</b>(13 times) and the algorithims ability to learn to spot a winner is trained on
-                the training set and it's actual ability to predict a winner is tested on the test sets. The graph to the left
-                Illustrates how it performed on each of the 13 test sets where the left axis represents the percentage of fights predicted correctly on
-                each fold.
+                (where k={{vm.foldResult.length}}) is used, whereby the matchups listed at the bottom of this page are continously subdivided into
+                <b>training and testing sets</b> ({{vm.foldResult.length}} times) and the algorithms ability to learn to spot a winner is trained on
+                the training set and it's actual ability to predict a winner is tested on the test sets.
+                <br>
+                The graph to the left Illustrates how it performed on each of the 13 test
+                sets where the left axis represents the percentage of fights predicted correctly on
+                each testing subset.
             </p>
     </div>
 </div>
@@ -19,15 +21,19 @@
 
 <div id="predictionResults">
     <div id="resultExplanation">
-    <h2 align="center">The Results</h2>
+    <h2 align="center">Results</h2>
     <p>
-        Using the above technique and calulating the average  of each  fold's results enables us to reasonably <br>
-        say that the algorithm is able to predict a matchup correctly <b> {{vm.accuracy| number: 2}} %</b>  of the time.
-        In total it managed to predict <b>{{vm.numCorrect}} out of {{vm.totalFights}} matchups correctly</b>.
-        The matchups which were predicted correctly and incorrectly are listed below
+        Using the above technique and calculating the average  of each  testing set's results enables us to
+        say that the algorithm is able to predict a matchup correctly <b> {{vm.accuracy| number: 2}} %</b> of the time.
+        In total it managed to predict <b>{{vm.numCorrect}} out of {{vm.totalFights}} matchups correctly</b>
+        <br>
+        The matchups which were predicted correctly and incorrectly are listed below:
     </p>
     </div>
-    <div id="resultDonut">    <canvas id="accuracyDoughnut"></canvas> </div>
+
+    <div id="resultDonut">
+        <canvas id="accuracyDoughnut" />
+</div>
 </div>
 
    <div class="pastPredictionTable" >

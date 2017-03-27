@@ -8,7 +8,7 @@ import com.example.Entity.Prediction;
 import com.example.FileWriter.CsvFileWriter;
 import com.example.MachineLearning.CalculateStats;
 import com.example.MachineLearning.MultiLayerPerceptron;
-import com.example.PredictionEngine.Predictor;
+//import com.example.PredictionEngine.Predictor;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +62,9 @@ public class StartupService {
 
 //         calculateStats.getFighterStatsAtTimeOfMatchup();
 //            getEventInfo(eventRepository.findOne(611205));
-//            createArffMLInputs();
-//            multiLayerPerceptron.crossValidate();
-//            multiLayerPerceptron.PredictUpcoming();
+            createArffMLInputs();
+            multiLayerPerceptron.crossValidate();
+            multiLayerPerceptron.PredictUpcoming();
             }
    }
 
@@ -126,7 +126,7 @@ public class StartupService {
                 //predict the matchup if it has not taken place
             Date currentDate = new Date();
             if (currentDate.compareTo(event.getEvent_date())<0) {
-                Predictor predictor = new Predictor();
+//                Predictor predictor = new Predictor();
                     //before predicting the fight ensure we have a profile for each fighter(in the case of newcomers create one)
                 int fighter1Id=matchups[p].getFighter1_id();
                 int fighter2Id=matchups[p].getFighter2_id();
@@ -141,10 +141,10 @@ public class StartupService {
                 }
                 if((fighter1!=null) && (fighter2!=null))
                 {
-                    Prediction prediction= predictor.predict(fighter1, fighter2);
-                    matchups[p].setPrediction(prediction);
+//                    Prediction prediction= predictor.predict(fighter1, fighter2);
+//                    matchups[p].setPrediction(prediction);
                     matchups[p].setResult(null);
-                    predictionRepository.save(prediction);
+//                    predictionRepository.save(prediction);
                     //update fighter names for matchups for future display purposes
                     if(matchups[p].getFighter1_first_name()==null &&matchups[p].getFighter2_first_name()==null){
                         matchups[p].setFighter1_first_name(fighter1.getFirst_name());
@@ -153,8 +153,8 @@ public class StartupService {
                         matchups[p].setFighter2_last_name(fighter2.getLast_name());
                     }
                      matchupRepository.save(matchups[p]);
-                    prediction.setMatchup(matchups[p]);
-                    predictionRepository.save(prediction);
+//                    prediction.setMatchup(matchups[p]);
+//                    predictionRepository.save(prediction);
                     addMatchupToFighter(matchups[p].getFighter1_id(), matchups[p]);
                     addMatchupToFighter(matchups[p].getFighter2_id(), matchups[p]);
                 }

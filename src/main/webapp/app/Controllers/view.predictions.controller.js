@@ -8,46 +8,23 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
     vm.numCorrect=0;
     vm.totalFights=0;
     var accuracyHistory=[];
-
-
     var data = [];
     var limit;
-    //
-    // function createChartData() {
-    //    // limit = 100000;
-    //
-    //     var y = 0;
-    //      var dataSeries = { type: "line" };
-    //     var dataPoints = [];
-    //
-    //     for (var i = 0; i < limit; i++) {
-    //         y=accuracyHistory[i];
-    //
-    //         // y += (Math.random() * 10 - 5);
-    //         dateTime = new Date(1960, 08, 15);
-    //
-    //         // dateTime.setMilliseconds(dateTime.getMilliseconds() + i);
-    //         // dateTime.setSeconds(dateTime.getSeconds() + i);
-    //         // dateTime.setMinutes(dateTime.getMinutes() + i);
-    //         // dateTime.setHours(dateTime.getHours() + i);
-    //         dateTime.setDate(dateTime.getDate() + i);
-    //         // dateTime.setMonth(dateTime.getMonth() + i);
-    //         // dateTime.setFullYear(dateTime.getFullYear() + i);
-    //
-    //         dataPoints.push({
-    //             x: dateTime,
-    //             y: accuracyHistory[i]
-    //         });
-    //     }
-    //
-    //     dataSeries.dataPoints = dataPoints;
-    //     data.push(dataSeries);
-    // }
+    vm.foldResult=[];
 
+
+    function getFoldResults() {
+        var url="predictions/folds"
+        var predictionPromise=$http.get(url);
+        predictionPromise.then(function (response) {
+            vm.foldResult = response.data;
+        });
+
+    }
     function getPredictions() {
         var url="predictions/all/";
-        var eventsPromise=$http.get(url);
-        eventsPromise.then(function (response) {
+        var predictionPromise=$http.get(url);
+        predictionPromise.then(function (response) {
             vm.predictions=response.data;
             limit=vm.predictions.length;
 
@@ -62,40 +39,59 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
         })
     }
 
-    // function displayChart(){
-    //     var chart = new CanvasJS.Chart("chartContainer",
-    //         {
-    //             zoomEnabled: true,
-    //             animationEnabled: true,
-    //             title:{
-    //                 text: "Results on each fold"
-    //             },
-    //             axisX :{
-    //                 labelAngle: -30
-    //             },
-    //             axisY :{
-    //                 includeZero:false
-    //             },
-    //             data: data
-    //         });
-    //     chart.render();
-    // }
-
     function createDoughnutChart() {
         var pctCorrect=vm.accuracy;
         var pctIncorrect=100-vm.accuracy;
-        var ctx = document.getElementById("accuracyDoughnut");
-        var myDoughnutChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["correct", "incorrect"],
-                datasets: [{
+        var data = {
+            labels: [
+                "Incorrect",
+                "Correct",
+            ],
+            datasets: [
+                {
+                    data: [pctCorrect,pctIncorrect],
                     backgroundColor: [
-                        "#2ecc71",
-                        "#f4424e"
+                        "#3cba28",
+                        "#f44141"
                     ],
-                    data: [pctCorrect,pctIncorrect]
+                    hoverBackgroundColor: [
+                        "#3cba28",
+                        "#f44141"
+                    ]
                 }]
+        };
+
+        Chart.pluginService.register({
+            beforeDraw: function(chart) {
+                if (chart.config.options.optionsUsingPlugin1=="DONUT") {
+                    var width = chart.chart.width,
+                        height = chart.chart.height,
+                        ctx = chart.chart.ctx;
+
+                    ctx.restore();
+                    var fontSize = (height / 114).toFixed(2);
+                    ctx.font = fontSize + "em sans-serif";
+                    ctx.textBaseline = "middle";
+
+                    var text = Math.round(vm.accuracy * 100) / 100+'%',
+                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctx.fillText(text, textX, textY);
+                    ctx.save();
+                }
+            }
+        });
+
+        var chart = new Chart(document.getElementById('accuracyDoughnut'), {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true,
+                legend: {
+                    display: false
+                },
+                optionsUsingPlugin1:"DONUT"
             }
         });
     }
@@ -109,26 +105,66 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
             vm.totalFights++;
             if(prediction[6]) {
              vm.wl++;
-             // vm.values.push((vm.wl));
-             vm.values.push((vm.accuracy));
-             vm.labels.push("");
              vm.numCorrect++;
          }else {
              vm.wl--;
-             // vm.values.push((vm.wl));
-                vm.values.push((vm.accuracy));
-                vm.labels.push("");
          }
-
-
         });
 
         vm.values.splice(0,vm.values.length);
-        vm.values=[50,58,63,64,57,57,59,63,55,60,61,55,59,63,55,60,61,59];
-        vm.labels=["","","","","","","","","","",""];
+        vm.values.splice(0,vm.values.length);
+        for (var i=0;i<vm.foldResult.length;i++){
+            vm.values.push(Math.round(vm.foldResult[i].accuracy * 100) / 100);
+            vm.labels.push("test set "+(i+1));
+        }
+
     }
     function setUpGraph() {
+        var horizonalLinePlugin = {
+            afterDraw: function(chartInstance) {
+                var yScale = chartInstance.scales["y-axis-0"];
+                var canvas = chartInstance.chart;
+                var ctx = canvas.ctx;
+                var index;
+                var line;
+                var style;
 
+                if (chartInstance.options.horizontalLine) {
+                    for (index = 0; index < chartInstance.options.horizontalLine.length; index++) {
+                        line = chartInstance.options.horizontalLine[index];
+
+                        if (!line.style) {
+                            style = "rgba(169,169,169, .6)";
+                        } else {
+                            style = line.style;
+                        }
+
+                        if (line.y) {
+                            yValue = yScale.getPixelForValue(line.y);
+                        } else {
+                            yValue = 0;
+                        }
+
+                        ctx.lineWidth = 3;
+
+                        if (yValue) {
+                            ctx.beginPath();
+                            ctx.moveTo(0, yValue);
+                            ctx.lineTo(canvas.width, yValue);
+                            ctx.strokeStyle = style;
+                            ctx.stroke();
+                        }
+
+                        if (line.text) {
+                            ctx.fillStyle = style;
+                            ctx.fillText(line.text, 0, yValue + ctx.lineWidth);
+                        }
+                    }
+                    return;
+                };
+            }
+        };
+        Chart.pluginService.register(horizonalLinePlugin);
 
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -136,11 +172,29 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
             data: {
                  labels: vm.labels,
                 datasets: [{
-                    label: 'Prediction  History',
+                    label: '% of fights predicted correctly on each test set',
                     data: vm.values,
                     backgroundColor: "rgba(153,255,51,0.4)"
-                }]
-            }
+                }]},
+                options: {
+                    "horizontalLine": [{
+                        "y": 50,
+                        "style": "rgba(255, 0, 0, .4)",
+                        "text": "random"
+                    }],
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                suggestedMin: 40,    // minimum will be 0, unless there is a lower value.
+                                // OR //
+                                // beginAtZero: true   // minimum value will be 0.
+                            }
+                        }]
+                    }
+                }
+
+
         });
     }
     $scope.rowClass = function(prediction) {
@@ -153,6 +207,6 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
     }
 
     getPredictions();
-
+    getFoldResults();
 
 });

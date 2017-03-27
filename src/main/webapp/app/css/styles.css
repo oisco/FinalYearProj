@@ -41,9 +41,10 @@
     padding-left: 5%;
     padding-right: 5%;
 }
+
 .predictionLineChart{
-    width:60%;
-    height: 60%;
+    width:55%;
+    height: 50%;
     float: left;
     padding-bottom: 5%;
 }
@@ -56,8 +57,8 @@
 }
 
 #resultDonut{
-    width: 40%;
-    height: 10%;
+    width: 37.5%;
+    height: 37.5%;
     background: #ffffff;
     float: right;
     padding-right: 10%;

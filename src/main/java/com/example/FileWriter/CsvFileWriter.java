@@ -40,7 +40,6 @@ public class CsvFileWriter {
                       "  @attribute WinPct NUMERIC\n" +
                       "  @attribute height NUMERIC\n" +
                       "  @attribute reach NUMERIC\n" +
-//                      "  @attribute WeightClass {Welterweight,Heavyweight,Middleweight,Light_Heavyweight,Lightweight,Featherweight,Bantamweight,Flyweight,Women_Bantamweight,Women_Featherweight,Women_Strawweight}\n" +
                       "  @attribute strikingaccuracy NUMERIC\n" +
                       "  @attribute sapm NUMERIC\n" +
                       "  @attribute slpm NUMERIC\n" +
@@ -112,8 +111,6 @@ public class CsvFileWriter {
             fileWriter.append(String.valueOf(input.getFighter1height()));
             fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getFighter1reach()));
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(input.getWeightClass()));
             fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getFighter1_strikingaccuracy()));
             fileWriter.append(COMMA_DELIMITER);

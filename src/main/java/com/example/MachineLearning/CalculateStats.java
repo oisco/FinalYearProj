@@ -24,7 +24,6 @@ public class CalculateStats {
     public CalculateStats(){}
 
     //iterates through every matchup and updates each fighters stats to be that of the time of going into the matchup
-//    @PostConstruct
     public void getFighterStatsAtTimeOfMatchup() {
         //go through every matchup
         List<Matchup> matchups=matchupRepository.findAll();
@@ -114,10 +113,6 @@ public class CalculateStats {
 
                     int ending_time = ((endingRound - 1) * 300) + inSeconds(fightersPastMatchups.get(p)[0].toString()); //ending round+seconds in round
                     careerFightTime += ending_time;
-
-//                careerGroundControlTime += fighter1ground_control_time;
-//                careerGroundTimeBeingControlled += fighter2ground_control_time;
-
                     careerStrikesAttempted += fighter1strikes_attempted;
                     careerStrikesLanded += fighter1strikes_landed;
 
@@ -132,7 +127,6 @@ public class CalculateStats {
                     careerTakedownsRecieved += fighter2takedowns_landed;
                     careerSubmissionsAttempted += fighter1submissions_attempted;
                 }
-                //can extend with career takedowns attempted per min and landed per min
                 ///calculate overall career stats(going into that matchup)
                 if(validNumberOfUfcFights>0) {
                     strikingDefense = asPercentage(careerStrikesOpponentsAttempted, careerStrikesOpponentsAttempted - careerStrikesRecieved);

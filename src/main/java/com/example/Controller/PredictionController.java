@@ -2,6 +2,8 @@ package com.example.Controller;
 
 //import com.example.DAO.PredictionRepository;
 //import com.example.DAO.PredictionRepository;
+import com.example.DAO.FoldResultRepository;
+import com.example.Entity.FoldResult;
 import com.example.Entity.Matchup;
 import com.example.Entity.Prediction;
 //import com.example.EntityWrappers.PredictionWinner;
@@ -25,6 +27,9 @@ public class PredictionController {
     @Autowired
     private PredictionService predictionService;
 
+    @Autowired
+    private FoldResultRepository foldResultRepository;
+
     public PredictionController(PredictionService predictionService){
         this.predictionService=predictionService;
     }
@@ -39,6 +44,16 @@ public class PredictionController {
     public List<Object[]> findAll() {
         return predictionService.getAllPredictions();
     }
+
+    @RequestMapping(value = "/folds",method = RequestMethod.GET)
+    public List<FoldResult> getFoldTestingResults() {
+        return foldResultRepository.findAll();
+    }
+
+//    @RequestMapping(value = "/upcoming",method = RequestMethod.GET)
+//    public List<Object[]> findForUpcomingMatchups() {
+//        return predictionService.findForUpcomingMatchups();
+//    }
 //
 //    @
 
