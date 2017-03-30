@@ -46,8 +46,7 @@ public class PrepareInputs {
     }
 
     public int[] getTotalFightsAndWins(String s){
-        //get wins ,losses and draws from record
-        //get wins ,losses and draws from record
+        //get wins ,losses and draws from record string current formatg e.g--> 10-1-1
         s=s.replace(',','-');
         String[] wld = s.split("-");
         int wins = Integer.parseInt(wld[0]);

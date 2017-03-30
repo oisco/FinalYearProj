@@ -85,7 +85,7 @@ import java.util.List;
                 "                ,m.fighter2_takedownaccuracy,m.fighter2_takedowndefense,m.fighter2_submissionsaverage,m.fighter2ufcfinish_pct,m.fighter2ufcwin_pct,m.fighter2ufcloss_pct,m.fighter1_id as currentFighter \n" +
                 "                from matchup m\n" +
                 "                where \n" +
-                "\t\t\t\tm.date>now()\n" +
+                "                  m.date>now()\n" +
                 "                and m.status='valid'\n" +
                 "                 union \n" +
                 "                select m.id,m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +

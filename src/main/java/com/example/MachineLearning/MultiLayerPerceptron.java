@@ -205,70 +205,29 @@ System.out.println("--------------------------------TEST SET--------------------
 //                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 59.44
 //                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 59.98
 //                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 59.75
-//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 60.18
-                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 60.18
-
-
-//                mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //58
-//                mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //57.4
-//                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //56.82
-//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //57
-//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //56
-//                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.5k=15
-//                mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //57.5 k=15
-
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.075 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.42
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //61.2
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.09 -70s and some 40s
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.125 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.46
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));
-//        mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R"));//60
-//        mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R"));59.4
-//        mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R"));58
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));//59.75
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));//61.315
-
-//        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R"));//59.53
-//        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //593
-//        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.075 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.91
-//        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.125 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.31
-//        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.75
-//        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59.75
-
-//        mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59.19
-//        mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.2
-//        mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.75
-//        mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59.17
-//        mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.3 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59.86
-//        mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59.5
-
-
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //59.05
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"7,2\" -R")); //59.75
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"7,3\" -R")); //60.91
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"6,3\" -R")); //59.17
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,3\" -R")); //60.64
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,4\" -R")); //61.09
-//        mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,4\" -R")); //60.08
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,4\" -R")); //61.31
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,4,1\" -R")); //60.2
-//        mlp.setOptions(Utils.splitOptions(" -L 0.45 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,4,2\" -R")); //59.86
-
-//        mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.175 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.42
-//        mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //58
-//        mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59
-//        mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.3
-
-//        mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //58
-//        mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59.65
-//        mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //60.5
-//        mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //58.8
-//        mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59.3
-
-//        mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //59.3
-//        mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //58.19
-
-
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 60.09
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"7,2\" -R")); //k-10 58.8
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6,2\" -R")); //k-10 58.98
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 58.78
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 60.10--perfect distribution, ensible amount of nodes
+//                mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.134
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.134
+                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 61.02--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 60.03
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6,3\" -R")); //k-10 59.6-
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6,3\" -R")); //k-10 60.02--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6,3\" -R")); //k-10 59.5--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6,2\" -R")); //k-10 59.8--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6,2\" -R")); //k-10 58.8--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"5,2\" -R")); //k-10 59.65--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"5,2\" -R")); //k-10 60.1--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"5,2\" -R")); //k-10 58.98
+//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"5,2\" -R")); //k-10 58.97--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"6,2\" -R")); /nope
+//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 57.2
+//                mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.69
+//                mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 58.65
+//                mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 56.65
 
 
 
