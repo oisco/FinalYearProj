@@ -20,6 +20,7 @@ public class PrepareInputs {
 
     //
     public List<Input> getClass0Inputs(){
+//     List<Object[]> losers=matchupRepository.findMLClass0Inputs(howManyMonthsAgo);
      List<Object[]> losers=matchupRepository.findMLClass0Inputs();
         return listGetClassStats(losers,0);
     }

@@ -47,47 +47,48 @@ public class MultiLayerPerceptron {
     int testSize=0;
     int numberOfFolds=10;
     int numInstances=239;
-    int fold=1;
-    
+    int fold;
     FilteredClassifier fc;
 
     public MultiLayerPerceptron(){}
     
-    public void crossValidate(){
+    public double crossValidate(int offset){
         predictionRepository.deleteAll();
         foldResultRepository.deleteAll();
-        double pctCorrect=0;
+        double foldPctCorrect=0;
         int p=0;
         int startingPoint=0;
+        fold=1;
+
         do{
             p++;
             FileReader trainreader = null;
             try {
                 trainreader = new FileReader("src/main/resources/PerceptronInputs/PastMatchups.arff");
-
             train = new Instances(trainreader);
-            numInstances=train.numInstances();
-            train.sort(0);
-                //add the modulus to the first fold if not an even split
-                if(fold==10){
-//                    testSize=(numInstances/numberOfFolds)+(numInstances%numberOfFolds);
-                    testSize=178+16;
-                }
-                else {
-//                    testSize=(numInstances/numberOfFolds);
-                    testSize=178;
-                }
+                train.sort(0);
 
-            //below will  create a test set from the total/training set at a specified index and remove said test set from the training set
+                //delete records
+                for(int i=0;i<offset;i++){
+                    train.delete(train.numInstances()-1);
+                }
+            numInstances=train.numInstances();
+
+                //below will find the best size for each test set based on the amount of records
+                testSize=(numInstances-(((numInstances/2)%numberOfFolds)*2))/numberOfFolds;
+
+
+                //below will  create a test set from the total/training set at a specified index and remove said test set from the training set
             Instances test=new Instances(train,  startingPoint,  testSize);
                 //remove test instances from training set
             for (int i=0;i<testSize;i++){
                 train.delete(startingPoint);
             }
 
-            fold++;
-            pctCorrect+=trainAndTest(train,test);
+            foldPctCorrect+=trainAndTest(train,test);
             startingPoint+=testSize;
+                fold++;
+
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -97,7 +98,8 @@ public class MultiLayerPerceptron {
 
         }while (startingPoint<=numInstances-testSize);
 
-        System.out.println("full amt %: "+(pctCorrect/p)+"%");
+        System.out.println("full amt %: "+(foldPctCorrect/p)+"%");
+        return (foldPctCorrect/p);
     }
 
     public float trainAndTest(Instances train,Instances test)
@@ -121,7 +123,7 @@ public class MultiLayerPerceptron {
 //            System.out.println(eval.errorRate()); //Printing Training Mean root squared Error
 //            System.out.println(eval.toSummaryString()); //Summary of Training
 //            System.out.println(eval.numInstances()/2); //Summary of Training
-            System.out.println("train set CORRECT"+numCorrect+" TOTAL: "+eval.numInstances()/2+" PCT:"+(numCorrect/((train.size()/2)/100.0f)));
+            System.out.println("fold:"+fold+" train set CORRECT"+numCorrect+" TOTAL: "+eval.numInstances()/2+" PCT:"+(numCorrect/((train.size()/2)/100.0f)));
 
 
 System.out.println("--------------------------------TEST SET---------------------------------------------");
@@ -209,10 +211,13 @@ System.out.println("--------------------------------TEST SET--------------------
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"7,2\" -R")); //k-10 58.8
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6,2\" -R")); //k-10 58.98
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 58.78
-//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 60.10--perfect distribution, ensible amount of nodes
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 60.10--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION --try every 2 months maybe
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 60.10--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 1000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 60.10 best yet!! curve every 300
+                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.15 -N 1000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //                mlp.setOptions(Utils.splitOptions(" -L 0.25 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.134
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.134
-                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 61.02--good sit
+//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 61.02--good sit
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 60.03
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6,3\" -R")); //k-10 59.6-
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"6,3\" -R")); //k-10 60.02--good sit
@@ -231,7 +236,7 @@ System.out.println("--------------------------------TEST SET--------------------
 
 
 
-        Attribute clas=train.attribute(15); //275 l
+        Attribute clas=train.attribute(train.numAttributes()-1); //275 l
         train.setClass(clas);
         // meta-classifier
         fc = new FilteredClassifier();

@@ -46,10 +46,9 @@ public class CsvFileWriter {
                       "  @attribute strikingdefense NUMERIC\n" +
                       "  @attribute takedownAverage NUMERIC\n" +
                       "  @attribute takedownDefense NUMERIC\n" +
-                      "  @attribute submissionAverage NUMERIC\n" +
+//                      "  @attribute submissionAverage NUMERIC\n" +
                       "  @attribute numberOfUfcFights NUMERIC\n" +
                       "  @attribute numberOfUfcWins NUMERIC\n" +
-//                      "  @attribute numberOfUfcLosses NUMERIC\n" +
                       "  @attribute class NUMERIC" +
                       "\n"+
                       "@data");
@@ -57,6 +56,8 @@ public class CsvFileWriter {
             //Add a new line separator after the header
             fileWriter.append(NEW_LINE_SEPARATOR);
             //if we are creating an arff data file for future or past matchups
+
+            //change how many months ago to go by x number of fights each time for consistency
             if(past){
                 createPastMatchupData();
             }else {
@@ -124,14 +125,12 @@ public class CsvFileWriter {
             fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getFighter1_takedowndefense()));
             fileWriter.append(COMMA_DELIMITER);
-            fileWriter.append(String.valueOf(input.getFighter1_submissionsaverage()));
-            fileWriter.append(COMMA_DELIMITER);
+//            fileWriter.append(String.valueOf(input.getFighter1_submissionsaverage()));
+//            fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getufcFinishPct()));
             fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(input.getufcWinPct()));
                 fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(input.getufcLossPct()));
-//                fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getClas()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
 

@@ -62,9 +62,33 @@ public class StartupService {
 
 //         calculateStats.getFighterStatsAtTimeOfMatchup();
 //            getEventInfo(eventRepository.findOne(611205));
-//            createArffMLInputs();
-            multiLayerPerceptron.crossValidate();
+
+            //get count of valid matchups which are going to be predicted
+
+            //take an extra 10% of the matchups away from the total set each time
+
+            //gonna have to modify query to sort all by date asc and offset and remove and from the previous time
+            //int setToDelete[]={200,400,600,800,1000,1200,1400,1600};
+            int setToDelete[]={0,300,600,900,1200,1500};
+//            int setToDelete[]={0,200,400,600,800,1000,1200,1400};
+
+            double results[]=new double[setToDelete.length];
+//            int setToDelete[]={20,40,60,80};
+//            int setToDelete[]={40,80,100,120};
+//            int setToDelete[]={80,160,240,320,400};
+//            int setToDelete[]={0,20,40,60,80};
+            //is deleting the first of the full data set and not the last!
+
+            for(int i=0;i<setToDelete.length;i++){
+                createArffMLInputs();
+                System.out.println(setToDelete[i]+" fights removed");
+                //pass crossvalidate an int of how many fights to delete
+                results[i]=multiLayerPerceptron.crossValidate(setToDelete[i]);
+            }
             multiLayerPerceptron.PredictUpcoming();
+            for (int i=0;i<results.length;i++){
+                System.out.println(i+" months ago "+results[i]+"%");
+            }
             }
    }
 

@@ -33,7 +33,7 @@ import java.util.List;
                         "and m.fighter1reach>0  and m.fighter1height>0 and m.fighter1record!=\"\" "+
                         "and m.fighter2reach>0  and m.fighter2height>0 and m.fighter2record!=\"\" "+
                         "and m.status='valid'" +
-                        "and m.date<now()" +
+//                        "and m.date<now()-INTERVAL  ?1 month" +
                         " union \n" +
                         "select m.id,m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +
                         " m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
@@ -46,7 +46,7 @@ import java.util.List;
                         "and m.status='valid'" +
                         "and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\" "+
                         "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\" " +
-                        "and m.date<now()" +
+//                        "and m.date<now()-INTERVAL ?1 month" +
                         "  order by matchupId  ;")
 
         //the same as above but this time the losers of all matchups will appear first
@@ -60,6 +60,7 @@ import java.util.List;
                         "from matchup m\n" +
                         "where m.fighter2_is_winner\n" +
                         " and m.status='valid'" +
+//                        "and m.date<now()-INTERVAL ?1 month" +
                         " and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\""+
                         "and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\""+
                         "union \n" +
@@ -72,6 +73,7 @@ import java.util.List;
                         "from matchup m\n" +
                         "where m.fighter1_is_winner\n" +
                         "and m.status='valid'" +
+//                        "and m.date<now() - INTERVAL ?1 month" +
                         " and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\" "+
                         "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\" order by matchupId ;")
         ,
