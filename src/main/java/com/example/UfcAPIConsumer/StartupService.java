@@ -41,8 +41,12 @@ public class StartupService {
     CsvFileWriter csvFileWriter;
     @Autowired
     MultiLayerPerceptron multiLayerPerceptron;
+    @Autowired
+    FoldResultRepository foldResultRepository;
+    @Autowired
+    TestingResultRepository testingResultRepository;
     //service to populate db with data from UFC API on startup if database is currently empty
-   @PostConstruct
+//   @PostConstruct
     public void onStartup() {
         if(fighterRepository.findAll().size()>0) {
 //            events
@@ -63,28 +67,25 @@ public class StartupService {
 //         calculateStats.getFighterStatsAtTimeOfMatchup();
 //            getEventInfo(eventRepository.findOne(611205));
 
-            //get count of valid matchups which are going to be predicted
-
-            //take an extra 10% of the matchups away from the total set each time
-
-            //gonna have to modify query to sort all by date asc and offset and remove and from the previous time
-            //int setToDelete[]={200,400,600,800,1000,1200,1400,1600};
-            int setToDelete[]={0,300,600,900,1200,1500};
-//            int setToDelete[]={0,200,400,600,800,1000,1200,1400};
-
+            testingResultRepository.deleteAll();
+            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
+            int setToDelete[]={0,400,800,1200,1600};
             double results[]=new double[setToDelete.length];
-//            int setToDelete[]={20,40,60,80};
-//            int setToDelete[]={40,80,100,120};
-//            int setToDelete[]={80,160,240,320,400};
-//            int setToDelete[]={0,20,40,60,80};
             //is deleting the first of the full data set and not the last!
+            createArffMLInputs();
+            for(int i=setToDelete.length-1;i >= 0;i--){
+                //save the results if we are cross validating using the full data set
+                if(i==0){
+                    predictionRepository.deleteAll();
+                    testingResultRepository.getRidOfFoldResult("FoldResult");
+                }
 
-            for(int i=0;i<setToDelete.length;i++){
-                createArffMLInputs();
                 System.out.println(setToDelete[i]+" fights removed");
-                //pass crossvalidate an int of how many fights to delete
+
+                //pass crossvalidate an int of how many fights to delete before beginnning
                 results[i]=multiLayerPerceptron.crossValidate(setToDelete[i]);
             }
+
             multiLayerPerceptron.PredictUpcoming();
             for (int i=0;i<results.length;i++){
                 System.out.println(i+" months ago "+results[i]+"%");
@@ -165,10 +166,7 @@ public class StartupService {
                 }
                 if((fighter1!=null) && (fighter2!=null))
                 {
-//                    Prediction prediction= predictor.predict(fighter1, fighter2);
-//                    matchups[p].setPrediction(prediction);
                     matchups[p].setResult(null);
-//                    predictionRepository.save(prediction);
                     //update fighter names for matchups for future display purposes
                     if(matchups[p].getFighter1_first_name()==null &&matchups[p].getFighter2_first_name()==null){
                         matchups[p].setFighter1_first_name(fighter1.getFirst_name());

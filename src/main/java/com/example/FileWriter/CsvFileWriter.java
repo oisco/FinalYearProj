@@ -43,7 +43,7 @@ public class CsvFileWriter {
                       "  @attribute strikingaccuracy NUMERIC\n" +
                       "  @attribute sapm NUMERIC\n" +
                       "  @attribute slpm NUMERIC\n" +
-                      "  @attribute strikingdefense NUMERIC\n" +
+//                      "  @attribute strikingdefense NUMERIC\n" +
                       "  @attribute takedownAverage NUMERIC\n" +
                       "  @attribute takedownDefense NUMERIC\n" +
 //                      "  @attribute submissionAverage NUMERIC\n" +
@@ -119,8 +119,8 @@ public class CsvFileWriter {
             fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getFighter1_slpm()));
             fileWriter.append(COMMA_DELIMITER);
-            fileWriter.append(String.valueOf(input.getFighter1_strikingdefense()));
-            fileWriter.append(COMMA_DELIMITER);
+//            fileWriter.append(String.valueOf(input.getFighter1_strikingdefense()));
+//            fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getFighter1_takedownaverage()));
             fileWriter.append(COMMA_DELIMITER);
             fileWriter.append(String.valueOf(input.getFighter1_takedowndefense()));

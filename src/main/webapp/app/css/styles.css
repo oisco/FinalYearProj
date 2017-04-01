@@ -48,6 +48,12 @@
     float: left;
     padding-bottom: 5%;
 }
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:20px !important;
+    padding-bottom:0 !important;
+    height: 60px;
+}
+.navbar {min-height:50px !important;}
 
 #resultExplanation{
     width: 60%;

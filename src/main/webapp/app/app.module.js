@@ -45,6 +45,10 @@
                 templateUrl : "/templates/ViewUpcomingMatchup.html",
                 controller : "ViewUpcomingMatchupController as vm"
             })
+            .when("/theLearningCurve", {
+                templateUrl : "/templates/LearningCurve.html",
+                controller : "ViewLearningCurveController as vm"
+            })
             .when("/HowItWorks", {
                 templateUrl : "/templates/HowItWorks.html",
             })

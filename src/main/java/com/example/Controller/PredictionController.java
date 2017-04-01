@@ -4,6 +4,7 @@ package com.example.Controller;
 //import com.example.DAO.PredictionRepository;
 import com.example.DAO.FoldResultRepository;
 import com.example.Entity.FoldResult;
+import com.example.Entity.LearningCurveResult;
 import com.example.Entity.Matchup;
 import com.example.Entity.Prediction;
 //import com.example.EntityWrappers.PredictionWinner;
@@ -45,17 +46,16 @@ public class PredictionController {
         return predictionService.getAllPredictions();
     }
 
+    //gets the cross validaiton results on the full data set
     @RequestMapping(value = "/folds",method = RequestMethod.GET)
     public List<FoldResult> getFoldTestingResults() {
         return foldResultRepository.findAll();
     }
 
-//    @RequestMapping(value = "/upcoming",method = RequestMethod.GET)
-//    public List<Object[]> findForUpcomingMatchups() {
-//        return predictionService.findForUpcomingMatchups();
-//    }
-//
-//    @
+    @RequestMapping(value = "/learningCurve",method = RequestMethod.GET)
+    public List<LearningCurveResult> getLearningCurve() {
+        return predictionService.findLearningCurve();
+    }
 
 
 

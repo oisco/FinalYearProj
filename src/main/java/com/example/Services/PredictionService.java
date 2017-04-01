@@ -1,6 +1,9 @@
 package com.example.Services;
 
+import com.example.DAO.LearningCurveResultRepository;
 import com.example.DAO.PredictionRepository;
+import com.example.DAO.TestingResultRepository;
+import com.example.Entity.LearningCurveResult;
 import com.example.Entity.Prediction;
 //import com.example.EntityWrappers.PredictionWinner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,8 @@ import java.util.ListIterator;
 public class PredictionService {
     @Autowired
     private PredictionRepository predictionRepository;
-
+    @Autowired
+    private LearningCurveResultRepository learningCurveRepository;
 
     public PredictionService(PredictionRepository predictionRepository){
         this.predictionRepository=predictionRepository;
@@ -36,5 +40,9 @@ public class PredictionService {
 
     public List<Object[]> getAllPredictions() {
         return predictionRepository.getAllPredictions();
+    }
+
+    public List<LearningCurveResult> findLearningCurve() {
+       return learningCurveRepository.findLearningCurveValues();
     }
 }

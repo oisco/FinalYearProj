@@ -72,13 +72,6 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
             else{
                 if(!matchup.fighter1_is_winner && !matchup.fighter2_is_winner){
                     //neither fighter won therefore win/loss graph stays the same
-                    // if(matchup.fighter1_first_name=vm.fighter.first_name){
-                    //     vm.labels.push(matchup.fighter2_first_name+" "+matchup.fighter2_last_name+" (Draw/No Contest)");
-                    //     vm.values.push(vm.wl);
-                    // }else{
-                    //     vm.labels.push(matchup.fighter1_first_name+" "+matchup.fighter1_last_name+" (Draw/No Contest)");
-                    //     vm.values.push(vm.wl);
-                    // }
                 }
                 else if(matchup.fighter1_id==vm.fighter.id){
                     if(matchup.fighter1_is_winner)

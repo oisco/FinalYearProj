@@ -9,6 +9,7 @@ angular.module('app').controller("ViewEventController", function ($scope,$http,$
         var eventsPromise=$http.get(url);
         eventsPromise.then(function (response) {
             vm.event=response.data;
+            debugger;
         })
     }
 
