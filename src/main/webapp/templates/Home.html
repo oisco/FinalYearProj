@@ -1,37 +1,18 @@
-<div ng-app="app">
-<!--<div class="container">-->
-        <div id="Carousel" class="carousel slide" data-ride="carousel">
-
-            <!-- Indicators -->
-            <!--<ol class="carousel-indicators">-->
-                <!--<li ng-repeat="event in vm.events"  data-target="Carousel" class="carousel-slide"></li>-->
-            <!--</ol>-->
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item" ng-repeat="event in vm.events"  ng-class="{'active': $index == vm.index}">
-                    <div class="nextEvent">
-                        <div class="homePoster">
-                        <img ng-src="{{event.feature_image}}" height="50%" class="img-responsive">
-                        </div>
-                        <div class="upcomingEventInfo">
-                        <h2>{{event.base_title}}</h2>
-                        <h2>{{event.title_tag_line}}</h2><p>{{event.event_date |date}}</p><p>{{event.location}}</p>
-                        <br>
-                        <button type="button" class="btn btn-info" ng-click="vm.goToUpcomingEvent(event.id)" >View Fight card</button>
-                        <button type="button" class="btn btn-info">View Predictions</button>
-                        </div>
-                    </div>
+<div>
+    <uib-carousel interval="vm.myInterval" active="vm.activeSlide">
+        <uib-slide ng-repeat="event in vm.events" index="$index">
+            <div class="nextEvent">
+                <div class="homePoster">
+                    <img class="eventPic" ng-src="{{event.feature_image}}"  class="img-responsive">
+                </div>
+                <div class="upcomingEventInfo">
+                    <h2>{{event.base_title}}</h2>
+                    <h2>{{event.title_tag_line}}</h2><p>{{event.event_date |date}}</p><p>{{event.location}}</p>
+                    <br>
+                    <button type="button" class="btn btn-info" ng-click="vm.goToUpcomingEvent(event.id)" >View Fight card</button>
+                    <button type="button" class="btn btn-info">View Predictions</button>
                 </div>
             </div>
-
-            <a class="left carousel-control" href="" ng-click="slide(-1)" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            </a>
-            <a class="right carousel-control" href="" ng-click="slide(1)" role="button">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            </a>
-        </div>
+        </uib-slide>
+    </uib-carousel>
 </div>
-<!--</div>-->
-

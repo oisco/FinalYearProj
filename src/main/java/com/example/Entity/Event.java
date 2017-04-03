@@ -18,7 +18,7 @@ import java.util.List;
                 @NamedNativeQuery(name = "Event.findNextEvent", query = "select * from event where event_date> NOW() order by event_date limit 1", resultClass = Event.class),
                 @NamedNativeQuery(name = "Event.findPastEvents", query = "select id,base_title,title_tag_line,event_date from event where event_date< NOW()  order by event_date desc"),
                 @NamedNativeQuery(name = "Event.findToGetMatchups", query = "select * from event where id not in(select distinct(event_id) from matchup) AND EVENT_DATE<NOW() ORDER BY(id) DESC;" ,resultClass = Event.class),
-        @NamedNativeQuery(name = "Event.findUpcomingEvents", query = "select id,base_title,title_tag_line,event_date from event where event_date> NOW()  order by event_date asc")})
+        @NamedNativeQuery(name = "Event.findUpcomingEvents", query = "select id,base_title,title_tag_line,event_date from event where event_date> NOW()  order by event_date asc ")})
 public class Event {
     @Id
     private int id;

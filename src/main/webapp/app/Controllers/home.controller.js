@@ -4,6 +4,10 @@ angular.module('app').controller("HomeController", function ($scope,$http, $loca
     vm.nextEvent=null;
     vm.index=0;
 
+    vm.myInterval = 5000;
+    vm.noWrapSlides = false;
+    vm.activeSlide = 0;
+
     var url="/events/next"
     var eventsPromise=$http.get(url);
     eventsPromise.then(function (response) {
@@ -12,21 +16,6 @@ angular.module('app').controller("HomeController", function ($scope,$http, $loca
 
     vm.goToUpcomingEvent = function (eventId) {
         $location.path("upcomingEvents/"+eventId);
-    };
-
-    $scope.slide = function (dir) {
-        debugger
-        if(vm.index==vm.events.length-1 && dir>0){
-            vm.index=0;
-        }
-        else if(vm.index==0 && dir<0){
-            vm.index=vm.events.length-1;
-        }
-        else {
-            vm.index+=dir;
-        }
-        $('#Carousel').carousel(dir);
-        debugger;
     };
 
 

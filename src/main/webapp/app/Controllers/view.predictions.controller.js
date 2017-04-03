@@ -8,7 +8,6 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
     vm.numCorrect=0;
     vm.totalFights=0;
     var accuracyHistory=[];
-    var data = [];
     var limit;
     vm.foldResult=[];
 

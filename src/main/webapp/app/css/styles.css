@@ -61,10 +61,11 @@
     height: 50%;
 }
 .upcomingEventInfo{
+    padding-left: 10%;
+    padding-right: 10%;
     width: 50%;
     height: 50%;
-    padding-right: 15%;
-    background: #ffffff;
+    background: #ececec;
     float: right;
 }
 .nextEvent{
@@ -150,6 +151,22 @@ td img {
 .eventImage{
     float:inherit;
     width:100%;
+}
+#slides_control > div{
+    height: 200px;
+}
+
+/*.eventPic{*/
+    /*height: 50%;*/
+    /*width: 70%;*/
+/*}*/
+
+#slides_control {
+    position:absolute;
+    width: 400px;
+    left:50%;
+    top:20px;
+    margin-left:-200px;
 }
 /*.img{*/
     /*height: auto;*/
