@@ -67,6 +67,9 @@ public class MultiLayerPerceptron {
                 }
             numInstances=train.numInstances();
 
+                int modulus=(((numInstances/2)%numberOfFolds)*2);
+
+
                 //below will find the best size for each test set based on the amount of records
                 testSize=(numInstances-(((numInstances/2)%numberOfFolds)*2))/numberOfFolds;
 
@@ -143,13 +146,13 @@ System.out.println("--------------------------------TEST SET--------------------
                             if(fc.classifyInstance(test.instance(i))<fc.classifyInstance(test.instance(i+1))) {
                                 numCorrect++;
                                 totalCorrect+=numCorrect;
-                                //pass the winer instance
+                                //pass the predicted winner instance
                                 savePrediction(test.instance(i+1),true);
                             }else {
-                                savePrediction(test.instance(i+1),false);
+                                savePrediction(test.instance(i),false);
                             }
                         }
-                        else {
+                        else {//is of class 1 winner
                             if(fc.classifyInstance(test.instance(i))>fc.classifyInstance(test.instance(i+1)))
                             {
                                 numCorrect++;
@@ -157,8 +160,7 @@ System.out.println("--------------------------------TEST SET--------------------
                                 savePrediction(test.instance(i),true);
                             }
                             else {
-                                savePrediction(test.instance(i),false);
-
+                                savePrediction(test.instance(i+1),false);
                             }
                         }
                     }
@@ -214,6 +216,8 @@ System.out.println("--------------------------------TEST SET--------------------
 //    bets leraning curve great    mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //     good learning curve ,good current accuracy   mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.05 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 // 61 1st set good curve
+//        mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.075 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//   also good
         mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.075 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //   poor     mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //     quite good   mlp.setOptions(Utils.splitOptions(" -L 0.05 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION

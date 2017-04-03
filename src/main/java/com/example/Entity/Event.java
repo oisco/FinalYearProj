@@ -2,6 +2,7 @@ package com.example.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.data.jpa.repository.*;
 
 import javax.persistence.*;
 import java.util.Date;

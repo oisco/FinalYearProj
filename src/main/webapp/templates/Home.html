@@ -1,35 +1,37 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
+<div ng-app="app">
+<!--<div class="container">-->
+        <div id="Carousel" class="carousel slide" data-ride="carousel">
 
-    <!-- Wrapper for slides -->
-    <div  class="carousel-inner" role="listbox">
-        <div class="nextEvent" ng-repeat="event in vm.events" class="item active">
-            <div class="homePoster">
-                <img src="{{event.feature_image}}">
-            </div>
-            <div class="upcomingEventInfo"  >
-                <h2>{{event.base_title}}</h2>
-            <h2>{{event.title_tag_line}}</h2><p>{{event.event_date |date}}</p><p>{{event.location}}</p>
-            <br>
-            <button type="button" class="btn btn-info" ng-click="vm.goToUpcomingEvent(event.id)" >View Fight card</button>
-                <button type="button" class="btn btn-info">View Predictions</button>
+            <!-- Indicators -->
+            <!--<ol class="carousel-indicators">-->
+                <!--<li ng-repeat="event in vm.events"  data-target="Carousel" class="carousel-slide"></li>-->
+            <!--</ol>-->
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item" ng-repeat="event in vm.events"  ng-class="{'active': $index == vm.index}">
+                    <div class="nextEvent">
+                        <div class="homePoster">
+                        <img ng-src="{{event.feature_image}}" height="50%" class="img-responsive">
+                        </div>
+                        <div class="upcomingEventInfo">
+                        <h2>{{event.base_title}}</h2>
+                        <h2>{{event.title_tag_line}}</h2><p>{{event.event_date |date}}</p><p>{{event.location}}</p>
+                        <br>
+                        <button type="button" class="btn btn-info" ng-click="vm.goToUpcomingEvent(event.id)" >View Fight card</button>
+                        <button type="button" class="btn btn-info">View Predictions</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <a class="left carousel-control" href="" ng-click="slide(-1)" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            </a>
+            <a class="right carousel-control" href="" ng-click="slide(1)" role="button">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            </a>
         </div>
-        </div>
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div>
+<!--</div>-->
 

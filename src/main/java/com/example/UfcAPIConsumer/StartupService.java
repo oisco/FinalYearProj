@@ -70,6 +70,7 @@ public class StartupService {
             testingResultRepository.deleteAll();
             //REMOVE RECORDS TO DETERMINE LEARNING CURVE
             int setToDelete[]={0,400,800,1200,1600};
+//            int setToDelete[]={0,200,400,600,800,1000,1200,1400,1600};
             double results[]=new double[setToDelete.length];
             //is deleting the first of the full data set and not the last!
             createArffMLInputs();

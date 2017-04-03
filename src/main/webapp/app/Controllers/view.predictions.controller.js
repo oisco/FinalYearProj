@@ -29,12 +29,10 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
             limit=vm.predictions.length;
 
             setUpGraphData();//chartjs
-            // createChartData();
 
             setUpGraph();
             createDoughnutChart();
 
-            // displayChart();
 
         })
     }
@@ -44,8 +42,8 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
         var pctIncorrect=100-vm.accuracy;
         var data = {
             labels: [
-                "Incorrect",
                 "Correct",
+                "Incorrect",
             ],
             datasets: [
                 {
@@ -115,7 +113,7 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
         vm.values.splice(0,vm.values.length);
         for (var i=0;i<vm.foldResult.length;i++){
             vm.values.push(Math.round(vm.foldResult[i].accuracy * 100) / 100);
-            vm.labels.push("test set "+(i+1));
+            vm.labels.push("set "+(i+1));
         }
 
     }
@@ -189,12 +187,20 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
                                 suggestedMin: 35,    // minimum will be 0, unless there is a lower value.
                                 // OR //
                                 // beginAtZero: true   // minimum value will be 0.
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: '% Correct'
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Fold'
                             }
                         }]
                     }
                 }
-
-
         });
     }
     $scope.rowClass = function(prediction) {

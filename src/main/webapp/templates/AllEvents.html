@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Past Events</h2>
+    <h1 align="center">Past Events</h1>
     <form>
         <div class="form-group">
             <div class="input-group">
@@ -8,8 +8,8 @@
             </div>
         </div>
     </form>
-    <table class="table table-bordered table-striped">
-        <tr><td>Event Name</td><td>Date</td></tr>
+    <table class="table">
+        <tr><th>Event Name</th><th>Date</th></tr>
         <tr ng-repeat="event in vm.events | filter:searchFish">
             <td>{{event[1]}} {{event[2]}}</td><td>{{event[3] | date}}</td><td><button type="button" class="btn btn-default" ng-click="vm.goToEvent(event[0])">Event Info</button></td>
 

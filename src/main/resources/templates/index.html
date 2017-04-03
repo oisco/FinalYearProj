@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>MMA APP</title>
+    <title>Forecast The Fight</title>
     <!--css -->
     <link rel="stylesheet" type="text/css" href="app/css/styles.css"/>
     <!--bootstrapp, thymeleaf, jquery scripts-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <script src="http://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
@@ -28,44 +29,38 @@
     <script type="text/javascript" src="app/Controllers/view.learning.curve.controller.js"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js" ></script>
-    <!-- -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 
 </head>
 <body ng-app="app" >
 
 <header>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-custom">
         <div class="container-fluid">
-            <!--<div class="navbar-header">-->
-                <a class="navbar-brand" href="#"><img src="images/Logo2.png"  width="100" height="60"/></a>
-            <!--</div>-->
+            <div class="navbar-header">
+                <a class="navbar-left" href="#"><img src="images/Logo1.png"  width="120" height="60"/></a>
+            </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="#allFighters">View Fighters</a></li>
                 <li><a href="#allEvents">View Past Events</a></li>
-                <!--<li><a href="#upcomingEvents">View Upcoming Events and Predictions</a></li>-->
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" >The Algorithm
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#HowItWorks">How it works</a></li>
-                            <li><a href="#viewAllPredictions">How it Performs</a></li>
-                            <li><a href="#theLearningCurve">The Learning Curve</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" >View Upcoming Events and Predictions
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">View All Upcoming Predictions</a></li>
-                            <li><a href="#upcomingEvents">View Upcoming Events</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" >The Algorithm
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#HowItWorks">How it Works</a></li>
+                        <li><a href="#viewAllPredictions">How it Performs</a></li>
+                        <li><a href="#theLearningCurve">Watch it Learn</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" >View Upcoming Events and Predictions
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">View All Upcoming Predictions</a></li>
+                        <li><a href="#upcomingEvents">View Upcoming Events</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>

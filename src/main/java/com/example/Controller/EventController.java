@@ -45,8 +45,8 @@ public class EventController {
     }
 
     @RequestMapping(value = "/next",method = RequestMethod.GET)
-    public Event findNext() {
-        return eventService.findNextEvent();
+    public List<Event> findNext() {
+        return eventService.findNextEvents();
     }
 
 

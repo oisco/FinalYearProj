@@ -60,7 +60,6 @@ import java.util.List;
                         "from matchup m\n" +
                         "where m.fighter2_is_winner\n" +
                         " and m.status='valid'" +
-//                        "and m.date<now()-INTERVAL ?1 month" +
                         " and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\""+
                         "and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\""+
                         "union \n" +
@@ -73,7 +72,6 @@ import java.util.List;
                         "from matchup m\n" +
                         "where m.fighter1_is_winner\n" +
                         "and m.status='valid'" +
-//                        "and m.date<now() - INTERVAL ?1 month" +
                         " and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\" "+
                         "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\" order by matchupId ;")
         ,
@@ -123,7 +121,6 @@ import java.util.List;
                 "and m.result_id=r.id\n" +
                 "and r.is_valid " +
                 "order by date limit 3;"),
-        //next
         @NamedNativeQuery(name = "Matchup.findNoOfPastUfcFinishes",
                 query = "select count(*) from matchup m,result r where \n" +
                         "m.result_id=r.id\n" +

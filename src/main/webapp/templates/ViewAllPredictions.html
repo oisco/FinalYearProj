@@ -2,21 +2,22 @@
     <h1 align="center" >How the Algorithm Performs</h1>
     <br>
     <div id="predictionTesting">
-        <div class="predictionLineChart"><canvas id="myChart"></canvas></div></div>
+        <div class="predictionLineChart"><canvas id="myChart"></canvas></div>
         <div id="crossValidation">
             <h2 align="center">Testing</h2>
             <p>In order to determine accuracy, a machine learning testing technique known as
                 <a href="https://www.youtube.com/watch?v=TIgfjmp-4BA">k-fold cross validation</a>
-                (where k={{vm.foldResult.length}}) is used, whereby the matchups listed at the bottom of this page are continously subdivided into
+                (where k={{vm.foldResult.length}}) is used, whereby the matchups listed at the bottom of this page are continuously subdivided into
                 <b>training and testing sets</b> ({{vm.foldResult.length}} times) and the algorithms ability to learn to spot a winner is trained on
                 the training set and it's actual ability to predict a winner is tested on the test sets.
                 <br>
-                The graph to the left Illustrates how it performed on each of the 13 test
+                The graph to the left Illustrates how it performed on each of the ({{vm.foldResult.length}} test
                 sets where the left axis represents the percentage of fights predicted correctly on
                 each testing subset.
             </p>
+            </div>
     </div>
-</div>
+    </div>
 
 
 <div id="predictionResults">
@@ -27,34 +28,36 @@
         say that the algorithm is able to predict a matchup correctly <b> {{vm.accuracy| number: 2}} %</b> of the time.
         In total it managed to predict <b>{{vm.numCorrect}} out of {{vm.totalFights}} matchups correctly</b>
         <br>
+        Please note that this is a <b>minnimum figure</b> as future predictions will be based on using the full data set and not 90% of it.
+        <br>
         The matchups which were predicted correctly and incorrectly are listed below:
     </p>
     </div>
 
     <div id="resultDonut">
         <canvas id="accuracyDoughnut" />
-</div>
+    </div>
 </div>
 
-   <div class="pastPredictionTable" >
-       <form>
+   <div class="pastPredictionTable">
+       <form id="matchupSearch">
        <div class="form-group">
            <div class="input-group">
                <div class="input-group-addon"><i class="fa fa-search"></i></div>
                <input type="text" class="form-control" placeholder="Search for Matchup" ng-model="searchFish"/>
            </div>
        </div>
-   </form>
+     </form>
     <table class="table table-bordered table-striped">
-        <tr><td>Event Name</td><td>Fighter 1</td><td>Fighter 2</td><td>Date</td> <td>was Prediction correct?</td></tr>
+        <tr><th>Event Name</th><th>Matchup</th><th>Predicted winner</th><th>Date</th> <th>Was Prediction Correct?</th></tr>
         <tr ng-repeat="prediction in vm.predictions | filter:searchFish |orderBy:'date':true">
-        <!--<tr ng-repeat="prediction in vm.predictions | filter:searchFish |orderBy:'date':true" ng-class="rowClass(prediction)">-->
             <td></td>
-            <td>{{prediction[1]}} {{prediction[2]}}</td>
-            <td>{{prediction[4]}} {{prediction[5]}}</td>
+            <td>{{prediction[1]}} {{prediction[2]}} vs {{prediction[4]}} {{prediction[5]}}</td>
+            <td>{{prediction[8]}} {{prediction[9]}}</td>
             <td>{{prediction[7]|date:'dd-MMM-yy HH:mm'}}</td>
             <td ng-if="prediction[6]"><img src="../images/correct.png" height="30" width="40"/></td>
             <td ng-if="!prediction[6]"><img src="../images/incorrect.png" height="30" width="40"/></td>
         </tr>
     </table>
    </div>
+    </div>

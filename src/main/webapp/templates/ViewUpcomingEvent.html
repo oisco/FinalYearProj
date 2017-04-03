@@ -7,11 +7,9 @@
                     <img src="{{vm.event.feature_image}}">
                 </div>
                 <button type="button" class="btn btn-info"  ng-click="vm.getPredictions()">View Predictions</button>
-                <!--<button type="button" class="btn btn-info"  ng-click="vm.viewPredictions()">View Predictions</button>-->
 
                 <table class="table table-bordered table-striped">
-                    <tr><td><h4>Fights</h4></td></tr>
-                    <!--<tr ng-repeat="matchup in vm.event.matchups" ng-class="rowClass(matchup)">-->
+                    <tr><h4 align="center">Matchups</h4></tr>
                     <tr ng-repeat="matchup in vm.event.matchups">
                         <td ng-class="cellClass(matchup.fighter1_id)">
                             <div style="float:left;" >
@@ -20,7 +18,6 @@
                             <div style="float:left;" ><b>Record :</b>{{matchup.fighter1record}}</div>
                             <div style="float:right;"><img src="{{matchup.fighter1_profile_image}}" height="120"></div>
                         </td>
-                        <td>vs</td>
                         <td ng-class="cellClass(matchup.fighter2_id)">
                             <div style="float:left;" >
                                 <b>Name :</b><a ng-click="vm.goToFighter(matchup.fighter2_id)">{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a></div>

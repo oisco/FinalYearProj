@@ -15,11 +15,13 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event,Integer>{
   public Event findOne(int id);
     public List<Event> findByDateGreaterThan();
-    public Event findNextEvent();
   public List<Event> findToGetMatchups();
 
 
 
   List<Object[]> findPastEvents();
     List<Object[]> findUpcomingEvents();
+
+  @Query(value = "SELECT * FROM EVENT where EVENT_DATE >NOW() ORDER BY EVENT_DATE ASC LIMIT 5;", nativeQuery = true)
+  List<Event> getNextEvents();
 }

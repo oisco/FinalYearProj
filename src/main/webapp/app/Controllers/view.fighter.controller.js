@@ -13,12 +13,10 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
         var eventsPromise=$http.get(url);
         eventsPromise.then(function (response) {
             vm.fighter=response.data;
-            if(vm.fighter.left_full_body_image==null){
+            if(vm.fighter.left_full_body_image==null && vm.fighter.left_full_body_image.length>0){
                 vm.fighterImage=vm.fighter.thumbnail;
-                debugger
             }
             else{
-                debugger
                 vm.fighterImage=vm.fighter.left_full_body_image;
             }
             setUpGraphData();
@@ -124,10 +122,26 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
             data: {
                 labels: vm.labels,
                 datasets: [{
-                    label: 'UFC Performance History: Wins - Losses',
+                    label: 'UFC Performance History Wins-Losses',
                     data: vm.values,
                     backgroundColor: "rgba(153,255,51,0.4)"
                 }]
+            },
+            options:{
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Career UFC Wins- UFC Losses'
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Matchup History'
+                        }
+                    }]
+                }
             }
         });
     }

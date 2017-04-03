@@ -28,8 +28,8 @@
                         <canvas id="myChart2"></canvas>
                     </div>
                 </div>
-                <table class="table table-bordered table-striped">
-                    <tr><td>Previous fights</td></tr>
+                <table class="table">
+                    <th>Previous fights</th>
                     <tr ng-repeat="matchup in vm.fighter.matchups | orderBy:'-date'" ng-class="rowClass(matchup)">
                         <td>
                             <a ng-click="vm.goToFighter(matchup.fighter1_id)">

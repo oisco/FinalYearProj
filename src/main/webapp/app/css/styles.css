@@ -37,6 +37,10 @@
     padding-right: 5%;
 }
 
+#matchupSearch{
+    float: left;
+    margin-bottom: 1em;
+}
 #testingResults{
     padding-left: 5%;
     padding-right: 5%;
@@ -48,12 +52,75 @@
     float: left;
     padding-bottom: 5%;
 }
-.navbar-nav > li > a, .navbar-brand {
-    padding-top:20px !important;
-    padding-bottom:0 !important;
-    height: 60px;
+
+.homePoster{
+    padding-left: 10%;
+    padding-right: 10%;
+    float: left;
+    width: 50%;
+    height: 50%;
 }
-.navbar {min-height:50px !important;}
+.upcomingEventInfo{
+    width: 50%;
+    height: 50%;
+    padding-right: 15%;
+    background: #ffffff;
+    float: right;
+}
+.nextEvent{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#slides_control > div{
+      height: 200px;
+  }
+
+#slides_control {
+    position:absolute;
+    width: 400px;
+    left:50%;
+    top:20px;
+    margin-left:-200px;
+}
+
+.navbar-custom {
+    background-color:#229922;
+    color:#ffffff;
+    border-radius:0;
+    height: 48%;
+    padding-top: 0.15%;
+    padding-bottom: 0.15%;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+
+.navbar-custom .navbar-nav > .active > a {
+    color: #ffffff;
+    background-color:transparent;
+}
+
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus,
+.navbar-custom .navbar-nav > .open >a {
+    text-decoration: none;
+    background-color: #33aa33;
+}
+
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+.navbar-custom .navbar-toggle {
+    background-color:#eeeeee;
+}
+.navbar-custom .icon-bar {
+    background-color:#33aa33;
+}
 
 #resultExplanation{
     width: 60%;
@@ -84,21 +151,12 @@ td img {
     float:inherit;
     width:100%;
 }
-.img{
-    height: auto;
-    width: auto;
-}
-.homePoster{
-    width: 80%;
-    margin-right: 20%;
-    float: right;
-}
+/*.img{*/
+    /*height: auto;*/
+    /*width: auto;*/
+/*}*/
 
-.upcomingEventInfo{
-    float: right;
-    margin-right: 10%;
-    text-align: justify;
-}
+
 
 p{
     size: 10px;

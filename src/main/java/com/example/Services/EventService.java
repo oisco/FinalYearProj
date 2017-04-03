@@ -28,9 +28,7 @@ public class EventService {
         eventRepository.save(event);
     }
 
-    public Event findNextEvent(){
-        return eventRepository.findNextEvent();
-    }
+
 
 
     public Event get(int id) {
@@ -43,5 +41,10 @@ public class EventService {
 
     public List<Object[]> findPastEvents(){
         return eventRepository.findPastEvents();
+    }
+
+    //returns 5 upcoming events for homescreen display
+    public List<Event> findNextEvents() {
+        return eventRepository.getNextEvents();
     }
 }

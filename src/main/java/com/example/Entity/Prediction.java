@@ -12,11 +12,12 @@ import javax.persistence.*;
 @Entity
 @NamedNativeQueries({
         @NamedNativeQuery(name = "Prediction.getAllPredictions",
-                query = "SELECT m.fighter1_profile_image,m.fighter1_first_name,m.fighter1_last_name,m.fighter2_profile_image,m.fighter2_first_name,m.fighter2_last_name,p.is_correct,m.date\n" +
+                query = "SELECT m.fighter1_profile_image,m.fighter1_first_name,m.fighter1_last_name,m.fighter2_profile_image,m.fighter2_first_name,m.fighter2_last_name,p.is_correct,m.date,f.last_name\n" +
                 "FROM \n" +
-                "matchup m, prediction p\n" +
+                "matchup m, prediction p,fighter f\n" +
                 "WHERE\n" +
                 "m.id=p.matchup_id" +
+                        " and p.winner_id=f.id" +
                         " and m.date<now();"),
 @NamedNativeQuery(name = "Prediction.getEventPredictions",
         query = "select p.winner_id from prediction p,matchup m,fighter f where p.matchup_id=m.id and m.event_id=?1 and p.winner_id=f.id ORDER BY p.winner_id ASC;")
