@@ -1,13 +1,8 @@
 <div class="container">
     <div class="panel-group">
         <div class="panel panel-success">
-            <div class="panel-heading">{{vm.fighter.first_name}} {{vm.fighter.last_name}}</div>
+            <div class="panel-heading"><b>{{vm.fighter.first_name}} {{vm.fighter.last_name}}</b></div>
             <div class="panel-body" >
-
-
-
-
-
                 <div class="fighterTop">
                     <div class="MainFighterImage">
                         <img src={{vm.fighterImage}}/>
@@ -15,8 +10,9 @@
 
                     <div class="stats">
                         <ul>
+                            <li><b>Name:</b>{{vm.fighter.first_name}} {{vm.fighter.last_name}}</li>
                             <li><b>Weight class:</b> {{vm.fighter.weight_class}}</li>
-                            <li><b>Rank:</b> {{vm.fighter.rank}}</li>
+                            <li ng-show="vm.fighter.rank!==''"><b>Rank:</b> {{vm.fighter.rank}}</li>
                             <li><b>Reach:</b> {{vm.fighter.reach}}</li>
                             <li><b>Height:</b> {{vm.fighter.height}}</li>
                         </ul>
@@ -35,13 +31,13 @@
                             <a ng-click="vm.goToFighter(matchup.fighter1_id)">
                             {{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}
                             </a>
-                            <div style="float:right;"><img src="{{matchup.fighter1_profile_image}}" height="60"></div>
+                            <div style="float:right;"><img ng-src="{{matchup.fighter1_profile_image}}" height="60"></div>
                         </td><td>vs</td>
                         <td>
                             <a ng-click="vm.goToFighter(matchup.fighter2_id)">
                             {{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}
                              </a>
-                            <div style="float:right;"><img src="{{matchup.fighter2_profile_image}}" height="60"></div>
+                            <div style="float:right;"><img ng-src="{{matchup.fighter2_profile_image}}" height="60"></div>
 
                         </td>
                         <td><div ng-if="matchup.result==null">(Upcoming)</div>{{matchup.result.method}}-{{matchup.result.ending_time}}</td>

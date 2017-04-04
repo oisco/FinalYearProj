@@ -183,7 +183,7 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
                         yAxes: [{
                             display: true,
                             ticks: {
-                                suggestedMin: 35,    // minimum will be 0, unless there is a lower value.
+                                suggestedMin: 30,    // minimum will be 0, unless there is a lower value.
                                 // OR //
                                 // beginAtZero: true   // minimum value will be 0.
                             },

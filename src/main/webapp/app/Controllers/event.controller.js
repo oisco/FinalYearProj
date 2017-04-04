@@ -10,7 +10,6 @@ angular.module('app').controller("EventController", function ($scope,$http, $loc
     var eventsPromise=$http.get(url);
     eventsPromise.then(function (response) {
         vm.events=response.data;
-        debugger
 
     })
 

@@ -9,23 +9,65 @@
 
             <table class="table table-bordered table-bordered">
                 <tr><th>Fights</th></tr>
-                <tr ng-repeat="matchup in vm.event.matchups">
+                <tr height="180" ng-repeat="matchup in vm.event.matchups">
                     <td ng-class="cellClass(matchup.fighter1_id,matchup.fighter1_is_winner)">
-                        <div style="float:left;" >
-                            <b>Name :</b><a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a></div>
-                        <br>
-                        <div style="float:right;"><img src="{{matchup.fighter1_profile_image}}" height="100"></div>
+                        <div class="main">
+                            <div class="sidebar">
+                                <b>Name :</b>
+                                <a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a>
+                                <b>Height :</b>{{matchup.fighter1height}}
+                                <br>
+                                <b>Reach :</b>{{matchup.fighter1reach}}
+                                <br>
+                            </div>
+                            <div class="page-wrap">
+                                <img ng-src="{{matchup.fighter1_profile_image}}" height="120">
+                                <div ng-if="matchup.fighter1_is_winner">
+                                    <div class="ribbon">
+                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                        <h1>Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                    </div>
+                                </div>
+                                <div ng-if="matchup.fighter2_is_winner">
+                                    <div class="loserribbon">
+                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                        <h1>Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                     </td>
-                   <td>vs</td>
                     <td ng-class="cellClass(matchup.fighter2_id,matchup.fighter2_is_winner)">
-                        <div style="float:left;" >
-                            <b>Name :</b><a ng-click="vm.goToFighter(matchup.fighter2_id)">{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a></div>
-                        <br>
-                        <div style="float:right;"><img src="{{matchup.fighter2_profile_image}}" height="100"></div>
+                        <div class="main">
+                            <div class="sidebar">
+                                <b>Name :</b>
+                                <a ng-click="vm.goToFighter(matchup.fighter2_id)">{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a>
+                                <b>Height :</b>{{matchup.fighter2height}}
+                                <br>
+                                <b ng-show="matchup.fighter2reach>0">Reach :</b>{{matchup.fighter2reach}}
+                                <br>
+                            </div>
+                            <div class="page-wrap"><img ng-src="{{matchup.fighter2_profile_image}}" height="120">
+                                <div ng-if="matchup.fighter2_is_winner">
+                                    <div class="ribbon">
+                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                        <h1>Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                    </div>
+                                </div>
+                                <div ng-if="matchup.fighter1_is_winner">
+                                    <div class="loserribbon">
+                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                        <h1>Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
-                    <td>{{matchup.result.method}}</td>
+
+                    <td><b>{{matchup.result.method}}</b></td>
                      <td> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
                 </tr>
+
                 </table>
         </div>
         </div>

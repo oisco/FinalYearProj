@@ -10,27 +10,47 @@
 
                 <table class="table table-bordered table-striped">
                     <tr><h4 align="center">Matchups</h4></tr>
-                    <tr ng-repeat="matchup in vm.event.matchups">
-                        <td ng-class="cellClass(matchup.fighter1_id)">
-                            <div id="main">
-                                <div id="sidebar">
+                    <tr ng-repeat="matchup in vm.event.matchups" height="180">
+                        <td ng-class="vm.cellClass(matchup.fighter1_id)">
+                            <!--<p nd-if="angular.element(#currentFighter).hasClass('winner');">test</p>-->
+                            <div class="main">
+                                <div class="sidebar">
                                     <b>Name :</b>
                                     <a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a>
                                     <br>
                                     <b>Record :</b>{{matchup.fighter1record}}
                                 </div>
-                                <div id="page-wrap"><img ng-src="{{matchup.fighter1_profile_image}}" height="120"></div>
-                            </div>
+                                <div class="page-wrap">
+                                    <img id="fighter" ng-src="{{matchup.fighter1_profile_image}}" height="120">
+                                        <div ng-class="vm.labelClass({{matchup.fighter1_id}})">
+                                            <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                            <h1>Predicted Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                        </div>
+                                    <div ng-show="vm.loserLabelClass({{matchup.fighter1_id}})" CLASS="loserribbon">
+                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                        <h1>Predicted Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                    </div>
+                                    </div>
+                                </div>
                         </td>
-                        <td ng-class="cellClass(matchup.fighter2_id)">
-                            <div id="main">
-                                <div id="sidebar">
+                        <td ng-class="vm.cellClass(matchup.fighter2_id)">
+                            <div class="main">
+                                <div class="sidebar">
                                     <b>Name :</b>
                                     <a ng-click="vm.goToFighter(matchup.fighter2_id)">{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a>
                                     <br>
                                     <b>Record :</b>{{matchup.fighter2record}}
                                 </div>
-                                <div id="page-wrap"><img ng-src="{{matchup.fighter2_profile_image}}" height="120"></div>
+                                <div class="page-wrap"><img ng-src="{{matchup.fighter2_profile_image}}" height="120">
+                                    <div ng-class="vm.labelClass({{matchup.fighter2_id}})">
+                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                        <h1>Predicted Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                    </div>
+                                    <div ng-show="vm.loserLabelClass({{matchup.fighter2_id}})" CLASS="loserribbon">
+                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                        <h1>Predicted Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                         <td> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
