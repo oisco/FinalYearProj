@@ -36,7 +36,7 @@
 
 
 </head>
-<body ng-app="app" >
+<body ng-app="app" id="appBody">
 
 <header>
     <nav class="navbar navbar-custom">
@@ -52,9 +52,9 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" >The Algorithm
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#HowItWorks">How it Works</a></li>
-                        <li><a href="#viewAllPredictions">How it Performs</a></li>
-                        <li><a href="#theLearningCurve">Watch it Learn</a></li>
+                        <li><a href="#HowItWorks">How It Works</a></li>
+                        <li><a href="#viewAllPredictions">How It Performs</a></li>
+                        <li><a href="#theLearningCurve">How It Improves</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -69,13 +69,11 @@
         </div>
     </nav>
 </header>
-
-<div class="ng-view">
+<div id="mainView" class="ng-view">
     <!--
     -->
 </div>
-
-<footer class="footer" style="position:absolute; bottom: 0; background-color: #c1ffa5">
+<footer class="footer">
 
 </footer>
 </body>

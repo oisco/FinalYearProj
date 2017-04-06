@@ -1,20 +1,22 @@
 <div class="container">
-    <div class="panel-group">
-    <div class="panel panel-success">
-        <div class="panel-heading">{{vm.event.base_title}}  {{vm.event.event_date | date}}</div>
-        <div class="panel-body">
+    <!--<div class="panel-group">-->
+    <!--<div class="panel panel-success">-->
+        <!--<div class="panel-heading">{{vm.event.base_title}}  {{vm.event.event_date | date}}</div>-->
+        <!--<div class="panel-body">-->
             <div class="eventImage">
                 <img width="100%" src="{{vm.event.feature_image}}">
             </div>
 
-            <table class="table table-bordered table-bordered">
+            <table class="table ">
                 <tr><th>Fights</th></tr>
                 <tr height="180" ng-repeat="matchup in vm.event.matchups">
-                    <td ng-class="cellClass(matchup.fighter1_id,matchup.fighter1_is_winner)">
+                    <!--<td ng-class="cellClass(matchup.fighter1_id,matchup.fighter1_is_winner)">-->
+                    <td>
                         <div class="main">
                             <div class="sidebar">
                                 <b>Name :</b>
                                 <a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a>
+                                <br>
                                 <b>Height :</b>{{matchup.fighter1height}}
                                 <br>
                                 <b>Reach :</b>{{matchup.fighter1reach}}
@@ -37,7 +39,8 @@
                                 </div>
                             </div>
                     </td>
-                    <td ng-class="cellClass(matchup.fighter2_id,matchup.fighter2_is_winner)">
+                    <!--<td ng-class="cellClass(matchup.fighter2_id,matchup.fighter2_is_winner)">-->
+                    <td>
                         <div class="main">
                             <div class="sidebar">
                                 <b>Name :</b>
@@ -69,8 +72,8 @@
                 </tr>
 
                 </table>
-        </div>
-        </div>
-    </div>
+        <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
 </div>

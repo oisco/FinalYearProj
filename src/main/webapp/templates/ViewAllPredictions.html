@@ -11,7 +11,7 @@
                 <b>training and testing sets</b> ({{vm.foldResult.length}} times) and the algorithms ability to learn to spot a winner is trained on
                 the training set and it's actual ability to predict a winner is tested on the test sets.
                 <br>
-                The graph to the left Illustrates how it performed on each of the ({{vm.foldResult.length}} test
+                The graph to the left Illustrates how it performed on each of the {{vm.foldResult.length}} test
                 sets where the left axis represents the percentage of fights predicted correctly on
                 each testing subset.
             </p>
@@ -26,9 +26,10 @@
     <p>
         Using the above technique and calculating the average  of each  testing set's results enables us to
         say that the algorithm is able to predict a matchup correctly <b> {{vm.accuracy| number: 2}} %</b> of the time.
-        In total it managed to predict <b>{{vm.numCorrect}} out of {{vm.totalFights}} matchups correctly</b>
+        In total it managed to correctly predict <b>{{vm.numCorrect}} out of {{vm.totalFights}} matchups in total.</b>
         <br>
-        Please note that this is a <b>minnimum figure</b> as future predictions will be based on using the full data set and not 90% of it.
+        Please note that this is a <b>minnimum figure</b> as future predictions will be made using the full data set and not 90% of it.
+        For more information on how the data set size affects accuracy <a href="#theLearningCurve">see here.</a>
         <br>
         The matchups which were predicted correctly and incorrectly are listed below:
     </p>
@@ -48,7 +49,7 @@
            </div>
        </div>
      </form>
-    <table class="table table-bordered table-striped">
+    <table class="table">
         <tr><th>Event Name</th><th>Matchup</th><th>Predicted winner</th><th>Date</th> <th>Was Prediction Correct?</th></tr>
         <tr ng-repeat="prediction in vm.predictions | filter:searchFish |orderBy:'date':true">
             <td></td>

@@ -27,7 +27,7 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
     $scope.rowClass = function(matchup){
         if(matchup.fighter1_is_winner){
             if(matchup.fighter1_id==vm.fighter.id){
-                return "success";
+                return "winner";
             }
             else {
                 return "danger";
@@ -35,7 +35,7 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
         }
         else if(matchup.fighter2_is_winner){
             if(matchup.fighter2_id==vm.fighter.id){
-                return "success";
+                return "winner";
             }
             else {
                 return "danger";
