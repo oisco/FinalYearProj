@@ -1,15 +1,18 @@
 <div class="container">
-    <!--<div class="panel-group">-->
-        <!--<div class="panel panel-success">-->
-            <!--<div class="panel-heading">{{vm.event.base_title}}  {{vm.event.event_date | date}}</div>-->
-            <!--<div class="panel-body">-->
-                <div class="eventImage">
-                    <img src="{{vm.event.feature_image}}">
-                </div>
-                <button type="button" class="btn btn-info"  ng-click="vm.getPredictions()">Show Predictions</button>
+    <div class="eventBreakdown">
+        <div class="eventImage">
+            <img src="{{vm.event.feature_image}}">
+        </div>
+        <div class="eventInfo">
+            <h2>{{vm.event.base_title}}</h2>
+            <h2>{{vm.event.title_tag_line}}</h2><p>{{vm.event.event_date |date}}</p><p>{{vm.event.location}}</p>
+            <br>
+            <button type="button" class="btn btn-info"  ng-click="vm.getPredictions()">Show Predictions</button>
+        </div>
+    </div>
 
                 <table class="table">
-                    <tr><h4 align="center">Matchups</h4></tr>
+                    <th>Matchups</th>
                     <tr ng-repeat="matchup in vm.event.matchups" height="180">
                         <td ng-class="vm.cellClass(matchup.fighter1_id)">
                             <!--<p nd-if="angular.element(#currentFighter).hasClass('winner');">test</p>-->

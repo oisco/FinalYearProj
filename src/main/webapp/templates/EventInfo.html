@@ -1,11 +1,14 @@
 <div class="container">
-    <!--<div class="panel-group">-->
-    <!--<div class="panel panel-success">-->
-        <!--<div class="panel-heading">{{vm.event.base_title}}  {{vm.event.event_date | date}}</div>-->
-        <!--<div class="panel-body">-->
-            <div class="eventImage">
-                <img width="100%" src="{{vm.event.feature_image}}">
-            </div>
+    <div class="eventBreakdown">
+        <div class="eventImage">
+            <img src="{{vm.event.feature_image}}">
+        </div>
+        <div class="eventInfo">
+            <h2>{{vm.event.base_title}}</h2>
+            <h2>{{vm.event.title_tag_line}}</h2><p>{{vm.event.event_date |date}}</p><p>{{vm.event.location}}</p>
+            <br>
+        </div>
+    </div>
 
             <table class="table ">
                 <tr><th>Fights</th></tr>
@@ -45,6 +48,7 @@
                             <div class="sidebar">
                                 <b>Name :</b>
                                 <a ng-click="vm.goToFighter(matchup.fighter2_id)">{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</a>
+                                <br>
                                 <b>Height :</b>{{matchup.fighter2height}}
                                 <br>
                                 <b ng-show="matchup.fighter2reach>0">Reach :</b>{{matchup.fighter2reach}}
