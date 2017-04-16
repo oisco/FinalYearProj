@@ -189,17 +189,6 @@ System.out.println("--------------------------------TEST SET--------------------
         rm.setAttributeIndices("1,2");
         // classifier1
         mlp = new MultilayerPerceptron();
-//                mlp.setOptions(Utils.splitOptions(" -L 0.425 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k=10 57.3
-//                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.05 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k=10 57.08
-//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k=10 59.81
-//                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"7\" -R")); //k=10 58.82
-//                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"7\" -R")); //k-10 56
-//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 58
-//                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 58
-//                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 58.76
-//                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.25 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 58.75
-//                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.2 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 59.44
-//                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 59.98
 //                mlp.setOptions(Utils.splitOptions(" -L 0.4 -M 0.1 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 59.75
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"8,2\" -R")); //k-10 60.09
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"7,2\" -R")); //k-10 58.8
@@ -209,16 +198,31 @@ System.out.println("--------------------------------TEST SET--------------------
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 4000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 60.10--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //                mlp.setOptions(Utils.splitOptions(" -L 0.35 -M 0.15 -N 1000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 60.10 best yet!! curve every 300
 //                mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.15 -N 1000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.8--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-//    good    mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//    "0 0 9 * * SUN"
+//  60.1 mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+ //59 good curve
+         mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.2 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//   bad      mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.2 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+         mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+   //58.57     mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.25 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+ //SHITE   mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.15 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //    shit    mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.05 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //  57 first set no joy shit      mlp.setOptions(Utils.splitOptions(" -L 0.2 -M 0.2 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //  not great      mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.2 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-//    bets leraning curve great    mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//    bets leraning curve great
+ // 57.91 mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+
+//58.68 mlp.setOptions(Utils.splitOptions(" -L 0.05 -M 0.075 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+// 58.57 mlp.setOptions(Utils.splitOptions(" -L 0.05 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//58.79  mlp.setOptions(Utils.splitOptions(" -L 0.05 -M 0.05 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//58.13 mlp.setOptions(Utils.splitOptions(" -L 0.05 -M 0.025 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//59.99 shit curve mlp.setOptions(Utils.splitOptions(" -L 0.025 -M 0.05 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+
 //     good learning curve ,good current accuracy   mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.05 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 // 61 1st set good curve
 //        mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.075 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //   also good
-        mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.075 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+//        mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.075 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //   poor     mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //     quite good   mlp.setOptions(Utils.splitOptions(" -L 0.05 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
 //very good curve 59.3 on current set  mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"6,2\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION

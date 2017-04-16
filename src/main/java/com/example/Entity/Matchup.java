@@ -141,7 +141,9 @@ import java.util.List;
                 query="select count(*) from matchup where \n" +
                     "(fighter2_id=?1 and fighter1_is_winner and date <?2)\n" +
                         "or\n" +
-                        "(fighter1_id=?1 and fighter2_is_winner and date <?2);")
+                        "(fighter1_id=?1 and fighter2_is_winner and date <?2);"),
+
+        @NamedNativeQuery(name = "Matchup.findUpcomingToDelete",query = "select * from matchup where date>now();")
 })
 
 public class Matchup {
@@ -151,7 +153,7 @@ public class Matchup {
     private boolean fighter1_is_winner,fighter2_is_winner;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
     @JoinColumn(name = "event_id")
     private Event event;
 
@@ -159,11 +161,11 @@ public class Matchup {
     private List<Fighter> fighters;
 
     @JsonProperty("result")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private Result result;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,cascade =CascadeType.REMOVE )
     private Prediction prediction;
 
     private int fighter1_id;
@@ -647,4 +649,5 @@ public class Matchup {
     public void setFighter2_submissionsaverage(double fighter2_submissionsaverage) {
         this.fighter2_submissionsaverage = fighter2_submissionsaverage;
     }
+
 }

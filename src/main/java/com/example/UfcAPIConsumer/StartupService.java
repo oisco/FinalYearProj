@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.util.DateUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -46,52 +47,43 @@ public class StartupService {
     @Autowired
     TestingResultRepository testingResultRepository;
     //service to populate db with data from UFC API on startup if database is currently empty
-//   @PostConstruct
+   @PostConstruct
     public void onStartup() {
-        if(fighterRepository.findAll().size()>0) {
-//            events
-//           ResponseEntity<Event[]> responseEntity = restTemplate.getForEntity("http://ufc-data-api.ufc.com/api/v3/us/events", Event[].class);
-//           Event[] events = responseEntity.getBody();
-//           eventRepository.save(Arrays.asList(events));
-//            //fighters
-//           ResponseEntity<Fighter[]> responseEntity2 = restTemplate.getForEntity("http://ufc-data-api.ufc.com/api/v3/us/fighters", Fighter[].class);
-//           Fighter[] fighters = responseEntity2.getBody();
-//           fighterRepository.save(Arrays.asList(fighters));
 
-                //get all matchups for the event ids
-//            ArrayList<Event> events1 = new ArrayList<>();
-//            events1.add(eventRepository.findOne(611356));
-//                List<Event> events1 = eventRepository.findByDateGreaterThan();
+            //find any past events to update
 
+       //see if there was any event since the last time the schedular was ran
+       ArrayList<Event> eventsToUpdate=eventRepository.findToUpdate();
+       for (int i=0;i<eventsToUpdate.size();i++){
+           getEventInfo(eventsToUpdate.get(i));
+       }
 
-         calculateStats.getFighterStatsAtTimeOfMatchup();
-//            getEventInfo(eventRepository.findOne(611205));
+       //if there has been any events since the last update --> get its results, recreate the perceptron model on the latest set, test it, and use it to product future matchups
+       if(eventsToUpdate.size()>0){
+           testingResultRepository.deleteAll();
+           //REMOVE RECORDS TO DETERMINE LEARNING CURVE
+           int setToDelete[]={0,400,800,1200,1600};
+           double results[]=new double[setToDelete.length];
+           //is deleting the first of the full data set and not the last!
+           createArffMLInputs();
+           for(int i=setToDelete.length-1;i >= 0;i--){
+               //save the results if we are cross validating using the full data set
+               if(i==0){
+                   predictionRepository.deleteAll();
+                   testingResultRepository.getRidOfFoldResult("FoldResult");
+               }
 
-            testingResultRepository.deleteAll();
-            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
-            int setToDelete[]={0,400,800,1200,1600};
-//            int setToDelete[]={0,200,400,600,800,1000,1200,1400,1600};
-            double results[]=new double[setToDelete.length];
-            //is deleting the first of the full data set and not the last!
-            createArffMLInputs();
-            for(int i=setToDelete.length-1;i >= 0;i--){
-                //save the results if we are cross validating using the full data set
-                if(i==0){
-                    predictionRepository.deleteAll();
-                    testingResultRepository.getRidOfFoldResult("FoldResult");
-                }
+               System.out.println(setToDelete[i]+" fights removed");
 
-                System.out.println(setToDelete[i]+" fights removed");
+               //pass crossvalidate an int of how many fights to delete before beginnning
+               results[i]=multiLayerPerceptron.crossValidate(setToDelete[i]);
+           }
 
-                //pass crossvalidate an int of how many fights to delete before beginnning
-                results[i]=multiLayerPerceptron.crossValidate(setToDelete[i]);
-            }
-
-            multiLayerPerceptron.PredictUpcoming();
-            for (int i=0;i<results.length;i++){
-                System.out.println(i+" months ago "+results[i]+"%");
-            }
-            }
+           multiLayerPerceptron.PredictUpcoming();
+           for (int i=0;i<results.length;i++){
+               System.out.println(i+" months ago "+results[i]+"%");
+           }
+       }
    }
 
    //goes to an event url and gets its fights , gets matchup results if it past and if upcming will save the matchup -->and calculate its stats for each fighter

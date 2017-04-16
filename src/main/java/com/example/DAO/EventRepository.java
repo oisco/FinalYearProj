@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,4 +25,9 @@ public interface EventRepository extends JpaRepository<Event,Integer>{
 
   @Query(value = "SELECT * FROM EVENT where EVENT_DATE >NOW() ORDER BY EVENT_DATE ASC LIMIT 3;", nativeQuery = true)
   List<Event> getNextEvents();
+
+  //find any events from the past week
+  @Query(value = "select * from event where event_date>now() - INTERVAL 1 week and event_date<now();", nativeQuery = true)
+  ArrayList<Event> findToUpdate();
+
 }

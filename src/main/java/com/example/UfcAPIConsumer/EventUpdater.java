@@ -5,12 +5,14 @@ import com.example.DAO.FighterRepository;
 import com.example.DAO.MatchupRepository;
 import com.example.Entity.Event;
 import com.example.Entity.Fighter;
+import com.example.Entity.Matchup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +31,10 @@ public class EventUpdater {
 
 //    @PostConstruct
     public void refreshEvents(){
+        //remove all upcoming matchups to accomodate for fight card changes (rplacement,cancellation, etc.)
+
+        removeAllUpcomingMatchups();
+
         RestTemplate restTemplate=new RestTemplate();
         ResponseEntity<Event[]> responseEntity = restTemplate.getForEntity("http://ufc-data-api.ufc.com/api/v3/us/events", Event[].class);
         Event[] events = responseEntity.getBody();
@@ -70,7 +76,32 @@ public class EventUpdater {
         //find each fighter and update their records
         //have to update not just save-->> need to keep links intact
 
+    }
 
+//    @PostConstruct
+    //this method deletes all upcoming matchups,
+    //the reason for this is to ensure if fights are cancelled or opponents are replaced this will be reflected
+    public void removeAllUpcomingMatchups(){
+
+        matchupRepository.deleteMatchupLinks();
+        matchupRepository.deleteUpcomingMatchups();
+//        ArrayList<Matchup> allUpcomingMatchup=matchupRepository.findUpcomingToDelete();
+
+//        Date d =new Date();
+//        ArrayList<Matchup> matchupsToDelete= (ArrayList<Matchup>) matchupRepository.findByDateGreaterThan(d);
+//        d =new Date();
+//
+//    for(int i=0;i<matchupsToDelete.size();i++){
+//       ///detach all fighter_matchup links before deleting
+//        matchupRepository.save(matchupsToDelete.get(i));
+//
+//        //delete the matchup
+//      matchupRepository.delete( matchupsToDelete.get(i).getId());
+
+
+//    }
+
+//allUpcomingMatchup.get(0).getId();
     }
 
 }

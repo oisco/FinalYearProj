@@ -29,7 +29,7 @@ public class Fighter {
 
     private int reach,height;
 
-    @ManyToMany(fetch = FetchType.EAGER,targetEntity=Matchup.class)
+    @ManyToMany(fetch = FetchType.EAGER,targetEntity=Matchup.class,cascade = CascadeType.DETACH)
     public List<Matchup> matchups;
 
     @JsonIgnore
