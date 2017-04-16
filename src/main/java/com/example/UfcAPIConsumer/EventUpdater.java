@@ -34,6 +34,8 @@ public class EventUpdater {
         Event[] events = responseEntity.getBody();
         Date now = new Date();
 
+        //nb delete all upcoming matchups
+
         boolean allUpcomingEvents=true;
 
         int i=0;
@@ -49,6 +51,9 @@ public class EventUpdater {
             }
             i++;
         }while (allUpcomingEvents);
+
+        //re-run cross validation
+        startupService.onStartup();
 
     }
 

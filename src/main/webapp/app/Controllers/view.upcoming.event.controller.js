@@ -47,6 +47,7 @@ angular.module('app').controller("ViewUpcomingEventController", function ($scope
         var predictionPromise=$http.get(url);
         predictionPromise.then(function (response) {
             vm.predictions=response.data;
+            debugger
             // updateCellClass();
         })
     }

@@ -64,7 +64,7 @@ public class StartupService {
 //                List<Event> events1 = eventRepository.findByDateGreaterThan();
 
 
-//         calculateStats.getFighterStatsAtTimeOfMatchup();
+         calculateStats.getFighterStatsAtTimeOfMatchup();
 //            getEventInfo(eventRepository.findOne(611205));
 
             testingResultRepository.deleteAll();
@@ -101,7 +101,6 @@ public class StartupService {
            String matchupString = responseEntity3.getBody();
            Gson gson = new GsonBuilder().create();
            Matchup[] matchups = gson.fromJson(matchupString, Matchup[].class);
-           //check if it is a future event if so predict and save otherwise just save and retrieve stats
            saveMatchups(matchups, event);
            System.out.println("event data got");
    }

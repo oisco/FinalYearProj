@@ -72,7 +72,8 @@ public ArrayList<Input> listGetClassStats(List<Object[]> matchups, int clas){
         int fighter1height=Integer.parseInt(matchups.get(i)[1].toString());
         int fighter1reach=Integer.parseInt(matchups.get(i)[2].toString());
         String fighter1record=matchups.get(i)[3].toString();
-        String weightClass=matchups.get(i)[4].toString();
+//        String weightClass=matchups.get(i)[4].toString();
+        String weightClass="";
         double fighter1_strikingaccuracy=Double.parseDouble(matchups.get(i)[5].toString());
         double fighter1_sapm=Double.parseDouble(matchups.get(i)[6].toString());
         double fighter1_slpm=Double.parseDouble(matchups.get(i)[7].toString());
