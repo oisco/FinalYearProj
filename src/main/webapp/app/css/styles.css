@@ -193,8 +193,22 @@
     /*padding: 20px;*/
 }
 
-.stats{
 
+.fighter1Stats{
+    float: right;
+    /*background-color: #eeeeee;*/
+    border: 2px solid #9fadaa;;
+    padding: 10px;
+    background-color: #222233;
+    border-radius: 25px;
+}
+.fighter2Stats{
+    float: left;
+    /*background-color: #eeeeee;*/
+    border: 2px solid #9fadaa;;
+    padding: 10px;
+    background-color: #222233;
+    border-radius: 25px;
 }
 
 #resultDonut{
@@ -503,4 +517,16 @@ html{
 
 p{
     size: 10px;
+}
+
+.versus {
+    height:35%;
+    padding-top:20%;
+}
+
+.fighter1Profile{
+    float: left;
+}
+.fighter2Profile{
+    float: right;
 }

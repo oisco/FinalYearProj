@@ -1,16 +1,84 @@
 <div class="container">
-    <div class="panel-group">
-        <div class="panel panel-success">
-            <div class="panel-heading"> <h2>{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}  vs  {{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</h2></div>
+
+    <table class="table">
+        <tr height="150"><td bgcolor="#0066ff" >
+            <div class="sidebar">
+                <b>Name :</b>
+                <a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a>
+                <br>
+                <b>Height :</b>{{vm.matchup.fighter1height}}
+                <br>
+                <div ng-show="vm.matchup.fighter1reach>0"><b>Reach :</b>{{vm.matchup.fighter1reach}}</div>
+                <br>
+            </div>
+            <div class="page-wrap"><img ng-src="{{vm.matchup.fighter1_profile_image}}" height="120">
+                <div ng-if="vm.matchup.fighter1_is_winner">
+                    <div class="ribbon">
+                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                        <h1>Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                    </div>
+                </div>
+                <div ng-if="vm.matchup.fighter2_is_winner">
+                    <div class="loserribbon">
+                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                        <h1>Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </td>
+            <td bgcolor="#ff5050">
+                <div class="main">
+                    <div class="sidebar">
+                        <b>Name :</b>
+                        <a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</a>
+                        <br>
+                        <b>Height :</b>{{vm.matchup.fighter2height}}
+                        <br>
+                        <div ng-show="vm.matchup.fighter2reach>0"><b>Reach :</b>{{vm.matchup.fighter2reach}}</div>
+                        <br>
+                    </div>
+                    <div class="page-wrap"><img ng-src="{{vm.matchup.fighter2_profile_image}}" height="120">
+                        <div ng-if="vm.matchup.fighter2_is_winner">
+                            <div class="ribbon">
+                                <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                <h1>Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                            </div>
+                        </div>
+                        <div ng-if="vm.matchup.fighter1_is_winner">
+                            <div class="loserribbon">
+                                <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                <h1>Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="fighter1Profile">
+        <img ng-src="{{vm.fighter1.left_full_body_image}}">
+        <div class="stats">
+            <ul>
+                <li><b>Name:</b>{{vm.fighter1.first_name}} {{vm.fighter1.last_name}}</li>
+                <li><b>Weight class:</b> {{vm.fighter1.weight_class}}</li>
+                <li ng-show="vm.fighter1.rank!==''"><b>Rank:</b> {{vm.fighter1.rank}}</li>
+                <li><b>Reach:</b> {{vm.fighter1.reach}}</li>
+                <li><b>Height:</b> {{vm.fighter1.height}}</li>
+            </ul>
         </div>
-        <table class="table">
-            <tr><td bgcolor="#0066ff" > <img src="{{vm.matchup.fighter1_profile_image}}"></td>
-                <td bgcolor="#ff5050"> <img src="{{vm.matchup.fighter2_profile_image}}"></td></tr>
-            <tr>
-                <td><a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a></td>
-                <td><a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</a></td>
-            </tr>
-        </table>
     </div>
 
+    <div class="fighter1Profile">
+        <img ng-src="{{vm.fighter2.left_full_body_image}}">
+        <div class="fighter1Stats">
+        <ul>
+            <li><b>Name:</b>{{vm.fighter2.first_name}} {{vm.fighter2.last_name}}</li>
+            <li><b>Weight class:</b> {{vm.fighter2.weight_class}}</li>
+            <li ng-show="vm.fighter2.rank!==''"><b>Rank:</b> {{vm.fighter2.rank}}</li>
+            <li><b>Reach:</b> {{vm.fighter2.reach}}</li>
+            <li><b>Height:</b> {{vm.fighter2.height}}</li>
+        </ul>
+        </div>
+    </div>
 </div>

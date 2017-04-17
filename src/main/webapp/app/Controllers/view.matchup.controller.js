@@ -76,8 +76,8 @@ angular.module('app').controller("ViewMatchupController", function ($scope,$http
                 var outcome=document.getElementById("outcome").innerHTML=(vm.matchup.fighter2_first_name+' '+vm.matchup.fighter2_last_name+" beats "+
                 vm.matchup.fighter1_first_name+' '+vm.matchup.fighter1_last_name +" via "+result+"");
             }
-
         }
+
 
     }
 
