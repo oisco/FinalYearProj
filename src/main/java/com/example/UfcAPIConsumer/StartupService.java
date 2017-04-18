@@ -47,7 +47,7 @@ public class StartupService {
     @Autowired
     TestingResultRepository testingResultRepository;
     //service to populate db with data from UFC API on startup if database is currently empty
-   @PostConstruct
+//   @PostConstruct
     public void onStartup() {
 
             //find any past events to update

@@ -166,6 +166,9 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
     };
 
     vm.goToMatchup=function (id) {
+        $location.path("viewMatchup/"+id);
+    };
+    vm.goToUpcomingMatchup=function (id) {
         $location.path("viewUpcomingMatchup/"+id);
     };
 

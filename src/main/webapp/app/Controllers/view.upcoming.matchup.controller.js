@@ -6,6 +6,8 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
     vm.labels=null;
     vm.fighter1=null;
     vm.fighter2=null;
+    vm.labels=["h","b","n"]
+    vm.values=[1,2,3]
 
     function getMatchup(id) {
         var url="matchups/view/"+id;
@@ -33,8 +35,77 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
             }
             else
                 vm.fighter2=response.data;
+                setUpGraph(vm.fighter2);
+
         })
     }
+
+    function setUpGraphValues(fighter) {
+        for(var i=0;i<fighter.matchups.length;i++){
+            vm.values.push()
+        }
+
+    }
+
+    function setUpGraph(fighter) {
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["Wins","Draws", "Losses"],
+                datasets: [{
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#95a5a6",
+                        "#e74c3c",
+                    ],
+                    data: [fighter.wins,fighter.draws,fighter.losses]
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
+        var myChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: vm.labels,
+                datasets: [{
+                    label: 'UFC Performance History Wins-Losses',
+                    data: vm.values,
+                    backgroundColor: "rgba(153,255,51,0.4)"
+                }]
+            },
+            options:{
+                legend: {labels:{fontColor:"#AACCFF", fontSize: 18}},
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: "#AACCFF"
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Career UFC Wins- UFC Losses',
+                            fontColor: "#AACCFF"
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#AACCFF"
+
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Last 4 (or fewer) fights',
+                            fontColor: "#AACCFF"
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+
+
 
 
     getMatchup($routeParams.id)

@@ -9,10 +9,28 @@
     clear: none;
     margin-right: 10%;
 }
+.previousFights{
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
 
 .recordPie{
     width:30%;
 }
+
+.topLeft{
+    width: 50%;
+    height: 50%;
+    float: left;
+}
+.bottomLeft{
+    width: 50%;
+    height: 50%;
+    float: left;
+}
+
 .lineChart{
     width:70%;
     height: 600%;
@@ -35,7 +53,7 @@
 /*}*/
 
 .matchupResult{
-    /*/ background-color: #222233; */
+     background-color: #222233;
     border: 2px solid #9fadaa;
     padding: 15px;
     border-radius: 25px;
@@ -53,9 +71,8 @@
 
 #LearningCurve{
     width: 45%;
-    /*background: #ffffff;*/
     margin-top: 3%;
-/*/ background-color: #222233; */
+    background-color: #222233;
     border: 2px solid #9fadaa;;
     padding: 10px;
     float: right;
@@ -286,25 +303,40 @@ td img {
     border-radius: 25px;
 
 }
-
-.thumbnailStatss{
+.breakDownStats{
     /*background-color: #eeeeee;*/
     border: 2px solid #9fadaa;;
     padding: 10px;
     background-color: #222233;
     border-radius: 25px;
     width: 60%;
+    height: 80%;
+    float: right;
+
 }
 
-#mainView{
-    /*background-image: url("/../../images/octagon.jpg");;*/
-    /*background-repeat: repeat-y;*/
-    /*background-size: 100%;*/
-    /*width: 100%;*/
-    /*padding-top: 3%;*/
-    /*background-size: 100%;*/
-    /*background-color: #222233;*/
+.breakDownStats2{
+    /*background-color: #eeeeee;*/
+    border: 2px solid #9fadaa;;
+    padding: 10px;
+    background-color: #222233;
+    border-radius: 25px;
+    width: 60%;
+    height: 80%;
+    float: left;
 }
+
+
+.thumbnailStatss{
+    width: 70%;
+    /*background-color: #eeeeee;*/
+    border: 2px solid #9fadaa;;
+    padding: 5px;
+    background-color: #222233;
+    border-radius: 25px;
+    /*width: 60%;*/
+}
+
 header{
     /*background-color: #222233;*/
 
@@ -312,8 +344,6 @@ header{
 div {
     color: #AACCFF;
 }
-
-
 .table tbody tr.loss > td {
     background-color: #c36357 !important;
 }
@@ -527,7 +557,40 @@ p{
 
 .fighter1Profile{
     float: left;
+    width: 100%;
+    /*padding-left: 10%;*/
+    padding-top: 2%;
+
+}
+
+.fighter2Profile{
+    float: right;
+    width: 100%;
+    /*padding-left: 10%;*/
+    padding-top: 2%;
+
+}
+
+
+.profileImage{
+    padding-top: 5%;
+    padding-right: 5%;
+    padding-left: 10%;
+    float: left;
+    width: 30%;
 }
 .fighter2Profile{
+    float: right;
+    width: 100%;
+    padding-left: 10%;
+}
+.fightHistory{
+    padding-left: 10%;
+    width: 80%;
+    height: 50%;
+}
+.topRight{
+    height: 50%;
+    width: 50%;
     float: right;
 }

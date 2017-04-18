@@ -20,8 +20,10 @@
                         <canvas id="myChart2"></canvas>
                     </div>
                 </div>
-                <table class="table">
-                    <th>Previous fights</th>
+</div>
+    <div class="previousFights">
+        <h2>Previous fights</h2>
+    <table class="table">
                     <tr ng-repeat="matchup in vm.fighter.matchups | orderBy:'-date'" ng-class="rowClass({{matchup}})">
                             <td>
                                 <div><img ng-src="{{matchup.fighter1_profile_image}}" height="80"></div>
@@ -41,11 +43,13 @@
                                 </a>
                             </div>
                         </td>
-                        <td><div ng-if="matchup.result==null">(Upcoming)</div>{{matchup.result.method}}-{{matchup.result.ending_time}}</td>
+                        <td><div ng-if="matchup.result==null">(Upcoming)</div><b>{{matchup.result.method}}-{{matchup.result.ending_time}}</b></td>
                         <td>{{matchup.date | date}}</td>
 
-                        <td ng-show="matchup.date < vm.currentDate"> <button type="button" class="btn btn-info"  ng-click="vm.goToUpcomingMatchup(matchup.id)">View Details</button></td>
-                        <td ng-show="matchup.date > vm.currentDate"> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Breakdown</button></td>
+                        <td ng-show="matchup.date > vm.currentDate"> <button type="button" class="btn btn-info"  ng-click="vm.goToUpcomingMatchup(matchup.id)">View Breakdown</button></td>
+                        <td ng-show="matchup.date < vm.currentDate"> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
                     </tr>
                 </table>
     </div>
+
+</div>
