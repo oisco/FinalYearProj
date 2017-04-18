@@ -22,22 +22,30 @@
                 </div>
                 <table class="table">
                     <th>Previous fights</th>
-                    <tr ng-repeat="matchup in vm.fighter.matchups | orderBy:'-date'" ng-class="rowClass(matchup)">
+                    <tr ng-repeat="matchup in vm.fighter.matchups | orderBy:'-date'" ng-class="rowClass({{matchup}})">
+                            <td>
+                                <div><img ng-src="{{matchup.fighter1_profile_image}}" height="80"></div>
+                                <div class="thumbnailStatss">
+                                    <a ng-click="vm.goToFighter(matchup.fighter1_id)">
+                                     {{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}
+                                </a>
+                                </div>
+                            </td>
+                        <td><img src="images/versus.png" height="20%"> </td>
                         <td>
-                            <a ng-click="vm.goToFighter(matchup.fighter1_id)">
-                            {{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}
-                            </a>
-                            <div style="float:right;"><img ng-src="{{matchup.fighter1_profile_image}}" height="60"></div>
-                        </td><td>vs</td>
-                        <td>
-                            <a ng-click="vm.goToFighter(matchup.fighter2_id)">
-                            {{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}
-                             </a>
-                            <div style="float:right;"><img ng-src="{{matchup.fighter2_profile_image}}" height="60"></div>
+
+                            <div><img ng-src="{{matchup.fighter2_profile_image}}" height="80"></div>
+                            <div class="thumbnailStatss" width="50">
+                                <a ng-click="vm.goToFighter(matchup.fighter2_id)">
+                                    {{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}
+                                </a>
+                            </div>
                         </td>
                         <td><div ng-if="matchup.result==null">(Upcoming)</div>{{matchup.result.method}}-{{matchup.result.ending_time}}</td>
                         <td>{{matchup.date | date}}</td>
-                        <td> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
+
+                        <td ng-show="matchup.date < vm.currentDate"> <button type="button" class="btn btn-info"  ng-click="vm.goToUpcomingMatchup(matchup.id)">View Details</button></td>
+                        <td ng-show="matchup.date > vm.currentDate"> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Breakdown</button></td>
                     </tr>
                 </table>
     </div>

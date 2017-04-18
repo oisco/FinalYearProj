@@ -53,16 +53,22 @@ public class StartupService {
             //find any past events to update
 
        //see if there was any event since the last time the schedular was ran
-       ArrayList<Event> eventsToUpdate=eventRepository.findToUpdate();
+       ArrayList<Event> eventsToUpdate=new ArrayList<Event>();
+//       eventsToUpdate.add(eventRepository.findOne(620685));
+//       eventsToUpdate.add(eventRepository.findOne(617917));
+               eventRepository.findToUpdate();
        for (int i=0;i<eventsToUpdate.size();i++){
            getEventInfo(eventsToUpdate.get(i));
        }
 
        //if there has been any events since the last update --> get its results, recreate the perceptron model on the latest set, test it, and use it to product future matchups
        if(eventsToUpdate.size()>0){
+//           calculateStats.getFighterStatsAtTimeOfMatchup();
            testingResultRepository.deleteAll();
            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
-           int setToDelete[]={0,400,800,1200,1600};
+           int setToDelete[]={0,200,400,600,800,1000,1200,1400,1600,1800};
+//           int setToDelete[]={0,400,800,1200,1600};
+//           int setToDelete[]={0,600,1200,1800};
            double results[]=new double[setToDelete.length];
            //is deleting the first of the full data set and not the last!
            createArffMLInputs();

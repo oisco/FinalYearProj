@@ -28,8 +28,6 @@
 }
 #predictionResults{
     width: 90%;
-    padding-left: 5%;
-    padding-right: 5%;
     margin: 0 auto;
 }
 /*.separator{*/
@@ -46,7 +44,7 @@
 #crossValidationExplanation{
     width: 35%;
     /*background: #ffffff;*/
-/*/ background-color: #222233; */
+         background-color: #222233;
     border: 2px solid #9fadaa;;
     padding: 15px;
     float: right;
@@ -68,7 +66,7 @@
 .crossValidationResults{
     width: 55%;
     /*background: #ffffff;*/
-/*/ background-color: #222233; */
+     background-color: #222233;
     border: 2px solid #9fadaa;
     padding: 15px;
     float: left;
@@ -212,13 +210,10 @@
 }
 
 #resultDonut{
-    width: 42.5%;
-    height: 42.5%;
-    /*background: #ffffff;*/
+    width: 40%;
+    height: 50%;
     float: right;
-    padding-right: 10%;
     padding-bottom: 10%;
-    padding-top: 2%;
 }
 
 td {
@@ -292,6 +287,15 @@ td img {
 
 }
 
+.thumbnailStatss{
+    /*background-color: #eeeeee;*/
+    border: 2px solid #9fadaa;;
+    padding: 10px;
+    background-color: #222233;
+    border-radius: 25px;
+    width: 60%;
+}
+
 #mainView{
     /*background-image: url("/../../images/octagon.jpg");;*/
     /*background-repeat: repeat-y;*/
@@ -308,23 +312,20 @@ header{
 div {
     color: #AACCFF;
 }
-.
-/*.table tbody tr > td.loser {*/
-    /*!*background-color: #c86467 !important;*!*/
-    /*background-image: url("/../../images/loser.png");*/
-    /*background-repeat:no-repeat;*/
 
+
+.table tbody tr.loss > td {
+    background-color: #c36357 !important;
+}
+.table tbody tr.win > td {
+    background-color: #6db37b !important;
+}
+
+
+/*table.table tbody > tr.danger {*/
+    /*background-color: #957df2 !important;*/
 /*}*/
 
-
-
-
-
-tr.loss td{
-    background-color: #e45b55 !important;
-}.winner td{
-    background-color: #33aa33 !important;
-}
 
 body{
 

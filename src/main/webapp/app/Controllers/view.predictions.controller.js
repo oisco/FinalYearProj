@@ -78,7 +78,11 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
                     var fontSize = (height / 114).toFixed(2);
                     ctx.font = fontSize + "em sans-serif";
                     ctx.textBaseline = "middle";
-
+                    // ctx.strokeStyle = "red";
+                    var gradient=ctx.createLinearGradient(0,0,1,0);
+                    gradient.addColorStop("1.0","#AACCFF");
+// Fill with gradient
+                    ctx.fillStyle=gradient
                     var text = Math.round(vm.accuracy * 100) / 100+'%',
                         textX = Math.round((width - ctx.measureText(text).width) / 2),
                         textY = height / 2;
@@ -182,6 +186,8 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
                     backgroundColor: "rgba(153,255,51,0.4)"
                 }]},
                 options: {
+                    legend: {labels:{fontColor:"#AACCFF", fontSize: 18}},
+
                     "horizontalLine": [{
                         "y": 50,
                         "style": "rgba(255, 0, 0, .4)",
@@ -194,16 +200,23 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
                                 suggestedMin: 30,    // minimum will be 0, unless there is a lower value.
                                 // OR //
                                 // beginAtZero: true   // minimum value will be 0.
+                                fontColor: "#AACCFF"
+
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: '% Correct'
+                                labelString: '% Correct',
+                                fontColor: "#AACCFF"
                             }
                         }],
                         xAxes: [{
+                            ticks: {
+                                fontColor: "#AACCFF"
+                            },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Fold'
+                                labelString: 'Fold',
+                                fontColor: "#AACCFF"
                             }
                         }]
                     }

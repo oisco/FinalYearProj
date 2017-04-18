@@ -6,6 +6,7 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
     vm.values=[];
     vm.fighterImage="";
     vm.wl=0;
+    vm.currentDate=new Date();
 
 
     function getFighter(id) {
@@ -27,18 +28,18 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
     $scope.rowClass = function(matchup){
         if(matchup.fighter1_is_winner){
             if(matchup.fighter1_id==vm.fighter.id){
-                return "winner";
+                return "win";
             }
             else {
-                return "danger";
+                return "loss";
             }
         }
         else if(matchup.fighter2_is_winner){
             if(matchup.fighter2_id==vm.fighter.id){
-                return "winner";
+                return "win";
             }
             else {
-                return "danger";
+                return "loss";
             }
         }
         else if((!matchup.fighter2_is_winner)&&(!matchup.fighter2_is_winner))
@@ -50,6 +51,10 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
     }
     vm.goToMatchup=function (id) {
         $location.path("viewMatchup/"+id);
+    };
+
+    vm.goToUpcomingMatchup=function (id) {
+        $location.path("viewUpcomingMatchup/"+id);
     };
 
 
@@ -128,17 +133,27 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
                 }]
             },
             options:{
+                legend: {labels:{fontColor:"#AACCFF", fontSize: 18}},
                 scales: {
                     yAxes: [{
+                        ticks: {
+                            fontColor: "#AACCFF"
+                        },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Career UFC Wins- UFC Losses'
+                            labelString: 'Career UFC Wins- UFC Losses',
+                            fontColor: "#AACCFF"
                         }
                     }],
                     xAxes: [{
+                        ticks: {
+                            fontColor: "#AACCFF"
+
+                        },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Matchup History'
+                            labelString: 'Matchup History',
+                            fontColor: "#AACCFF"
                         }
                     }]
                 }
@@ -148,6 +163,10 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
 
     vm.goToFighter = function (id) {
         $location.path("viewFighter/"+id);
+    };
+
+    vm.goToMatchup=function (id) {
+        $location.path("viewUpcomingMatchup/"+id);
     };
 
 

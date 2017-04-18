@@ -88,7 +88,7 @@ public class EventUpdater {
 //        ArrayList<Matchup> allUpcomingMatchup=matchupRepository.findUpcomingToDelete();
 
 //        Date d =new Date();
-//        ArrayList<Matchup> matchupsToDelete= (ArrayList<Matchup>) matchupRepository.findByDateGreaterThan(d);
+//        ArrayList<Matchup> matchupsToDelete= (ArrayList<Matchup>) matchupRepository.finNNdByDateGreaterThan(d);
 //        d =new Date();
 //
 //    for(int i=0;i<matchupsToDelete.size();i++){
