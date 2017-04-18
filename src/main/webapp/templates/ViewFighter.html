@@ -9,8 +9,8 @@
                             <li><b>Name:</b>{{vm.fighter.first_name}} {{vm.fighter.last_name}}</li>
                             <li><b>Weight class:</b> {{vm.fighter.weight_class}}</li>
                             <li ng-show="vm.fighter.rank!==''"><b>Rank:</b> {{vm.fighter.rank}}</li>
-                            <li><b>Reach:</b> {{vm.fighter.reach}}</li>
-                            <li><b>Height:</b> {{vm.fighter.height}}</li>
+                            <li ng-show="vm.fighter.reach>0"><b>Reach:</b> {{vm.fighter.reach}}</li>
+                            <li ng-show="vm.fighter.height>0"><b>Height:</b> {{vm.fighter.height}}</li>
                         </ul>
                     </div>
                     <div class="recordPie">
@@ -23,7 +23,8 @@
 </div>
     <div class="previousFights">
         <h2>Previous fights</h2>
-    <table class="table">
+        <div class="panel panel-default">
+        <table class="table">
                     <tr ng-repeat="matchup in vm.fighter.matchups | orderBy:'-date'" ng-class="rowClass({{matchup}})">
                             <td>
                                 <div><img ng-src="{{matchup.fighter1_profile_image}}" height="80"></div>
@@ -50,6 +51,7 @@
                         <td ng-show="matchup.date < vm.currentDate"> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
                     </tr>
                 </table>
+            </div>
     </div>
 
 </div>

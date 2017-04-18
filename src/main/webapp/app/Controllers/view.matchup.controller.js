@@ -29,6 +29,9 @@ angular.module('app').controller("ViewMatchupController", function ($scope,$http
                     ],
                     data: [vm.matchup.result.fighter1StrikesLanded, vm.matchup.result.fighter2StrikesLanded]
                 }]
+            },
+            options:{
+                legend: {labels:{fontColor:"#AACCFF", fontSize: 14}}
             }
         });
 

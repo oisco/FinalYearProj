@@ -32,23 +32,25 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
         eventsPromise.then(function (response) {
             if(fighterToGet==1){
                 vm.fighter1=response.data;
+                setUpGraph(vm.fighter1,"fighter1Pie","lineChart1");
             }
             else
                 vm.fighter2=response.data;
-                setUpGraph(vm.fighter2);
+                setUpGraph(vm.fighter2,"fighter2Pie","lineChart2");
 
         })
     }
 
     function setUpGraphValues(fighter) {
+        //set up 2 fighter arrays here
         for(var i=0;i<fighter.matchups.length;i++){
             vm.values.push()
         }
 
     }
 
-    function setUpGraph(fighter) {
-        var ctx = document.getElementById("myChart");
+    function setUpGraph(fighter,pieChart,lineChart) {
+        var ctx = document.getElementById(pieChart);
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
@@ -64,7 +66,7 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
             }
         });
 
-        var ctx2 = document.getElementById('myChart2').getContext('2d');
+        var ctx2 = document.getElementById(lineChart).getContext('2d');
         var myChart2 = new Chart(ctx2, {
             type: 'line',
             data: {

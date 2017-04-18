@@ -118,6 +118,9 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
                     ],
                     data: [vm.fighter.wins,vm.fighter.draws,vm.fighter.losses]
                 }]
+            },
+            options:{
+                legend: {labels:{fontColor:"#AACCFF", fontSize: 14}}
             }
         });
 

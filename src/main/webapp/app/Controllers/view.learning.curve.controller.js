@@ -35,20 +35,31 @@ angular.module('app').controller("ViewLearningCurveController", function ($scope
                     label: '% of matchups predicted correctly per data set size',
                     data: vm.values,
                     backgroundColor: "rgba(153,255,51,0.4)"
-                }]
+                    }]
             },
             options:{
-            scales: {
+                legend: {labels:{fontColor:"#AACCFF", fontSize: 18}},
+
+                scales: {
                 yAxes: [{
+                    ticks: {
+                        fontColor: "#AACCFF"
+                    },
                     scaleLabel: {
                         display: true,
-                        labelString: '% Correct'
+                        labelString: '% Correct',
+                        fontColor: "#AACCFF"
                     }
                 }],
                 xAxes: [{
+                    ticks: {
+                        fontColor: "#AACCFF"
+                    },
                     scaleLabel: {
                         display: true,
-                        labelString: 'Data set size'
+                        labelString: 'Data set size',
+                        fontColor: "#AACCFF"
+
                     }
                 }]
             }
