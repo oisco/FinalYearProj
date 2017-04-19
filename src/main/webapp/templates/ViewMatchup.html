@@ -1,9 +1,6 @@
 <div class="container">
-    <!--<div class="panel-group">-->
-        <!--<div class="panel panel-success">-->
-            <!--<div class="panel-heading"></div>-->
-        <!--</div>-->
-        <table class="table">
+    <div class="panel panel-default">
+    <table class="table">
             <tr height="150"><td bgcolor="#0066ff" >
                         <div class="sidebar">
                             <b>Name :</b>
@@ -58,25 +55,38 @@
                 </td>
             </tr>
         </table>
+        </div>
 
-        <div class="matchupResult"><h2 id="outcome" align="center"></h2></div>
-            <h3>Striking :</h3>
+
+        <div class="matchupResult">
+            <h2 id="outcome" align="center"></h2>
+        </div>
+
+        <div class="strikingBreakdown">
+            <div class="sectionHeader"><h1>Striking Breakdown</h1></div>
             <div class="matchupStriking">
-            <p> {{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}} Striking Accuracy:</p>
-                <div><p>{{vm.matchup.result.fighter1StrikesLanded}}/{{vm.matchup.result.fighter1StrikesAttempted}}</p></div>
+                <div>
+                    <h3> {{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}} Striking Accuracy:</h3>
+                    <b>{{vm.matchup.result.fighter1StrikesLanded}}/{{vm.matchup.result.fighter1StrikesAttempted}} strikes landed</b>
+                </div>
+                <canvas id="accuracyDoughnut1" />
+            </div>
+
+            <div class="totalStrikes">
+                <canvas id="myChart"></canvas>
             </div>
 
             <div class="matchupStriking2">
-                <p> {{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}} Striking Accuracy:</p>
-                <div><p>{{vm.matchup.result.fighter2StrikesLanded}}/{{vm.matchup.result.fighter2StrikesAttempted}}</p></div>
-
+                <div>
+                    <h3>{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}} Striking Accuracy:</h3>
+                    <b>{{vm.matchup.result.fighter2StrikesLanded}}/{{vm.matchup.result.fighter2StrikesAttempted}} strikes landed</b>
+                </div>
+                <canvas id="accuracyDoughnut2" />
             </div>
-                     <canvas height="50"  id="myChart"></canvas>
+        </div>
 
-
-            <h3>Grappling :</h3>
-            <canvas height="50"  id="myChart2"></canvas>
-            <h3>Control Time :</h3>
-        <br>
-        <br>
+    <div class="sectionHeader">
+        <h1>Grappling Breakdown</h1>
+    </div>
+    <canvas height="50"  id="myChart2"></canvas>
 </div>
