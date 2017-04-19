@@ -21,13 +21,13 @@
 }
 
 .topLeft{
-    width: 50%;
-    height: 50%;
+    width:100%;
+    height: 100%;
     float: left;
 }
 .bottomLeft{
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
     float: left;
 }
 
@@ -323,9 +323,19 @@ td img {
     border-radius: 25px;
     width: 60%;
     height: 80%;
-    float: left;
+    float: right;
 }
 
+.lineHistory{
+    /*background-color: #eeeeee;*/
+    border: 2px solid #9fadaa;;
+    padding: 10px;
+    background-color: #222233;
+    border-radius: 25px;
+    width: 60%;
+    height: 80%;
+    float: right;
+}
 
 .thumbnailStatss{
     width: 70%;
@@ -553,44 +563,83 @@ p{
 .versus {
     height:35%;
     padding-top:20%;
+    padding-left: 20%;
 }
 
 .fighter1Profile{
     float: left;
-    width: 100%;
+    width: 50%;
     /*padding-left: 10%;*/
-    padding-top: 2%;
 
 }
 
-.fighter2Profile{
-    float: right;
-    width: 100%;
-    /*padding-left: 10%;*/
-    padding-top: 2%;
-
-}
-
-
-.profileImage{
-    padding-top: 5%;
-    padding-right: 5%;
-    padding-left: 10%;
+.profileImage1{
+    padding-top: 10%;
+    /*padding-right: 10%;*/
+    /*padding-left: 5%;*/
     float: left;
-    width: 30%;
+    width: 20%;
+}
+.profileImage2{
+    padding-top: 10%;
+    /*padding-right: 10%;*/
+    /*padding-right: 5%;*/
+    padding-left: 5%;
+    float: left;
+    width: 20%;
 }
 .fighter2Profile{
     float: right;
+    width: 50%;
+}
+
+.pastPerformances{
     width: 100%;
-    padding-left: 10%;
+    padding-top: 3%;
+}
+
+
+.matchupStriking{
+    float: left;
+}
+.matchupStriking2{
+    float: right ;
+}
+
+.fightHistory2{
+    background-color: #222233;
+    border: 2px solid #9fadaa;
+    border-radius: 25px;
+    padding-top: 2%;
+    width: 50%;
+    height: 40%;
+    padding-left: 2%;
+    padding-right: 2%;
+    float: right;
+}
+
+.method{
+    padding-top: 40%;
+    padding-left: 15%;
 }
 .fightHistory{
-    padding-left: 10%;
-    width: 80%;
-    height: 50%;
+    background-color: #222233;
+    border: 2px solid #9fadaa;
+    /*padding: 15px;*/
+    border-radius: 25px;
+    width: 50%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
+    height: 40%;
+    float: left;
+}
+
+.vers{
+    padding-top: 50%;
 }
 .topRight{
-    height: 50%;
-    width: 50%;
-    float: right;
+    height: 100%;
+    width: 100%;
+    float: left;
 }

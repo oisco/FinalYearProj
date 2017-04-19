@@ -59,7 +59,23 @@ angular.module('app').controller("ViewMatchupController", function ($scope,$http
         var ctx = document.getElementById("myChart2").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
-            data: data
+            data: data,
+            options:{
+                legend: {labels:{fontColor:"#AACCFF", fontSize: 18}},
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: "#AACCFF"
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#AACCFF"
+
+                        }
+                    }]
+                }
+            }
             // options: options
         });
 
@@ -73,11 +89,11 @@ angular.module('app').controller("ViewMatchupController", function ($scope,$http
         if(!result.includes("draw")){
             if(vm.matchup.fighter1_is_winner){
                 var outcome=document.getElementById("outcome").innerHTML=(vm.matchup.fighter1_first_name+' '+vm.matchup.fighter1_last_name+" beats "
-                +vm.matchup.fighter2_first_name+' '+vm.matchup.fighter2_last_name +" via "+result+"");
+                +vm.matchup.fighter2_first_name+' '+vm.matchup.fighter2_last_name +" "+result+".");
             }
             else{
                 var outcome=document.getElementById("outcome").innerHTML=(vm.matchup.fighter2_first_name+' '+vm.matchup.fighter2_last_name+" beats "+
-                vm.matchup.fighter1_first_name+' '+vm.matchup.fighter1_last_name +" via "+result+"");
+                vm.matchup.fighter1_first_name+' '+vm.matchup.fighter1_last_name +" "+result+".");
             }
         }
 

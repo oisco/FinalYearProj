@@ -37,7 +37,6 @@ angular.module('app').controller("ViewUpcomingEventController", function ($scope
         var eventsPromise=$http.get(url);
         eventsPromise.then(function (response) {
             vm.event=response.data;
-            debugger
         })
     }
 
@@ -47,23 +46,8 @@ angular.module('app').controller("ViewUpcomingEventController", function ($scope
         var predictionPromise=$http.get(url);
         predictionPromise.then(function (response) {
             vm.predictions=response.data;
-            debugger
-            // updateCellClass();
         })
     }
-
-    // function updateCellClass(){
-    //     vm.cellClass = function(id){
-    //         //check if fighter is in predictions
-    //         if(vm.predictions.indexOf(id)>=0)
-    //         {
-    //             return "success";
-    //         }
-    //         else{
-    //             return "danger";
-    //         }
-    //     }
-    // }
 
 
 

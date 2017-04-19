@@ -7,7 +7,7 @@
             <tr height="150"><td bgcolor="#0066ff" >
                         <div class="sidebar">
                             <b>Name :</b>
-                            <a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a>
+                            <b><a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a></b>
                             <br>
                             <b>Height :</b>{{vm.matchup.fighter1height}}
                             <br>
@@ -33,7 +33,7 @@
                     <div class="main">
                         <div class="sidebar">
                             <b>Name :</b>
-                            <a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</a>
+                            <b><a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</a></b>
                             <br>
                             <b>Height :</b>{{vm.matchup.fighter2height}}
                             <br>
@@ -61,7 +61,19 @@
 
         <div class="matchupResult"><h2 id="outcome" align="center"></h2></div>
             <h3>Striking :</h3>
-            <canvas height="50"  id="myChart"></canvas>
+            <div class="matchupStriking">
+            <p> {{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}} Striking Accuracy:</p>
+                <div><p>{{vm.matchup.result.fighter1StrikesLanded}}/{{vm.matchup.result.fighter1StrikesAttempted}}</p></div>
+            </div>
+
+            <div class="matchupStriking2">
+                <p> {{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}} Striking Accuracy:</p>
+                <div><p>{{vm.matchup.result.fighter2StrikesLanded}}/{{vm.matchup.result.fighter2StrikesAttempted}}</p></div>
+
+            </div>
+                     <canvas height="50"  id="myChart"></canvas>
+
+
             <h3>Grappling :</h3>
             <canvas height="50"  id="myChart2"></canvas>
             <h3>Control Time :</h3>

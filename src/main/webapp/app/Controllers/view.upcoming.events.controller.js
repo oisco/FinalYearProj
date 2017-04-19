@@ -6,7 +6,6 @@ angular.module('app').controller("ViewUpcomingEventsController", function ($scop
     var eventsPromise=$http.get(url);
     eventsPromise.then(function (response) {
         vm.events=response.data;
-        debugger
 
     })
 

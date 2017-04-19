@@ -4,7 +4,7 @@
         <tr height="150"><td bgcolor="#0066ff" >
             <div class="sidebar">
                 <b>Name :</b>
-                <a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a>
+                <b><a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a></b>
                 <br>
                 <b>Height :</b>{{vm.matchup.fighter1height}}
                 <br>
@@ -28,11 +28,11 @@
         </td>
             <td bgcolor="gray"><img src="images/versus.png" class="versus"> </td>
 
-            <td bgcolor="#ff5050">
+            <td bgcolor="#c36357">
                 <div class="main">
                     <div class="sidebar">
                         <b>Name :</b>
-                        <a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</a>
+                        <b><a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</a></b>
                         <br>
                         <div ng-show="vm.matchup.fighter2height>0">
                             <b>Height :</b>{{vm.matchup.fighter2height}}
@@ -68,71 +68,70 @@
         </div>
 
     <div class="fighter1Profile">
-        <div class="profileImage"> <img ng-src="{{vm.fighter1.left_full_body_image}}"></div>
+        <div class="profileImage1"> <img ng-src="{{vm.fighter1.left_full_body_image}}"></div>
         <div class="breakDownStats">
-            <h1 align="center">{{vm.fighter1.first_name}} {{vm.fighter1.last_name}}</h1>
+            <h2 align="center">{{vm.fighter1.first_name}} {{vm.fighter1.last_name}}</h2>
             <div class="topLeft">
-                <h3>Record</h3>
+                <h3>Record:</h3>
                 <canvas id="fighter1Pie"></canvas>
             </div>
 
             <div class="topRight">
-                <h3>Striking</h3>
+                <h3>Striking:</h3>
                 <p><b>Strikes landed per minute : </b>{{vm.matchup.fighter1_slpm| number: 2}}</p>
                 <p><b>Strikes absorbed per minute : </b>{{vm.matchup.fighter1_sapm| number: 2}}</p>
-                <p><b>Striking accuracy : </b>{{vm.matchup.fighter1_strikingaccuracy| number: 2}}</p>
-                <p><b>Striking defense  : </b>{{vm.matchup.fighter1_strikingdefense| number: 2}}</p>
+                <p><b>Striking accuracy : </b>{{vm.matchup.fighter1_strikingaccuracy| number: 2}}%</p>
+                <p><b>Striking defense  : </b>{{vm.matchup.fighter1_strikingdefense| number: 2}}%</p>
             </div>
 
             <div class="bottomLeft">
-                <h3>Grappling</h3>
+                <h3>Grappling:</h3>
                 <ul>
-                <li><p>Takedown average : {{vm.matchup.fighter1_takedownaverage| number: 2}} takedowns landed per fight</p></li>
-                <li><p>Takedown defense : {{vm.matchup.fighter1_takedowndefense| number: 2}} %</p></li>
+                <li><p><b>Takedown average :</b> {{vm.matchup.fighter1_takedownaverage| number: 2}} takedowns landed per fight</p></li>
+                <li><p><b>Takedown defense :</b> {{vm.matchup.fighter1_takedowndefense| number: 2}} %</p></li>
                 </ul>
             </div>
 
-            <div class="fightHistory">
-                <div class="lineChart2">
-                    <canvas id="lineChart1"></canvas>
-                </div>
-            </div>
         </div>
     </div>
-<!--sdjcnasknd-->
-
     <div class="fighter2Profile">
+        <div class="profileImage2"> <img ng-src="{{vm.fighter2.left_full_body_image}}"></div>
         <div class="breakDownStats2">
             <h2 align="center">{{vm.fighter2.first_name}} {{vm.fighter2.last_name}}</h2>
 
             <div class="topLeft">
-                <h3>Record</h3>
+                <h3>Record:</h3>
                 <canvas id="fighter2Pie"></canvas>
             </div>
 
             <div class="topRight">
-                <h3>Striking</h3>
+                <h3>Striking:</h3>
                 <p><b>Strikes landed per minute : </b>{{vm.matchup.fighter2_slpm| number: 2}}</p>
                 <p><b>Strikes absorbed per minute : </b>{{vm.matchup.fighter2_sapm| number: 2}}</p>
-                <p><b>Striking accuracy : </b>{{vm.matchup.fighter2_strikingaccuracy| number: 2}}</p>
-                <p><b>Striking defense  : </b>{{vm.matchup.fighter2_strikingdefense| number: 2}}</p>
+                <p><b>Striking accuracy : </b>{{vm.matchup.fighter2_strikingaccuracy| number: 2}}%</p>
+                <p><b>Striking defense  : </b>{{vm.matchup.fighter2_strikingdefense| number: 2}}%</p>
             </div>
 
             <div class="bottomLeft">
-                <h3>Grappling</h3>
+                <h3>Grappling:</h3>
                 <ul>
-                    <li><p>Takedown average : {{vm.matchup.fighter2_takedownaverage| number: 2}} takedowns landed per fight</p></li>
-                    <li><p>Takedown defense : {{vm.matchup.fighter2_takedowndefense| number: 2}} %</p></li>
+                    <li><p><b>Takedown average :</b> {{vm.matchup.fighter2_takedownaverage| number: 2}} takedowns landed per fight</p></li>
+                    <li><p><b>Takedown defense :</b> {{vm.matchup.fighter2_takedowndefense| number: 2}} %</p></li>
                 </ul>
             </div>
-
-            <div class="fightHistory">
-                <div class="lineChart2">
-                    <canvas id="lineChart2"></canvas>
-                </div>
-            </div>
         </div>
-        <div class="profileImage"> <img ng-src="{{vm.fighter2.left_full_body_image}}"></div>
+    </div>
 
+</div>
+<div class="pastPerformances">
+    <div class="fightHistory">
+        <canvas id="lineChart1"></canvas>
+    </div>
+    <div class="fightHistory2">
+        <canvas id="lineChart2"></canvas>
     </div>
 </div>
+
+<!--<div class="fighterHistorys">-->
+
+<!--</div>-->
