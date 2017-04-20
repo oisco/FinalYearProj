@@ -3,6 +3,7 @@ package com.example.UfcAPIConsumer;
 import com.example.DAO.EventRepository;
 import com.example.DAO.FighterRepository;
 import com.example.DAO.MatchupRepository;
+import com.example.DAO.PredictionRepository;
 import com.example.Entity.Event;
 import com.example.Entity.Fighter;
 import com.example.Entity.Matchup;
@@ -28,8 +29,10 @@ public class EventUpdater {
     StartupService startupService;
     @Autowired
     EventRepository eventRepository;
+    @Autowired
+    PredictionRepository predictionRepository;
 
-//    @PostConstruct
+    @PostConstruct
     public void refreshEvents(){
         //remove all upcoming matchups to accomodate for fight card changes (rplacement,cancellation, etc.)
 
@@ -82,26 +85,10 @@ public class EventUpdater {
     //this method deletes all upcoming matchups,
     //the reason for this is to ensure if fights are cancelled or opponents are replaced this will be reflected
     public void removeAllUpcomingMatchups(){
-
+        predictionRepository.deleteAll();
         matchupRepository.deleteMatchupLinks();
         matchupRepository.deleteUpcomingMatchups();
 //        ArrayList<Matchup> allUpcomingMatchup=matchupRepository.findUpcomingToDelete();
-
-//        Date d =new Date();
-//        ArrayList<Matchup> matchupsToDelete= (ArrayList<Matchup>) matchupRepository.finNNdByDateGreaterThan(d);
-//        d =new Date();
-//
-//    for(int i=0;i<matchupsToDelete.size();i++){
-//       ///detach all fighter_matchup links before deleting
-//        matchupRepository.save(matchupsToDelete.get(i));
-//
-//        //delete the matchup
-//      matchupRepository.delete( matchupsToDelete.get(i).getId());
-
-
-//    }
-
-//allUpcomingMatchup.get(0).getId();
     }
 
 }

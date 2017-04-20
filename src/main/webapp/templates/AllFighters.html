@@ -12,7 +12,7 @@
     <table class="table">
             <tr><th>Fighter Name</th><th>Fighter Image</th></tr>
             <tr  ng-click="vm.goToFighter(fighter[0])" ng-repeat="fighter in vm.fighters | filter:searchFish">
-                <td>{{fighter[1]}} {{fighter[2]}}</td><td><img src={{fighter[3]}}></td>
+                <td><b>{{fighter[1]}} {{fighter[2]}}</b></td><td><img src={{fighter[3]}}></td>
                 <td>
                     <button type="button" class="btn btn-default" ng-click="vm.goToFighter(fighter[0])">View Fighter</button>
                 </td>

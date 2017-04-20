@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NamedNativeQueries(
-        @NamedNativeQuery(name = "Fighter.findAllToDisplay", query = "select id,first_name,last_name,thumbnail from Fighter order by first_name ASC"))
+        @NamedNativeQuery(name = "Fighter.findAllToDisplay", query = "select id,first_name,last_name,thumbnail from Fighter where last_name not like '%to be%' order by first_name ASC"))
 @JsonAutoDetect
 
 public class Fighter {

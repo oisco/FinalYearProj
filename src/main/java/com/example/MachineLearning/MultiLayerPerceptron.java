@@ -133,7 +133,7 @@ System.out.println("--------------------------------TEST SET--------------------
             //Predict Part
             numCorrect=0;
             test.sort(test.attribute(0));
-
+            int predictedTheSame=0;
             for (int i = 0; i < test.numInstances(); i=i+2) {
                 double pred = fc.classifyInstance(test.instance(i));
 //                System.out.print("ID: " + test.instance(i).value(0));
@@ -141,6 +141,10 @@ System.out.println("--------------------------------TEST SET--------------------
 //                System.out.println(", predicted: " + pred);
                 if(i+1!=test.size())
                     if (test.get(i).value(0)==test.get(i+1).value(0)) {//2 records of same matchup
+                        if(fc.classifyInstance(train.instance(i))==fc.classifyInstance(train.instance(i+1))){
+                            //both outputs were predicted the same
+                            predictedTheSame++;
+                        }
                         //is the loser 
                         if(test.get(i).classValue()==0) {
                             if(fc.classifyInstance(test.instance(i))<fc.classifyInstance(test.instance(i+1))) {
@@ -167,7 +171,9 @@ System.out.println("--------------------------------TEST SET--------------------
             }
             float accuracy=(numCorrect/((test.size()/2)/100.0f));
             System.out.println("test set correct "+numCorrect+"/"+test.size()/2+" pct: "+accuracy);
-           //save the result
+            System.out.println("predicted the same "+predictedTheSame);
+
+            //save the result
             FoldResult foldResult=new FoldResult();
             foldResult.setAccuracy(accuracy);
             foldResultRepository.save(foldResult);
@@ -249,6 +255,7 @@ System.out.println("--------------------------------TEST SET--------------------
 
     private int trainPerceptron(Instances train, FilteredClassifier fc) throws Exception {
         int numCorrect=0;
+        int predictedTheSame=0;
 
         for (int i = 0; i < train.numInstances(); i++) {
             double pred = fc.classifyInstance(train.instance(i));
@@ -256,16 +263,15 @@ System.out.println("--------------------------------TEST SET--------------------
 //                System.out.print(", actual: " + train.instance(i).classValue());
 //                System.out.println(", predicted: " + pred);
             if(i+1!=train.size())
-                if (train.get(i).value(0)==train.get(i+1).value(0)) {
-
-                    if(train.get(i).classValue()==0) {
-                        if(fc.classifyInstance(train.instance(i))<fc.classifyInstance(train.instance(i+1)))
+                if (train.get(i).value(0)==train.get(i+1).value(0)) {//two records of the same matchup id
+                    if(train.get(i).classValue()==0) {//the first instance is a loser
+                        if(fc.classifyInstance(train.instance(i))<fc.classifyInstance(train.instance(i+1))) //was the ouput lower than the other record of same id (the winner)
                         {
                             numCorrect++;
                         }
                     }
-                    else {
-                        if(fc.classifyInstance(train.instance(i))>fc.classifyInstance(train.instance(i+1)))
+                    else {//the first instance is a winner
+                        if (fc.classifyInstance(train.instance(i)) > fc.classifyInstance(train.instance(i + 1)))//was the ouput higher than the other record of same id (the loser)
                         {
                             numCorrect++;
                         }
@@ -330,7 +336,7 @@ System.out.println("--------------------------------TEST SET--------------------
         Fighter fighter=fighterRepository.findOne(fighterId);
 
         prediction.setMatchup(matchupRepository.findOne(matchupId));
-//        String label=matchup.fighter1_first_name+' '+matchup.getFighter1_last_name()+" vs "+matchup.fighter2_first_name+' '+matchup.getFighter2_last_name();
+        String label=matchup.fighter1_first_name+' '+matchup.getFighter1_last_name()+" vs "+matchup.fighter2_first_name+' '+matchup.getFighter2_last_name();
         prediction.setCorrect(wasCorrect);
         prediction.setWinner(fighter);
         predictionRepository.save(prediction);

@@ -310,7 +310,7 @@ td img {
 }
 .breakDownStats{
     /*background-color: #eeeeee;*/
-    border: 2px solid #9fadaa;;
+    border: 2px solid #0066ff;;
     padding: 10px;
     background-color: #222233;
     border-radius: 25px;
@@ -322,7 +322,7 @@ td img {
 
 .breakDownStats2{
     /*background-color: #eeeeee;*/
-    border: 2px solid #9fadaa;;
+    border: 2px solid #ff5050;;
     padding: 10px;
     background-color: #222233;
     border-radius: 25px;
@@ -629,7 +629,7 @@ p{
 
 .fightHistory2{
     background-color: #222233;
-    border: 2px solid #9fadaa;
+    border: 2px solid #0066ff;
     border-radius: 25px;
     padding-top: 2%;
     width: 50%;
@@ -645,7 +645,7 @@ p{
 }
 .fightHistory{
     background-color: #222233;
-    border: 2px solid #9fadaa;
+    border: 2px solid #ff5050;
     /*padding: 15px;*/
     border-radius: 25px;
     width: 50%;
