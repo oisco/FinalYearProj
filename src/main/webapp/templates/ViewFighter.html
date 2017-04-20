@@ -29,9 +29,14 @@
                             <td>
                                 <div><img ng-src="{{matchup.fighter1_profile_image}}" height="85"></div>
                                 <div class="thumbnailStatss">
-                                    <a ng-click="vm.goToFighter(matchup.fighter1_id)">
-                                     {{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}
-                                </a>
+                                    <div ng-switch="matchup.fighter1IsActive">
+                                        <div ng-switch-when="true">
+                                            <a ng-click="vm.goToFighter(matchup.fighter1_id)">
+                                                {{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}
+                                            </a>
+                                        </div>
+                                        <div ng-switch-default>{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</div>
+                                    </div>
                                 </div>
                             </td>
                         <td><div class="vers"><img src="images/versus.png" height="50"></div> </td>
@@ -39,9 +44,15 @@
 
                             <div><img ng-src="{{matchup.fighter2_profile_image}}" height="85"></div>
                             <div class="thumbnailStatss" width="50">
-                                <a ng-click="vm.goToFighter(matchup.fighter2_id)">
-                                    {{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}
-                                </a>
+                                <div ng-switch="matchup.fighter2IsActive">
+                                    <div ng-switch-when="true">
+                                        <a ng-click="vm.goToFighter(matchup.fighter2_id)">
+                                        {{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}
+                                        </a>
+                                    </div>
+                                    <div ng-switch-default>{{matchup.fighter2_first_name}} {{matchup.fighter2_last_name}}</div>
+                                </div>
+
                             </div>
                         </td>
                         <td>
@@ -49,7 +60,7 @@
                         <td>{{matchup.date | date}}</td>
 
                         <td> <button ng-show="matchup.date > vm.currentDate" type="button" class="btn btn-info"  ng-click="vm.goToUpcomingMatchup(matchup.id)">View Breakdown</button>
-                        <button ng-show="matchup.date < vm.currentDate && matchup.status==='valid'" type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
+                        <button ng-show="matchup.date < vm.currentDate && matchup.result.valid" type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Details</button></td>
                     </tr>
                 </table>
             </div>

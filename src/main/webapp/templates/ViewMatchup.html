@@ -3,10 +3,17 @@
     <table class="table">
             <tr height="150"><td bgcolor="#0066ff" >
                         <div class="sidebar">
-                            <b>Name :</b>
-                            <b><a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a></b>
-                            <br>
-                            <b>Height :</b>{{vm.matchup.fighter1height}}
+                                <div ng-switch="vm.matchup.fighter1IsActive">
+                                        <div ng-switch-when="true">
+                                            <b>Name :
+                                            <a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">
+                                                {{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}
+                                            </a>
+                                            </b>
+                                        </div>
+                                        <div ng-switch-default><b>Name : {{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</b></div>
+                                </div>
+                                <div ng-show="vm.matchup.fighter1height>0"><b>Height :</b>{{vm.matchup.fighter1height}}</div>
                             <br>
                             <div ng-show="vm.matchup.fighter1reach>0"><b>Reach :</b>{{vm.matchup.fighter1reach}}</div>
                             <br>
@@ -29,9 +36,16 @@
                 <td bgcolor="#ff5050">
                     <div class="main">
                         <div class="sidebar">
-                            <b>Name :</b>
-                            <b><a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">{{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</a></b>
-                            <br>
+                            <div ng-switch="vm.matchup.fighter2IsActive">
+                                <div ng-switch-when="true">
+                                    <b>Name :
+                                        <a ng-click="vm.goToFighter(vm.matchup.fighter2_id)">
+                                            {{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}
+                                        </a>
+                                    </b>
+                                </div>
+                                <div ng-switch-default><b>Name : {{vm.matchup.fighter2_first_name}} {{vm.matchup.fighter2_last_name}}</b></div>
+                            </div>
                             <b>Height :</b>{{vm.matchup.fighter2height}}
                             <br>
                             <div ng-show="vm.matchup.fighter2reach>0"><b>Reach :</b>{{vm.matchup.fighter2reach}}</div>

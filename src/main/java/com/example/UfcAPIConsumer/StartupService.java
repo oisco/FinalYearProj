@@ -1,22 +1,25 @@
 package com.example.UfcAPIConsumer;
 
 import com.example.DAO.*;
-import com.example.Entity.*;
+import com.example.Entity.Event;
+import com.example.Entity.Fighter;
+import com.example.Entity.Matchup;
+import com.example.Entity.News;
 import com.example.FileWriter.CsvFileWriter;
 import com.example.MachineLearning.CalculateStats;
 import com.example.MachineLearning.MultiLayerPerceptron;
-//import com.example.PredictionEngine.Predictor;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.thymeleaf.util.DateUtils;
 
-import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+
+//import com.example.PredictionEngine.Predictor;
 
 /**
  * Created by Oisín on 1/16/2017.
@@ -59,6 +62,7 @@ public class StartupService {
 //       for (int i=0;i<eventsToUpdate.size();i++){
 //           getEventInfo(eventsToUpdate.get(i));
 //       }
+        getNews();
 
        //if there has been any events since the last update --> get its results, recreate the perceptron model on the latest set, test it, and use it to product future matchups
        if(eventsToUpdate.size()>0){
@@ -66,8 +70,8 @@ public class StartupService {
            testingResultRepository.deleteAll();
            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
 //           int setToDelete[]={0,200,400,600,800,1000,1200,1400,1600,1800};
-           int setToDelete[]={0,400,800,1200,1600};
-//           int setToDelete[]={0,600,1200,1800};
+//           int setToDelete[]={0,400,800,1200,1600};
+           int setToDelete[]={0,600,1200,1800};
            double results[]=new double[setToDelete.length];
            createArffMLInputs();
            for(int i=setToDelete.length-1;i >= 0;i--){
@@ -103,6 +107,7 @@ public class StartupService {
 
 //   @PostConstruct
    public void getNews(){
+       newsRepository.deleteAll();
    String url ="http://ufc-data-api.ufc.com/api/v3/us/news";
        RestTemplate restTemplate=new RestTemplate();
        ResponseEntity<News[]> responseEntity = restTemplate.getForEntity(url, News[].class);

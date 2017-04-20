@@ -29,7 +29,7 @@ angular.module('app').controller("HomeController", function ($scope,$http, $loca
     };
 
     vm.goToArticle=function(article){
-        $window.location.href=("http://www.ufc.com/news/"+article.url_name);
+        $window.location.href=("http://www.ufc.com/news/"+article[3]);
     }
 
 

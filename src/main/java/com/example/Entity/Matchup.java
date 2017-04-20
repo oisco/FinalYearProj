@@ -3,7 +3,6 @@ package com.example.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.internal.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -195,6 +194,7 @@ public class Matchup {
 
     double fighter1_submissionsaverage,fighter2_submissionsaverage;
 
+    boolean fighter1IsActive,fighter2IsActive;
     public String weightClass;
     public Date date;
     public String status;
@@ -205,7 +205,7 @@ public class Matchup {
     public String fighter1record, fighter2record;
 
 
-    public Matchup(int id, boolean fighter1_is_winner, boolean fighter2_is_winner, Event event, List<Fighter> fighters, Result result, Prediction prediction, int fighter1_id, int fighter2_id, int fighter1UFCFinishPct, int fighter2UFCFinishPct, int fighter1UFCWinPct, int fighter2UFCWinPct, int fighter1UFCLossPct, int fighter2UFCLossPct, String fighter1_first_name, String fighter2_first_name, String fighter2_last_name, String fighter1_last_name, String fighter1_profile_image, String fighter2_profile_image, String fighter2_weight_class, String fighter1_weight_class, int fighter1reach, int fighter2reach, int fighter1height, int fighter2height, double fighter2_strikingaccuracy, double fighter1_strikingaccuracy, double fighter1_sapm, double fighter2_sapm, double fighter1_slpm, double fighter2_slpm, double fighter1_strikingdefense, double fighter2_strikingdefense, double fighter2_takedownaverage, double fighter1_takedownaverage, double fighter1_takedownaccuracy, double fighter2_takedownaccuracy, double fighter1_takedowndefense, double fighter2_takedowndefense, double fighter1_submissionsaverage, double fighter2_submissionsaverage, String weightClass, Date date, String status, String fm_stats_feed_url, String fighter1record, String fighter2record) {
+    public Matchup(int id, boolean fighter1_is_winner, boolean fighter2_is_winner, Event event, List<Fighter> fighters, Result result, Prediction prediction, int fighter1_id, int fighter2_id, double fighter1UFCFinishPct, double fighter2UFCFinishPct, double fighter1UFCWinPct, double fighter2UFCWinPct, double fighter1UFCLossPct, double fighter2UFCLossPct, String fighter1_first_name, String fighter2_first_name, String fighter2_last_name, String fighter1_last_name, String fighter1_profile_image, String fighter2_profile_image, String fighter2_weight_class, String fighter1_weight_class, int fighter1reach, int fighter2reach, int fighter1height, int fighter2height, double fighter2_strikingaccuracy, double fighter1_strikingaccuracy, double fighter1_sapm, double fighter2_sapm, double fighter1_slpm, double fighter2_slpm, double fighter1_strikingdefense, double fighter2_strikingdefense, double fighter2_takedownaverage, double fighter1_takedownaverage, double fighter1_takedownaccuracy, double fighter2_takedownaccuracy, double fighter1_takedowndefense, double fighter2_takedowndefense, double fighter1_submissionsaverage, double fighter2_submissionsaverage, boolean fighter1IsActive, boolean fighter2IsActive, String weightClass, Date date, String status, String fm_stats_feed_url, String fighter1record, String fighter2record) {
         this.id = id;
         this.fighter1_is_winner = fighter1_is_winner;
         this.fighter2_is_winner = fighter2_is_winner;
@@ -249,6 +249,8 @@ public class Matchup {
         this.fighter2_takedowndefense = fighter2_takedowndefense;
         this.fighter1_submissionsaverage = fighter1_submissionsaverage;
         this.fighter2_submissionsaverage = fighter2_submissionsaverage;
+        this.fighter1IsActive = fighter1IsActive;
+        this.fighter2IsActive = fighter2IsActive;
         this.weightClass = weightClass;
         this.date = date;
         this.status = status;
@@ -650,4 +652,20 @@ public class Matchup {
         this.fighter2_submissionsaverage = fighter2_submissionsaverage;
     }
 
+
+    public boolean isFighter1IsActive() {
+        return fighter1IsActive;
+    }
+
+    public void setFighter1IsActive(boolean fighter1IsActive) {
+        this.fighter1IsActive = fighter1IsActive;
+    }
+
+    public boolean isFighter2IsActive() {
+        return fighter2IsActive;
+    }
+
+    public void setFighter2IsActive(boolean fighter2IsActive) {
+        this.fighter2IsActive = fighter2IsActive;
+    }
 }

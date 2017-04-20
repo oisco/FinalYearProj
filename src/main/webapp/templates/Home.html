@@ -27,14 +27,12 @@
                 <uib-slide ng-repeat="news in vm.news" index="$index">
                     <div class="news">
                         <div class="newsPoster">
-                            <img class="newsPic" ng-src="{{news.thumbnail}}" height="300" width="450" class="img-responsive">
+                            <img class="newsPic" ng-src="{{news[1]}}" height="300" width="450" class="img-responsive">
                         </div>
-                                <div class="newsInfo">
-                                        <!--"http://www.ufc.com/news" + {{news.url_name}}>-->
-                                        <h2>{{news.title}}</h2>
-                                    <button type="button" class="btn btn-info" ng-click="vm.goToArticle(news)" >View Article</button>
-
-                                </div>
+                        <div class="newsInfo">
+                            <h2>{{news[2]}}</h2>
+                            <button type="button" class="btn btn-info" ng-click="vm.goToArticle(news)" >View Article</button>
+                        </div>
                     </div>
                 </uib-slide>
             </uib-carousel>

@@ -1,22 +1,15 @@
 package com.example.UfcAPIConsumer;
 
 import com.example.DAO.EventRepository;
-import com.example.DAO.FighterRepository;
 import com.example.DAO.MatchupRepository;
 import com.example.DAO.PredictionRepository;
 import com.example.Entity.Event;
-import com.example.Entity.Fighter;
-import com.example.Entity.Matchup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Oisín on 2/6/2017.
@@ -66,21 +59,6 @@ public class EventUpdater {
 
     }
 
-    //will need to find method to find events to be updated -->check status and date fields
-//
-//    public void updateFighterRecordsForEvent(Event e){
-//
-//        ///get list of fighters from an event
-//        List<Integer> fighterIds=matchupRepository.findFightersToUpdate(eventId);
-//
-//        //call API and update fighters
-//        RestTemplate restTemplate=new RestTemplate();
-//
-//        //find each fighter and update their records
-//        //have to update not just save-->> need to keep links intact
-//
-//    }
-
 //    @PostConstruct
     //this method deletes all upcoming matchups,
     //the reason for this is to ensure if fights are cancelled or opponents are replaced this will be reflected
@@ -88,7 +66,6 @@ public class EventUpdater {
         predictionRepository.deleteAll();
         matchupRepository.deleteMatchupLinks();
         matchupRepository.deleteUpcomingMatchups();
-//        ArrayList<Matchup> allUpcomingMatchup=matchupRepository.findUpcomingToDelete();
     }
 
 }
