@@ -1,17 +1,42 @@
 <div class="homeCarousel">
-    <uib-carousel interval="vm.myInterval" active="vm.activeSlide">
-        <uib-slide ng-repeat="event in vm.events" index="$index">
-            <div class="nextEvent">
-                <div class="homePoster">
-                    <img class="eventPic" ng-src="{{event.feature_image}}"  class="img-responsive">
+    <div class="stats">
+        <div>
+            <h1 class="title" align="center">Upcoming Events</h1>
+        </div>
+        <uib-carousel interval="vm.myInterval" active="vm.activeSlide">
+            <uib-slide ng-repeat="event in vm.events" index="$index">
+                <div class="nextEvent">
+                    <div class="homePoster">
+                        <img class="eventPic" ng-src="{{event.feature_image}}"  height="300" class="img-responsive">
+                    </div>
+                    <div class="upcomingEventInfo">
+                        <h2>{{event.base_title}}</h2>
+                        <h2>{{event.title_tag_line}}</h2><p>{{event.event_date |date}}</p><p>{{event.location}}</p>
+                        <br>
+                        <button type="button" class="btn btn-info" ng-click="vm.goToUpcomingEvent(event.id)" >View Fight card</button>
+                    </div>
                 </div>
-                <div class="upcomingEventInfo">
-                    <h2>{{event.base_title}}</h2>
-                    <h2>{{event.title_tag_line}}</h2><p>{{event.event_date |date}}</p><p>{{event.location}}</p>
-                    <br>
-                    <button type="button" class="btn btn-info" ng-click="vm.goToUpcomingEvent(event.id)" >View Fight card</button>
-                </div>
-            </div>
-        </uib-slide>
-    </uib-carousel>
+            </uib-slide>
+        </uib-carousel>
+    </div>
 </div>
+    <div class="carousel2">
+        <div class="stats">
+            <h1 align="center" class="title">UFC News</h1>
+                <uib-carousel interval="vm.myInterval2" active="vm.activeSlide2">
+                <uib-slide ng-repeat="news in vm.news" index="$index">
+                    <div class="news">
+                        <div class="newsPoster">
+                            <img class="newsPic" ng-src="{{news.thumbnail}}" height="300" width="450" class="img-responsive">
+                        </div>
+                                <div class="newsInfo">
+                                        <!--"http://www.ufc.com/news" + {{news.url_name}}>-->
+                                        <h2>{{news.title}}</h2>
+                                    <button type="button" class="btn btn-info" ng-click="vm.goToArticle(news)" >View Article</button>
+
+                                </div>
+                    </div>
+                </uib-slide>
+            </uib-carousel>
+        </div>
+    </div>

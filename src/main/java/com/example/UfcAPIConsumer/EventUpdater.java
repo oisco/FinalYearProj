@@ -32,7 +32,7 @@ public class EventUpdater {
     @Autowired
     PredictionRepository predictionRepository;
 
-    @PostConstruct
+//    @PostConstruct
     public void refreshEvents(){
         //remove all upcoming matchups to accomodate for fight card changes (rplacement,cancellation, etc.)
 
@@ -67,19 +67,19 @@ public class EventUpdater {
     }
 
     //will need to find method to find events to be updated -->check status and date fields
-
-    public void updateFighterRecordsForEvent(int eventId){
-
-        ///get list of fighters from an event
-        List<Integer> fighterIds=matchupRepository.findFightersToUpdate(eventId);
-
-        //call API and update fighters
-        RestTemplate restTemplate=new RestTemplate();
-
-        //find each fighter and update their records
-        //have to update not just save-->> need to keep links intact
-
-    }
+//
+//    public void updateFighterRecordsForEvent(Event e){
+//
+//        ///get list of fighters from an event
+//        List<Integer> fighterIds=matchupRepository.findFightersToUpdate(eventId);
+//
+//        //call API and update fighters
+//        RestTemplate restTemplate=new RestTemplate();
+//
+//        //find each fighter and update their records
+//        //have to update not just save-->> need to keep links intact
+//
+//    }
 
 //    @PostConstruct
     //this method deletes all upcoming matchups,

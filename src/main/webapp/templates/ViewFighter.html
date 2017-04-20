@@ -44,7 +44,8 @@
                                 </a>
                             </div>
                         </td>
-                        <td><div ng-if="matchup.result==null">(Upcoming)</div><b>{{matchup.result.method}}-{{matchup.result.ending_time}}</b></td>
+                        <td>
+                            <div ng-if="matchup.result==null">(Upcoming)</div><b>{{matchup.result.method}}-{{matchup.result.ending_time}}</b></td>
                         <td>{{matchup.date | date}}</td>
 
                         <td> <button ng-show="matchup.date > vm.currentDate" type="button" class="btn btn-info"  ng-click="vm.goToUpcomingMatchup(matchup.id)">View Breakdown</button>

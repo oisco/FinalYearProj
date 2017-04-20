@@ -127,7 +127,20 @@
 }
 
 .homeCarousel{
-    width: 70%;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 100%;
+    height: 300px;
+    float: left;
+}
+
+.carousel2{
+    padding-top: 10%;
+    width: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+    height: 200px;
     float: left;
 }
 
@@ -135,17 +148,52 @@
     padding-left: 10%;
     padding-right: 10%;
     float: left;
-    width: 50%;
-    height: 50%;
+    width: 60%;
+    height: 300px;
 }
-.upcomingEventInfo{
+
+.newsPoster{
+    padding-left: 10%;
+    padding-right: 3%;
+    float: left;
+    width: 30%;
+    height: 30%;
+}
+
+.newsImage{
     padding-left: 10%;
     padding-right: 10%;
-    width: 35%;
+    float: left;
+    width: 60%;
+    height: 40%;
+}
+
+
+.upcomingEventInfo{
+    padding-left: 2%;
+    padding-right: 5%;
+    width: 40%;
+    height: 50%;
+    float: right;
+}
+
+.newsInfo{
+    /*float: right;*/
+    /*width: 60%;*/
+    /*padding-right: 5%;*/
+    padding-top: 5%;
+    padding-right: 15%;
+    width: 50%;
     height: 50%;
     float: right;
 }
 .nextEvent{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.news{
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -360,13 +408,22 @@ div {
     color: #AACCFF;
 }
 .table tbody tr.loss > td {
-    background-color: #c36357 !important;
+    background-color: #ae5755 !important;
 }
 .table tbody tr.win > td {
-    background-color: #6db37b !important;
+    background-color: #5a9e68 !important;
 }
 
+.table tbody tr.active > td {
+    background-color: #89878b !important;
+}
 
+.title{
+    /*font-family: "Euphemia UCAS";*/
+    /*font-size: 50px !important;*/
+    font-weight: 700;;
+    /*color: #222222;*/
+}
 /*table.table tbody > tr.danger {*/
     /*background-color: #957df2 !important;*/
 /*}*/
@@ -622,7 +679,7 @@ p{
 }
 
 .sectionHeader{
-    padding-top: 10%;
+    /*padding-top: 10%;*/
     padding-left: 30%;
     padding-right: 30%;
 }

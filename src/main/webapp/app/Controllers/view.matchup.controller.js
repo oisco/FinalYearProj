@@ -70,7 +70,10 @@ angular.module('app').controller("ViewMatchupController", function ($scope,$http
                 },                scales: {
                     yAxes: [{
                         ticks: {
+                            // OR //
+                            beginAtZero: true,   // minimum value will be 0.
                             fontColor: "#AACCFF"
+
                         }
                     }],
                     xAxes: [{
@@ -80,6 +83,7 @@ angular.module('app').controller("ViewMatchupController", function ($scope,$http
                         }
                     }]
                 }
+
             }
             // options: options
         });

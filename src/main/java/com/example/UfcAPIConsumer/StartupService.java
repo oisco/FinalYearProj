@@ -1,10 +1,7 @@
 package com.example.UfcAPIConsumer;
 
 import com.example.DAO.*;
-import com.example.Entity.Event;
-import com.example.Entity.Fighter;
-import com.example.Entity.Matchup;
-import com.example.Entity.Prediction;
+import com.example.Entity.*;
 import com.example.FileWriter.CsvFileWriter;
 import com.example.MachineLearning.CalculateStats;
 import com.example.MachineLearning.MultiLayerPerceptron;
@@ -46,6 +43,8 @@ public class StartupService {
     FoldResultRepository foldResultRepository;
     @Autowired
     TestingResultRepository testingResultRepository;
+    @Autowired
+    NewsRepository newsRepository;
     //service to populate db with data from UFC API on startup if database is currently empty
 //   @PostConstruct
     public void onStartup() {
@@ -100,6 +99,15 @@ public class StartupService {
            Matchup[] matchups = gson.fromJson(matchupString, Matchup[].class);
            saveMatchups(matchups, event);
            System.out.println("event data got");
+   }
+
+//   @PostConstruct
+   public void getNews(){
+   String url ="http://ufc-data-api.ufc.com/api/v3/us/news";
+       RestTemplate restTemplate=new RestTemplate();
+       ResponseEntity<News[]> responseEntity = restTemplate.getForEntity(url, News[].class);
+       News[] news = responseEntity.getBody();
+       newsRepository.save(Arrays.asList(news));
    }
     private void createArffMLInputs() {
         csvFileWriter.setFileWriter("src/main/resources/PerceptronInputs/PastMatchups.arff");
@@ -172,8 +180,6 @@ public class StartupService {
                         matchups[p].setFighter2_last_name(fighter2.getLast_name());
                     }
                      matchupRepository.save(matchups[p]);
-//                    prediction.setMatchup(matchups[p]);
-//                    predictionRepository.save(prediction);
                     addMatchupToFighter(matchups[p].getFighter1_id(), matchups[p]);
                     addMatchupToFighter(matchups[p].getFighter2_id(), matchups[p]);
                 }
