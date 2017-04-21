@@ -16,6 +16,7 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
         var eventsPromise=$http.get(url);
         eventsPromise.then(function (response) {
             vm.matchup=response.data;
+            debugger
 
             //request both fighters profiles
             getFighter(1,vm.matchup.fighter1_id);
@@ -67,10 +68,6 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
             today.setHours(0, 0, 0, 0);
             angular.forEach(fighter.matchups, function (matchup)
             {
-                // //only do first 4 fights
-                // if(vm.values.length>5){
-                //     return
-                // }
                 if(matchup.date>today){
                     //dont plot a fighters future matchups
                 }

@@ -2,21 +2,21 @@ package com.example.Controller;
 
 //import com.example.DAO.PredictionRepository;
 //import com.example.DAO.PredictionRepository;
+
 import com.example.DAO.FoldResultRepository;
 import com.example.Entity.FoldResult;
 import com.example.Entity.LearningCurveResult;
-import com.example.Entity.Matchup;
 import com.example.Entity.Prediction;
-//import com.example.EntityWrappers.PredictionWinner;
 import com.example.Services.PredictionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+//import com.example.EntityWrappers.PredictionWinner;
 
 /**
  * Created by Oisín on 1/24/2017.
@@ -41,8 +41,9 @@ public class PredictionController {
         return predictionService.getEventPredictions(eventId);
     }
 
+    //all past results from cross validation testing
     @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public List<Object[]> findAll() {
+    public List<Prediction> findAll() {
         return predictionService.getAllPredictions();
     }
 

@@ -17,7 +17,7 @@ import java.util.List;
         @NamedNativeQuery(name = "Matchup.findFightersToUpdate",query = "select fighter1_id from matchup where event_id=?1 union select fighter2_id from matchup where event_id=?1"),
 
         //below 2 queries can more than likely be a select *
-        ///the below query will return the record,height and reach of all status and loser in each matchup,
+        ///the below query will return the record,height and reach ETC OF A loser in each matchup, where the loser is fighter1 and his/her opponent fighter2
         @NamedNativeQuery(name = "Matchup.findMLClass1Inputs",
                 query = "select m.id as matchupId,m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
                         "m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm" +
@@ -32,7 +32,6 @@ import java.util.List;
                         "and m.fighter1reach>0  and m.fighter1height>0 and m.fighter1record!=\"\" "+
                         "and m.fighter2reach>0  and m.fighter2height>0 and m.fighter2record!=\"\" "+
                         "and m.status='valid'" +
-//                        "and m.date<now()-INTERVAL  ?1 month" +
                         " union \n" +
                         "select m.id,m.fighter2height,m.fighter2reach,m.fighter2record,m.fighter2_weight_class,\n" +
                         " m.fighter2_strikingaccuracy,m.fighter2_sapm ,m.fighter2_slpm ,m.fighter2_strikingdefense,m.fighter2_takedownaverage\n" +
@@ -97,6 +96,7 @@ import java.util.List;
                 "                where m.status='valid'\n" +
                 "                and m.date>now()\n" +
                 "                  order by matchupId  ;"),
+
         @NamedNativeQuery(name = "Matchup.findPastFightersMatchupStats",
         query="select r.ending_time\n" +
                 "        ,r.fighter1knockdowns_landed,r.fighter1strikes_attempted,r.fighter1strikes_landed,r.fighter1ground_control_time,r.fighter1ground_time\n" +
@@ -141,6 +141,11 @@ import java.util.List;
                     "(fighter2_id=?1 and fighter1_is_winner and date <?2)\n" +
                         "or\n" +
                         "(fighter1_id=?1 and fighter2_is_winner and date <?2);"),
+
+        @NamedNativeQuery(name = "Matchup.findPredictedWinnerLabel",query = "select concat(fighter1_first_name,' ',fighter1_last_name) from matchup where fighter1_id=?1 \n" +
+                " UNION \n" +
+                "select concat(fighter2_first_name,' ',fighter2_last_name) from matchup where fighter2_id=?1\n" +
+                " limit 1;"),
 
         @NamedNativeQuery(name = "Matchup.findUpcomingToDelete",query = "select * from matchup where date>now();")
 })
@@ -192,7 +197,7 @@ public class Matchup {
     double fighter1_takedownaccuracy,fighter2_takedownaccuracy;
     double fighter1_takedowndefense,fighter2_takedowndefense;
 
-    double fighter1_submissionsaverage,fighter2_submissionsaverage;
+    double fighter1_submissionsaverage,fighter2_submissionsaverage;//get rid of?
 
     boolean fighter1IsActive,fighter2IsActive;
     public String weightClass;

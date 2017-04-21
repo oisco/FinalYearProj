@@ -11,8 +11,6 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Utils;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Normalize;
 import weka.filters.unsupervised.attribute.Remove;
 
 import java.io.FileNotFoundException;
@@ -308,8 +306,11 @@ System.out.println("--------------------------------TEST SET--------------------
                 System.out.println("matchupId: "+matchupId+"first matchup predicted"+pred+" fighterId"+matchupsToPredict.instance(i).value(1));
                 System.out.println("matchupId: "+matchupId+"first matchup predicted"+pred2+" fighterId"+matchupsToPredict.instance(i+1).value(1));
                 Prediction p;
+                Matchup m=matchupRepository.findOne(matchupId);
+
+                //below does not need to set predicted winnner labels as we will always have a fighter profile for upcoming matchups
                 if(pred>pred2){
-                     p=new Prediction(matchupRepository.findOne(matchupId),fighterRepository.findOne(((int) matchupsToPredict.instance(i).value(1)))
+                    p=new Prediction(matchupRepository.findOne(matchupId),fighterRepository.findOne(((int) matchupsToPredict.instance(i).value(1)))
                             ,false);
                 }
                 else
@@ -317,7 +318,9 @@ System.out.println("--------------------------------TEST SET--------------------
                      p=new Prediction(matchupRepository.findOne(matchupId),fighterRepository.findOne(((int) matchupsToPredict.instance(i+1).value(1)))
                             ,false);
                 }
+                m.setPrediction(p);
                 predictionRepository.save(p);
+                matchupRepository.save(m);
             }
 
         } catch (Exception e) {
@@ -327,7 +330,6 @@ System.out.println("--------------------------------TEST SET--------------------
     }
 
 
-    ///need to set the id to be that of the predcted winner
     private void savePrediction(Instance instance,boolean wasCorrect) {
         Prediction prediction=new Prediction();
         int matchupId= (int) instance.value(0);
@@ -337,8 +339,15 @@ System.out.println("--------------------------------TEST SET--------------------
 
         prediction.setMatchup(matchupRepository.findOne(matchupId));
         String label=matchup.fighter1_first_name+' '+matchup.getFighter1_last_name()+" vs "+matchup.fighter2_first_name+' '+matchup.getFighter2_last_name();
+
+        //for some matchups we will not have a fighter profile and therefore cannot set the winner
+        //insted add a label of the predicted winners first name
+        String predictedWinner=matchupRepository.findPredictedWinnerLabel(fighterId);
+
+        prediction.setPredictedWinnerName(predictedWinner);
         prediction.setCorrect(wasCorrect);
         prediction.setWinner(fighter);
+        prediction.setLabel(label);
         predictionRepository.save(prediction);
     }
 

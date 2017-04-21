@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NamedNativeQuery;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,4 +45,7 @@ public interface MatchupRepository extends JpaRepository<Matchup,Integer> {
 
 
     List<Matchup> findByDateGreaterThan(Date d);
+
+
+    String findPredictedWinnerLabel(int fighterId);
 }

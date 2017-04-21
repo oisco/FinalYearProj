@@ -14,7 +14,7 @@ angular.module('app').controller("ViewFighterController", function ($location,$s
         var eventsPromise=$http.get(url);
         eventsPromise.then(function (response) {
             vm.fighter=response.data;
-            if(vm.fighter.left_full_body_image==null && vm.fighter.left_full_body_image.length>0){
+            if(vm.fighter.left_full_body_image==null || vm.fighter.left_full_body_image.length==0){
                 vm.fighterImage=vm.fighter.thumbnail;
             }
             else{

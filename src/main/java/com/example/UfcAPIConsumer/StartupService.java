@@ -69,13 +69,11 @@ public class StartupService {
            calculateStats.getFighterStatsAtTimeOfMatchup();
            testingResultRepository.deleteAll();
            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
-//           int setToDelete[]={0,200,400,600,800,1000,1200,1400,1600,1800};
-//           int setToDelete[]={0,400,800,1200,1600};
            int setToDelete[]={0,600,1200,1800};
            double results[]=new double[setToDelete.length];
            createArffMLInputs();
            for(int i=setToDelete.length-1;i >= 0;i--){
-               //save the results if we are cross validating using the full data set
+               //save the results if we are cross validating using the full data set--his will be used as an indicator for current accuracy
                if(i==0){
                    predictionRepository.deleteAll();
                    testingResultRepository.getRidOfFoldResult("FoldResult");

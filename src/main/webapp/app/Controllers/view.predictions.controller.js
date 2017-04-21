@@ -26,11 +26,13 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
         predictionPromise.then(function (response) {
             vm.predictions=response.data;
             limit=vm.predictions.length;
+            setUpGraphData();
+            setTimeout(function(){
+                setUpGraph();
+                createDoughnutChart();
+            }, 100);//slight delay needed before displaying graph due to size of request
 
-            setUpGraphData();//chartjs
 
-            setUpGraph();
-            createDoughnutChart();
 
 
         })
@@ -113,7 +115,7 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
             accuracyHistory.push(vm.accuracy);
 
             vm.totalFights++;
-            if(prediction[6]) {
+            if(prediction.correct) {
              vm.wl++;
              vm.numCorrect++;
          }else {
@@ -222,14 +224,6 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
                     }
                 }
         });
-    }
-    $scope.rowClass = function(prediction) {
-            if (prediction[6]) {
-                return "success";
-            }
-            else {
-                return "danger";
-            }
     }
 
     getPredictions();

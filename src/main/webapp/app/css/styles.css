@@ -38,6 +38,7 @@
 
 .fighterTop{
     width: 100%;
+    padding-top: 3%;
 }
 #predictionTesting{
     width: 100%;
@@ -111,7 +112,7 @@
 }
 
 .predictionLineChart{
-    width:60%;
+    width:65%;
     height: 100%;
     float: left;
     padding-bottom: 5%;
@@ -178,14 +179,17 @@
 }
 
 .newsInfo{
-    /*float: right;*/
-    /*width: 60%;*/
-    /*padding-right: 5%;*/
-    padding-top: 5%;
-    padding-right: 15%;
+
+    /*padding-top: 5%;*/
+    /*padding-right: 15%;*/
     width: 50%;
     height: 50%;
     float: right;
+    border: 2px solid #9fadaa;;
+    padding: 10px;
+    background-color: #222233;
+    border-radius: 25px;
+
 }
 .nextEvent{
     width: 100%;
@@ -193,10 +197,20 @@
     margin: 0 auto;
 }
 
+.event{
+    background-image: url("/../../images/octagon1.jpg") ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 2px solid #9fadaa;;
+    padding: 10px;
+    border-radius: 25px;
+}
+
 .news{
     width: 100%;
     height: 100%;
     margin: 0 auto;
+
 }
 
 
@@ -227,6 +241,7 @@
 }
 
 .navbar-custom .navbar-nav > li > a {
+    padding-top: 20px;
     color:#fff;
 }
 
@@ -301,8 +316,8 @@ td img {
     float: left;
 }
 .grid{
-    background-image: url("/../../images/chain.jpg") ;
-    height: 35px;
+    /*background-image: url("/../../images/chain.jpg") ;*/
+    /*height: 5px;*/
     /*background-color: #33aa33;*/
 }
 .eventInfo  {
@@ -335,6 +350,11 @@ td img {
     padding: 10px;
 }
 
+.alignFighterInfo{
+    padding-top: 5%;
+    width: 100%;
+    height: 100%;
+}
 .page-wrap  {
     width: 50%;
     height: 50%;

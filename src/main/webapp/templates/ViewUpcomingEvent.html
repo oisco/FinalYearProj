@@ -15,14 +15,13 @@
                     <th>Matchups</th>
                     <tr ng-repeat="matchup in vm.event.matchups" height="180">
                         <td ng-class="vm.cellClass(matchup.fighter1_id)">
-                            <!--<p nd-if="angular.element(#currentFighter).hasClass('winner');">test</p>-->
                             <div class="main">
-                                <div class="sidebar">
-                                    <b>Name :</b>
-                                    <b><a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a></b>
-                                    <br>
-                                    <b>Record :</b>{{matchup.fighter1record}}
-                                </div>
+                                    <div class="sidebar">
+                                        <b>Name :</b>
+                                        <b><a ng-click="vm.goToFighter(matchup.fighter1_id)">{{matchup.fighter1_first_name}} {{matchup.fighter1_last_name}}</a></b>
+                                        <br>
+                                        <b>Record :</b>{{matchup.fighter1record}}
+                                    </div>
                                 <div class="page-wrap">
                                     <img id="fighter" ng-src="{{matchup.fighter1_profile_image}}" height="120">
                                         <div ng-class="vm.labelClass({{matchup.fighter1_id}})">

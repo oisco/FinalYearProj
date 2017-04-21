@@ -3,7 +3,10 @@ package com.example.Controller;
 import com.example.Entity.Fighter;
 import com.example.Services.FighterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -16,8 +19,6 @@ public class FighterController {
 
     @Autowired
     FighterService fighterService;
-
-   // @Autowired
 
     public FighterController(FighterService fighterService)
     {
@@ -34,28 +35,5 @@ public class FighterController {
         return fighterService.get(id);
     }
 
-
-
-    /*
-    @RequestMapping(value = "/IDS/{id}",method = RequestMethod.GET)
-    public List<Fighter> tester(@PathVariable int id){
-    return fighterService.findByIdLessThan(id);
-    }
-
-
-    @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public List<Fighter> create(@RequestBody Fighter fighter) {
-    fighterService.save(fighter);
-        return fighterService.findAll();
-    }
-
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
-    public List<Fighter> delete(@PathVariable int id) {
-        fighterService.delete(id);
-        return fighterService.findAll();
-    }
-
-
-*/
 }
 
