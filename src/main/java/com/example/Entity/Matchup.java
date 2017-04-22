@@ -16,7 +16,8 @@ import java.util.List;
 @NamedNativeQueries({
         @NamedNativeQuery(name = "Matchup.findFightersToUpdate",query = "select fighter1_id from matchup where event_id=?1 union select fighter2_id from matchup where event_id=?1"),
 
-        //below 2 queries can more than likely be a select *
+        ///BELOW CANNOT BE A SELECT * AS THE ORDER OF THE COLUMNS IS VERY IMPORTANT --> ALL LOSERS INFO BEFORE WINNERS AND INVERSELY
+
         ///the below query will return the record,height and reach ETC OF A loser in each matchup, where the loser is fighter1 and his/her opponent fighter2
         @NamedNativeQuery(name = "Matchup.findMLClass1Inputs",
                 query = "select m.id as matchupId,m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
@@ -44,10 +45,9 @@ import java.util.List;
                         "and m.status='valid'" +
                         "and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\" "+
                         "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\" " +
-//                        "and m.date<now()-INTERVAL ?1 month" +
                         "  order by matchupId  ;")
 
-        //the same as above but this time the losers of all matchups will appear first
+//        the same as above but this time the losers of all matchups will appear first
         ,@NamedNativeQuery(name = "Matchup.findMLClass0Inputs",
                 query = "select m.id as matchupId,m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
                         "m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm ,m.fighter1_strikingdefense,m.fighter1_takedownaverage\n" +
@@ -72,6 +72,7 @@ import java.util.List;
                         "and m.status='valid'" +//VALID CALCS!
                         " and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\" "+
                         "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\" order by matchupId ;")
+//        the same as above but this time the losers of all matchups will appear first)
         ,
         @NamedNativeQuery(name = "Matchup.findFutureMatchupsToPredict",query = "select m.id as matchupId,m.fighter1height,m.fighter1reach,m.fighter1record,m.fighter1_weight_class,\n" +
                 "                m.fighter1_strikingaccuracy,m.fighter1_sapm ,m.fighter1_slpm\n" +

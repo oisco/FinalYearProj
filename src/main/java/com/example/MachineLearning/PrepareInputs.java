@@ -20,7 +20,6 @@ public class PrepareInputs {
 
     //
     public List<Input> getClass0Inputs(){
-//     List<Object[]> losers=matchupRepository.findMLClass0Inputs(howManyMonthsAgo);
      List<Object[]> losers=matchupRepository.findMLClass0Inputs();
         return listGetClassStats(losers,0);
     }
@@ -29,12 +28,14 @@ public class PrepareInputs {
     public List<Input> getClass1Inputs(){
         List<Object[]> winners=matchupRepository.findMLClass1Inputs();
         return listGetClassStats(winners,1);
+        
     }
 
 //create inputs for upcoming matchups to predict
     public List<Input> createFutureMatchupInputs(){
         List<Object[]> futureMatchups=matchupRepository.findFutureMatchupsToPredict();
         return listGetClassStats(futureMatchups,1);
+        
     }
 
 
@@ -68,6 +69,7 @@ public ArrayList<Input> listGetClassStats(List<Object[]> matchups, int clas){
     ArrayList<Input> inputs=new ArrayList<>();
     for (int i=0;i<matchups.size();i++){
 
+        //current fighter in the matchup we are preparing inputs for
         int matchupId=Integer.parseInt(matchups.get(i)[0].toString());
         int fighter1height=Integer.parseInt(matchups.get(i)[1].toString());
         int fighter1reach=Integer.parseInt(matchups.get(i)[2].toString());
@@ -88,6 +90,7 @@ public ArrayList<Input> listGetClassStats(List<Object[]> matchups, int clas){
         double fighter1UFCWinPct=Double.parseDouble(matchups.get(i)[14].toString());
         double fighter1UFCLossPct=Double.parseDouble(matchups.get(i)[15].toString());
 
+        //opponent
         int fighter2height=Integer.parseInt(matchups.get(i)[16].toString());
         int fighter2reach=Integer.parseInt(matchups.get(i)[17].toString());
         String fighter2record=matchups.get(i)[18].toString();

@@ -50,6 +50,11 @@ public class StartupService {
     @Autowired
     NewsRepository newsRepository;
     //service to populate db with data from UFC API on startup if database is currently empty
+
+//    @PostConstruct
+//    public void test(){
+//        matchupRepository.findMLClass0Inputs();
+//    }
    @PostConstruct
     public void onStartup() {
 
@@ -72,6 +77,7 @@ public class StartupService {
            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
            int setToDelete[]={0,600,1200,1800};
            double results[]=new double[setToDelete.length];
+           //CREATE THE ACTUAL PERCEPTRON INPUTS AND SAVE IN AARF FORMAT (WEKA LIBRARY FORMAT)
            createArffMLInputs();
            for(int i=setToDelete.length-1;i >= 0;i--){
                //save the results if we are cross validating using the full data set--his will be used as an indicator for current accuracy

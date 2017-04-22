@@ -17,6 +17,8 @@ import java.util.List;
 public interface MatchupRepository extends JpaRepository<Matchup,Integer> {
 
     public List<Integer>findFightersToUpdate(int eventId);
+
+
     //MACHINE LEARNING INPUTS
     public List<Object[]> findMLClass1Inputs();
     public List<Object[]> findMLClass0Inputs();
@@ -38,13 +40,15 @@ public interface MatchupRepository extends JpaRepository<Matchup,Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM Matchup where date>now()", nativeQuery = true)
+    @Query(value = "DELETE FROM Matchup where date>noFw()", nativeQuery = true)
     void deleteUpcomingMatchups();
 
 
 
 
-    List<Matchup> findByDateGreaterThan(Date d);
+//    List<Matchup> findByDateGreaterThan(Date d);
+
+//    List<Matchup> test();
 
 
     String findPredictedWinnerLabel(int fighterId);
