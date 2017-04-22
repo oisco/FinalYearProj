@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -49,7 +50,7 @@ public class StartupService {
     @Autowired
     NewsRepository newsRepository;
     //service to populate db with data from UFC API on startup if database is currently empty
-//   @PostConstruct
+   @PostConstruct
     public void onStartup() {
 
             //find any past events to update
@@ -62,7 +63,7 @@ public class StartupService {
 //       for (int i=0;i<eventsToUpdate.size();i++){
 //           getEventInfo(eventsToUpdate.get(i));
 //       }
-        getNews();
+//        getNews();
 
        //if there has been any events since the last update --> get its results, recreate the perceptron model on the latest set, test it, and use it to product future matchups
        if(eventsToUpdate.size()>0){

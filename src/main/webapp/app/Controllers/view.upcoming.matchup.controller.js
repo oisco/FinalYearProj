@@ -9,6 +9,7 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
     vm.labels=[];
     vm.values=[];
     vm.wl=0;
+    vm.prediction=null;
     var cureentFighter;
 
     function getMatchup(id) {
@@ -16,13 +17,29 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
         var eventsPromise=$http.get(url);
         eventsPromise.then(function (response) {
             vm.matchup=response.data;
-            debugger
-
+            getPredictions();
             //request both fighters profiles
             getFighter(1,vm.matchup.fighter1_id);
             getFighter(2,vm.matchup.fighter2_id);
         });
 
+    }
+
+    function getPredictions() {
+        var url="predictions/fight/"+vm.matchup.id;
+        var predictionPromise=$http.get(url);
+        predictionPromise.then(function (response) {
+            //returns id of predicted winnner
+            vm.prediction=response.data;
+            if(vm.prediction==vm.matchup.fighter1_id){
+                vm.matchup.fighter1IsPredictedWinner=true;
+                vm.matchup.fighter2IsPredictedWinner=false;
+            }
+            else if(vm.prediction==vm.matchup.fighter2_id){
+                vm.matchup.fighter2IsPredictedWinner=true;
+                vm.matchup.fighter1IsPredictedWinner=false;
+            }
+        })
     }
 
     vm.goToFighter = function (id) {
@@ -35,15 +52,20 @@ angular.module('app').controller("ViewUpcomingMatchupController", function ($sco
         eventsPromise.then(function (response) {
             if(fighterToGet==1){
                 vm.fighter1=response.data;
-                setUpGraphValues(vm.fighter1);
-                cureentFighter=vm.fighter1.first_name+' '+vm.fighter1.last_name;
-                setUpGraph(vm.fighter1,"fighter1Pie","lineChart1");
+                setTimeout(function(){
+                    setUpGraphValues(vm.fighter1);
+                    cureentFighter=vm.fighter1.first_name+' '+vm.fighter1.last_name;
+                    setUpGraph(vm.fighter1,"fighter1Pie","lineChart1");
+                }, 1000)
+
             }
             else
                 vm.fighter2=response.data;
+                setTimeout(function(){
                 setUpGraphValues(vm.fighter2);
                 cureentFighter=vm.fighter2.first_name+' '+vm.fighter2.last_name;
                 setUpGraph(vm.fighter2,"fighter2Pie","lineChart2");
+                }, 1000)
 
         })
     }

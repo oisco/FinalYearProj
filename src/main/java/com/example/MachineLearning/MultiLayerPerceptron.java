@@ -318,9 +318,9 @@ System.out.println("--------------------------------TEST SET--------------------
                      p=new Prediction(matchupRepository.findOne(matchupId),fighterRepository.findOne(((int) matchupsToPredict.instance(i+1).value(1)))
                             ,false);
                 }
-                m.setPrediction(p);
+//                m.setPrediction(p);
                 predictionRepository.save(p);
-                matchupRepository.save(m);
+//                matchupRepository.save(m);
             }
 
         } catch (Exception e) {

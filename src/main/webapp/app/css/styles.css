@@ -76,7 +76,7 @@
 }
 
 #LearningCurve{
-    width: 45%;
+    width: 35%;
     margin-top: 3%;
     background-color: #222233;
     border: 2px solid #9fadaa;;
@@ -86,10 +86,19 @@
 
 }
 
+p{
+    text-shadow: 4px 4px 4px #000000;
+    size: 12px;
+
+}
 .crossValidationResults{
     width: 55%;
     /*background: #ffffff;*/
-     background-color: #222233;
+     /*background-color: #222233;*/
+    background-image: url("/../../images/octagon1.jpg") ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
     border: 2px solid #9fadaa;
     padding: 15px;
     float: left;
@@ -120,7 +129,7 @@
 }
 
 .learningCurve{
-    width:55%;
+    width:65%;
     height: 100%;
     float: left;
     padding-bottom: 5%;
@@ -128,7 +137,7 @@
 }
 
 .homeCarousel{
-    padding-top: 2%;
+    /*padding-top: 2%;*/
     padding-left: 2%;
     padding-right: 2%;
     width: 100%;
@@ -137,7 +146,7 @@
 }
 
 .carousel2{
-    padding-top: 10%;
+    padding-top: 7.5%;
     width: 100%;
     padding-left: 2%;
     padding-right: 2%;
@@ -185,10 +194,33 @@
     width: 50%;
     height: 50%;
     float: right;
-    border: 2px solid #9fadaa;;
+    /*border: 2px solid #9fadaa;;*/
     padding: 10px;
-    background-color: #222233;
+    /*background-color: #222233;*/
     border-radius: 25px;
+
+}
+h1 {
+    text-transform: uppercase;
+
+    /*letter-spacing: 3px;*/
+    /*neon*/
+    /*color: #86a1a8;*/
+    /*text-shadow: 0 0 5px #6795a3, 0 0 10px #6795a3,*/
+    /*0 0 20px #6795a3, 0 0 30px #6795a3,*/
+    /*0 0 40px #6795a3;*/
+
+    text-shadow: 1px 2px 0 #575757,
+    2px 3px 0 #757575;
+
+
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -ms-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
+    transform: skew(-10deg);
+
+    font-weight: 900;
 
 }
 .nextEvent{
@@ -316,10 +348,10 @@ td img {
     float: left;
 }
 .grid{
-    /*background-image: url("/../../images/chain.jpg") ;*/
-    /*height: 5px;*/
-    /*background-color: #33aa33;*/
+    height: 15px;
 }
+.carousel-indicators li { visibility: hidden; }
+
 .eventInfo  {
     padding-left: 5%;
     height: 30%;
@@ -374,7 +406,15 @@ td img {
     padding: 10px;
     background-color: #222233;
     border-radius: 25px;
+    float: left;
 
+}
+
+.fighterName{
+    padding-top: 5%;
+    padding-left: 15%;
+    padding-right: 10%;
+    padding-bottom: 5%;
 }
 .breakDownStats{
     /*background-color: #eeeeee;*/
@@ -417,6 +457,9 @@ td img {
     padding: 5px;
     background-color: #222233;
     border-radius: 25px;
+    align-content: inherit;
+    text-align: center;
+    vertical-align: middle;
     /*width: 60%;*/
 }
 
@@ -638,9 +681,7 @@ html{
     box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
 }
 
-p{
-    size: 10px;
-}
+
 
 .versus {
     height:35%;
@@ -657,8 +698,6 @@ p{
 
 .profileImage1{
     padding-top: 10%;
-    /*padding-right: 10%;*/
-    /*padding-left: 5%;*/
     float: left;
     width: 20%;
 }
@@ -702,6 +741,18 @@ p{
     /*padding-top: 10%;*/
     padding-left: 30%;
     padding-right: 30%;
+}
+.sectionHeader2{
+    padding-top: 10%;
+    width: 100%;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.breakdownPage{
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .fightHistory2{

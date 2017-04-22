@@ -17,9 +17,14 @@ import javax.persistence.*;
                 "matchup m, prediction p "+
                 "WHERE\n" +
                 "m.id=p.matchup_id" +
-                        " and m.date<now();", resultClass = Prediction.class),
+                        " and m.date<now()" +
+                        "order by m.date;", resultClass = Prediction.class),
+
 @NamedNativeQuery(name = "Prediction.getEventPredictions",
-        query = "select p.winner_id from prediction p,matchup m,fighter f where p.matchup_id=m.id and m.event_id=?1 and p.winner_id=f.id ORDER BY p.winner_id ASC;")
+        query = "select p.winner_id from prediction p,matchup m,fighter f where p.matchup_id=m.id and m.event_id=?1 and p.winner_id=f.id ORDER BY p.winner_id ASC;"),
+
+        @NamedNativeQuery(name = "Prediction.findByMatchupPrediction",
+                query = "select p.winner_id from prediction p,matchup m where p.matchup_id=m.id and m.id=(?1) ;")
 })
 public class Prediction {
     @Id

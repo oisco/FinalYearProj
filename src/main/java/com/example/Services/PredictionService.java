@@ -32,16 +32,15 @@ public class PredictionService {
         return result;
     }
 
-//all predictions which were made based on test sets from cross validation testing
-//    public List<Object[]> getAllPredictions() {
-//        return predictionRepository.getAllPredictions();
-//    }
-
     public List<Prediction> getAllPredictions() {
         return predictionRepository.getAllPredictions();
     }
 
     public List<LearningCurveResult> findLearningCurve() {
        return learningCurveRepository.findLearningCurveValues();
+    }
+
+    public Integer findForMatchup(int matchupId) {
+        return predictionRepository.findByMatchupPrediction(matchupId);
     }
 }

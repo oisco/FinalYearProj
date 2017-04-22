@@ -9,19 +9,19 @@
                 <b>Height :</b>{{vm.matchup.fighter1height}}
                 <br>
                 <div ng-show="vm.matchup.fighter1reach>0"><b>Reach :</b>{{vm.matchup.fighter1reach}}</div>
-                <br>
-            </div>
+                <div ng-show="vm.fighter1.rank!==''"><b>Rank:</b> {{vm.fighter1.rank}}</div>
+                </div>
             <div class="page-wrap"><img ng-src="{{vm.matchup.fighter1_profile_image}}" height="120">
-                <div ng-if="vm.matchup.fighter1_is_winner">
+                <div ng-if="vm.matchup.fighter1IsPredictedWinner">
                     <div class="ribbon">
                         <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
-                        <h1>Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                        <h1>Predicted Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
                     </div>
                 </div>
-                <div ng-if="vm.matchup.fighter2_is_winner">
+                <div ng-if="vm.matchup.fighter2IsPredictedWinner">
                     <div class="loserribbon">
                         <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
-                        <h1>Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                        <h1>Predicted Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
                     </div>
                 </div>
             </div>
@@ -43,21 +43,20 @@
                         </div>
 
                         <div ng-show="vm.fighter2.rank!==''"><b>Rank:</b> {{vm.fighter2.rank}}
-                            <br>
                         </div>
 
                     </div>
                     <div class="page-wrap"><img ng-src="{{vm.matchup.fighter2_profile_image}}" height="120">
-                        <div ng-if="vm.matchup.fighter2_is_winner">
+                        <div ng-if="vm.matchup.fighter2IsPredictedWinner">
                             <div class="ribbon">
                                 <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
-                                <h1>Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                <h1>Predicted Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
                             </div>
                         </div>
-                        <div ng-if="vm.matchup.fighter1_is_winner">
+                        <div ng-if="vm.matchup.fighter1IsPredictedWinner">
                             <div class="loserribbon">
                                 <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
-                                <h1>Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                <h1>Predicted Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
                             </div>
                         </div>
                     </div>
@@ -121,7 +120,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <div class="pastPerformances">
     <div class="fightHistory">
@@ -131,7 +129,3 @@
         <canvas id="lineChart2"></canvas>
     </div>
 </div>
-
-<!--<div class="fighterHistorys">-->
-
-<!--</div>-->

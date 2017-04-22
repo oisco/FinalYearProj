@@ -69,7 +69,7 @@ import java.util.List;
                         ",m.fighter1_takedownaccuracy,m.fighter1_takedowndefense,m.fighter1_submissionsaverage,m.fighter1ufcfinish_pct,m.fighter1ufcwin_pct,m.fighter1ufcloss_pct, m.fighter2_id as currentFighter \n" +
                         "from matchup m\n" +
                         "where m.fighter1_is_winner\n" +
-                        "and m.status='valid'" +
+                        "and m.status='valid'" +//VALID CALCS!
                         " and m.fighter2reach>0  and m.fighter2height>0   and m.fighter2record!=\"\" "+
                         "and m.fighter1reach>0  and m.fighter1height>0   and m.fighter1record!=\"\" order by matchupId ;")
         ,
@@ -281,7 +281,7 @@ public class Matchup {
     }
 
     public double getFighter2UfcWinPct() {
-        return fighter1UFCWinPct;
+        return fighter2UFCWinPct;
     }
 
     public void setfighter2UFCWinPct(double fighter2UFCWinPct) {

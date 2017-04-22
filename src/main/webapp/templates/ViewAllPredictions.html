@@ -10,7 +10,8 @@
                 (where k={{vm.foldResult.length}}) is used, whereby the matchups listed at the bottom of this page are continuously subdivided into
                 <b>training and testing sets</b> ({{vm.foldResult.length}} times) and the algorithms ability to learn to spot a winner is trained on
                 the training set and it's actual ability to predict a winner is tested on the test sets.
-                <br>
+                </p>
+                <p>
                 The graph to the left Illustrates how it performed on each of the {{vm.foldResult.length}} test
                 sets where the left axis represents the percentage of fights predicted correctly on
                 each testing subset.
@@ -26,12 +27,12 @@
     <p>
         Using the above technique and calculating the average  of each  testing set's results enables us to
         say that the algorithm is able to predict a matchup correctly <b> {{vm.accuracy| number: 2}} %</b> of the time.
-        <br>
+        </p><p>
         When combining the results of all test sets, in total it managed to correctly predict <b>{{vm.numCorrect}} out of {{vm.totalFights}} matchups in total.</b>
-        <br>
+    </p><p>
         Please note that this is a <b>minnimum figure</b> as future predictions will be made using the full data set and not 90% of it.
         For more information on how the data set size affects accuracy <a href="#theLearningCurve">see here.</a>
-        <br>
+    </p><p>
         The matchups which were predicted correctly and incorrectly are listed below:
     </p>
     </div>
@@ -51,9 +52,8 @@
        </div>
      </form>
     <table class="table">
-        <tr><th>Matchup</th><th>Predicted winner</th><th>Date</th> <th>Was Prediction Correct?</th></tr>
-        <tr ng-repeat="prediction in vm.predictions | filter:searchFish |orderBy:'date':true">
-            <td>{{prediction[7]|date}}</td>
+        <tr><th>Matchup</th><th>Predicted winner</th><th>Was Prediction Correct?</th></tr>
+        <tr ng-repeat="prediction in vm.predictions | filter:searchFish ">
             <td>{{prediction.label}}</td>
             <td>{{prediction.predictedWinnerName}}</td>
             <td ng-if="prediction.correct"><img src="../images/correct.png" height="30" width="40"/></td>

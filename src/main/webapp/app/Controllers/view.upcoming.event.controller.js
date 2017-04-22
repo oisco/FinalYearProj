@@ -41,8 +41,7 @@ angular.module('app').controller("ViewUpcomingEventController", function ($scope
     }
 
     vm.getPredictions=function () {
-        vm.event;
-        var url="predictions/event/"+vm.event.id;
+          var url="predictions/event/"+vm.event.id;
         var predictionPromise=$http.get(url);
         predictionPromise.then(function (response) {
             vm.predictions=response.data;

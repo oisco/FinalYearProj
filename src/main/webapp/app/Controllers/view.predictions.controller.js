@@ -30,11 +30,7 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
             setTimeout(function(){
                 setUpGraph();
                 createDoughnutChart();
-            }, 100);//slight delay needed before displaying graph due to size of request
-
-
-
-
+            }, 2000);//slight delay needed before displaying graph due to size of request
         })
     }
 
@@ -225,8 +221,6 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
                 }
         });
     }
-
     getPredictions();
     getFoldResults();
-
 });

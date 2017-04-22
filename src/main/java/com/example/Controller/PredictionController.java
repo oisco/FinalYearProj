@@ -58,6 +58,12 @@ public class PredictionController {
         return predictionService.findLearningCurve();
     }
 
+    //RETURNS THE ID OF THE PREDICTED WINNER
+    @RequestMapping(value = "/fight/{matchupId}",method = RequestMethod.GET)
+    public Integer getFightPrediction(@PathVariable int matchupId) {
+        return predictionService.findForMatchup(matchupId);
+    }
+
 
 
 }

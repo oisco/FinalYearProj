@@ -10,8 +10,11 @@
     </form>
     <table class="table">
         <tr><th>Event Name</th><th>Date</th></tr>
-        <tr ng-repeat="event in vm.events | filter:searchFish | orderBy:'event_date'">
-            <td><b>{{event[1]}} {{event[2]}}</b></td><td>{{event[3] | date}}</td><td><button type="button" class="btn btn-default" ng-click="vm.goToUpcomingEvent(event[0])">Event Info</button></td>
+        <tr ng-repeat="event in vm.events | filter:searchFish | orderBy:'event_date'" ng-click="vm.goToUpcomingEvent(event[0])">
+            <td>
+                <b><div class="stats"> {{event[1]}} {{event[2]}}</div></b></td>
+
+            <td><div class="stats">{{event[3] | date}}</div> </td><td><button type="button" class="btn btn-default" ng-click="vm.goToUpcomingEvent(event[0])">Event Info</button></td>
         </tr>
     </table>
 </div>
