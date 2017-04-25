@@ -7,7 +7,6 @@ import com.example.Entity.Matchup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -56,13 +55,11 @@ public class CalculateStats {
                     numOfUfcWins =matchupRepository.fightersNoOfWins(matchups.get(i).getFighter1_id(), matchups.get(i).getDate());
                     //finish pct
                     if(numOfUfcLosses>0 || numOfUfcWins>0){
-                        finishPct=asPercentage(numOfUfcLosses+numOfUfcWins,numOfUfcFinishes);
-//                        matchups.get(i).setfighter1UFCFinishPct(finishPct);
+//                        finishPct=asPercentage(numOfUfcLosses+numOfUfcWins,numOfUfcFinishes);
                         matchups.get(i).setfighter1UFCFinishPct(numOfUfcFinishes);
-                        UFCWinPct=asPercentage(numOfUfcLosses+numOfUfcWins,numOfUfcWins);
+//                        UFCWinPct=asPercentage(numOfUfcLosses+numOfUfcWins,numOfUfcWins);
                         matchups.get(i).setfighter1UFCWinPct(numOfUfcWins);
-//                        matchups.get(i).setfighter1UFCWinPct(UFCWinPct);
-                        UFCLossPct=asPercentage(numOfUfcLosses+numOfUfcWins,numOfUfcLosses);
+//                        UFCLossPct=asPercentage(numOfUfcLosses+numOfUfcWins,numOfUfcLosses);
                         matchups.get(i).setfighter1UFCLossPct(numOfUfcLosses);
                     }
 //                    numOfUfcLosses = (int)Math.round(asPercentage(numOfUfcFinishes,matchupRepository.fightersNoOfLosses(matchups.get(i).getFighter1_id(), matchups.get(i).getDate()))*100);
@@ -174,10 +171,6 @@ public class CalculateStats {
                         //need to change
                     } else if (currentFighter == 2) {
                         //update the matchup
-//                        matchups.get(i).setfighter2UFCFinishPct(finishPct);
-//                        matchups.get(i).setfighter2UFCLossPct(UFCLossPct);
-//                        matchups.get(i).setfighter2UFCFinishPct(UFCWinPct);
-
                         //try and get the current fighters height and reach if available
                         if(matchups.get(i).getFighter2height()==0 || matchups.get(i).getFighter2reach()==0){
                             Fighter fighter=fighterRepository.findOne(matchups.get(i).getFighter2_id());

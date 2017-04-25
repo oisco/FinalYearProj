@@ -4,10 +4,11 @@
             <img src="{{vm.event.feature_image}}">
         </div>
         <div class="eventInfo">
-            <h2>{{vm.event.base_title}}</h2>
-            <h2>{{vm.event.title_tag_line}}</h2><p>{{vm.event.event_date |date}}</p><p>{{vm.event.location}}</p>
+            <h2 align="center">{{vm.event.base_title}}</h2>
+            <h2 align="center">{{vm.event.title_tag_line}}</h2>
+            <p align="center">{{vm.event.event_date |date}}</p><p align="center">{{vm.event.location}}</p>
             <br>
-            <button type="button" class="btn btn-info"  ng-click="vm.getPredictions()">Show Predictions</button>
+            <button type="button" class="btn btn-info"  ng-click="vm.getPredictions()" >Show Predictions</button>
         </div>
     </div>
 

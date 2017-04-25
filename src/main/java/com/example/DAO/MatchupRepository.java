@@ -40,7 +40,7 @@ public interface MatchupRepository extends JpaRepository<Matchup,Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM Matchup where date>noFw()", nativeQuery = true)
+    @Query(value = "DELETE FROM Matchup where date>now()", nativeQuery = true)
     void deleteUpcomingMatchups();
 
 

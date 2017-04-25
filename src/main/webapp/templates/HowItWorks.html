@@ -1,1 +1,130 @@
-<h1 align="center" class="title">How it works</h1>
+<h1 align="center" class="title">How it works -An Overview</h1>
+
+<div class="howItWorksSection">
+    <div class="stats">
+        <h2 align="center"> The Algorithm</h2>
+            <!--<div class="modelImage" height="500px" width="500px">-->
+                <img src="images/NETWORK5.png" height="500px" width="500px">
+                <!--</div>-->
+               <div class="modelExplanation">
+                <h3 align="center"> The Multi Layered Perceptron</h3>
+                <p>The machine learning algorithm which is used to predict the matchups is an artificial neural network which consists of
+                    a series of inter-connected nureons which work together to classify instances (in this context -predict matchups)
+                    <br>
+                     The algorithm is known known as the Multi-layered Perceptron.
+                <br>
+                   <h4 align="center">Training</h4>
+                    <p>
+                    It is a Supervised machine learning algorithm, what this means is that in order to classify instances
+                    (predict matchups) the model must first be provided with instances which are of a known class (past matchups where the winner and loser are both known) to base it's prediction for instances of unknown classes (upcoming matchups)
+                        on.
+                        </p>
+                   <p>
+                        This is known as the training stage, whereby the model "learns" how to predict matchups by essentially looking for patterns
+                        in previous matchups.
+
+                    Each node/neuron to the left(excluding input layer nodes) contains a set of weights for each feature(matchup attribute- eg fighter height advantage).
+                      <P> During training as the data set is iterated through,
+                        each nodes feature weights are continually
+                    incremented and decremented with regular checks to see was the
+                   how many instances
+                        it was able to classify correctly and how many it classified incorrectly, with the current feature weighting
+                   (this is known as the error rate). If the predicted output does not match the actual output(matchups are predicted incorrectly) the weights are changed to reduce the error(calculated as predicted value- actual value)
+               </P>
+                   <p>
+                        Once the data has been iterated through many times and the optimal weights have been decided (this being the series of feature weights with the lowest error rate) training is completed
+                       and the algorithm can be used to predict unseen data using the node weightings. By unseen data I mean matchups which have been excluded from the training stage, these can be past matchups which were not included in the training set or else
+                       future matchups which have yet to happen.
+                    </p>
+                   <p>
+                       The graph to the left displays the architecture of the model. Explanations on each section can be found below:
+                   </p>
+               </div>
+            </div>
+</div>
+</div>
+
+<div class="howItWorksSection">
+    <div class="stats">
+    <h2 align="center"> The Input Layer and Interpreting the Outputs</h2>
+        <p>The 11 node input layer represents the features (attributes) of the matchup which is being evaluated. In order determine these features,
+         a profile for each fighter in the matchup is created based on his/her last 3 fights(or less if the fighter has not had 3 fights in the UFC). </p>
+        <p>Each matchup feature is presented to the algorithm from each fighters perspective relative to his/her opponent and each matchup provides 2 inputs
+            for the above network:
+        <ul>
+            <li>One from the winners perspective (of class 1)</li>
+            <li>One from the losers perspective (of class 0)</li>
+        </ul>
+        <h3 align="center"> Features used</h3>
+        <table class="table">
+            <tr><th>Input</th>
+                <th>How its presented to the network</th>
+            </tr><td>Height advantage/disadvantage</td><td>fighter 1s height-fighter 2s height</td><tr>
+        </tr><td>Reach advantage/disadvantage</td> <td>fighter 1s reach-fighter 2s reach</td><tr>
+        </tr><td>Strikes Landed per minute advantage/disadvantage</td><td> fighter 1s slpm-fighter 2s slpm</td><tr>
+            <tr><td>Strikes Absorbed per minute advantage/disadvantage</td><td>fighter 1s sapm-fighter 2s sapm</td></tr>
+            <tr><td>Striking accuracy advantage/disadvantage</td><td>fighter 1s striking accuracy-fighter 2s striking accuracy</td></tr>
+            <tr><td>Takedown average advantage/disadvantage</td><td>fighter 1s takedown average-fighter 2s reach takedown average</td></tr>
+            <tr><td>Takedown defense advantage/disadvantage</td><td>fighter 1s takedown defense-fighter 2s takedown defense</td></tr>
+            <tr><td>Number of UFC finishes advantage/disadvantage (wins by submission or knockout) </td><td>fighter 1s number of UFC finishes-fighter 2s number of UFC finishes</td></tr>
+            <tr><td>Number of UFC wins relative to losses advantage/disadvantage</td><td>(fighter 1 number of UFC wins-fighter 1 number of UFC losses)-(fighter 2 number of UFC wins-fighter 2 number of UFC losses)</td></tr>
+            <tr><td>Career number of fights advantage/disadvantage</td><td> fighter 1s total fights - fighter 2s total fights</td></tr>
+            <tr><td>Career number of wins % advantage (consisting of UFC record+fights previous)</td><td> fighter 1s career win % - fighter 2s win %</td></tr>
+            </tr>
+        </table>
+
+        <h3>Interpreting outputs</h3>
+        </p>
+            <b>The outputs of each of the above classifications are interpreted as follows:</b>
+        <ul>
+            <li>
+                Both instances of the matchup are grouped together, input into the neural network and each instances classification(output of the network) is compared against one another, whereby the logic is
+                 if the classification of instance A > the classification of instance B then fighter 1 in instance A is the winner
+                (i.e. the output class for instance A is closer to class 1(winner)) and similarly if B>A then fighter 1 in instance B is the winner.
+                <br>
+                The prediction assembled above can be compared to the actual result when testing or in the case of future events( whereby classes/winner&loser are not known) can be
+                used as a future prediction.
+            </li>
+        </ul>
+        <p> This is a relatively common implementation of the Multi Layer Perceptron.The reasoning for the above is that it enables usage of the full data set when providing instances to the algorithm to train on,
+         otherwise using just one instance per matchup would mean that only half of the data set could provide information on winners and only half could provide information on losers.
+        </p>
+
+        <br>
+        </p>
+        <p>Each of the features as mentioned above represented in the 11 node input layer are passed to the 5 hidden layer nodes whereby a function known as the <a href="https://en.wikipedia.org/wiki/Sigmoid_function">Sigmoid function</a>
+         is used to propogate output values to the output node.</p>
+    </div>
+</div>
+
+<div class="howItWorksSection"><div class="stats">
+    <h3 align="center"> The Hidden layers</h3>
+    <div class="hiddenLayerDesc">
+            <p>
+                These layers nodes are responsible for producing outputs to other nodes(other hidden layers and the output node)
+                based on weighted inputs (inputs meaning instance/matchup features as mentioned above). This is where the actual "learning" occurs<br>
+                </p>
+                <p>
+                    Each hidden layer node contains a series of weights which correspond to input features. The input features are multiplied by these weights
+                    and summed together.
+                The summed weighted inputs are passed to an activation function which determines a threshold value.
+                This threshold is a numeric value is used to determine whether or not the current node fires (passes its output to other nodes).
+                If the sum of the input nodes exceeds the threshold then node fires and passes the activated value forward to consecutive nodes.
+                    <br>
+                This technique is known as back-propagation whereby the outputs of nodes are passed to other upstream nodes and
+                    is the reason why the algorithm is a regarded as an artificial neural network (as it simulates neuron in the brain sending and receiving signals from one another).
+                    </p>
+            <p>
+
+                After the nodes have propagated their outputs forward and the instance is classified, each nodes feature weights are recalculated depending on how the networks output
+                compares to the actual class of the instance which is being evaluated(how far off the network was when predicting the matchup). This process continues until the a specified
+                number of epochs have been reached (epoch is a term used for iteration of the full data set).
+            </p>
+    </div>
+
+        <div class="inputNode">
+            <img src="images/perceptron_node.png" height="300" width="400">
+        </div>
+
+</div></div>
+

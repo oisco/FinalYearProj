@@ -14,9 +14,7 @@
                                         <div ng-switch-default><b>Name : {{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</b></div>
                                 </div>
                                 <div ng-show="vm.matchup.fighter1height>0"><b>Height :</b>{{vm.matchup.fighter1height}}</div>
-                            <br>
                             <div ng-show="vm.matchup.fighter1reach>0"><b>Reach :</b>{{vm.matchup.fighter1reach}}</div>
-                            <br>
                         </div>
                         <div class="page-wrap"><img ng-src="{{vm.matchup.fighter1_profile_image}}" height="120">
                             <div ng-if="vm.matchup.fighter1_is_winner">
@@ -49,7 +47,6 @@
                             <b>Height :</b>{{vm.matchup.fighter2height}}
                             <br>
                             <div ng-show="vm.matchup.fighter2reach>0"><b>Reach :</b>{{vm.matchup.fighter2reach}}</div>
-                            <br>
                         </div>
                         <div class="page-wrap"><img ng-src="{{vm.matchup.fighter2_profile_image}}" height="120">
                             <div ng-if="vm.matchup.fighter2_is_winner">

@@ -46,6 +46,8 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
 
         var pctCorrect=vm.accuracy;
         var pctIncorrect=100-vm.accuracy;
+
+        vm.accuracy=Math.round(vm.accuracy * 100) / 100;//round for display purposes
         var data = {
             labels: [
                 "Correct",
@@ -173,7 +175,7 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
         };
         Chart.pluginService.register(horizonalLinePlugin);
 
-        var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx = document.getElementById('myChart5').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {

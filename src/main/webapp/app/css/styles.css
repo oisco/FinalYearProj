@@ -86,17 +86,80 @@
 
 }
 
+
 p{
-    text-shadow: 4px 4px 4px #000000;
+    text-shadow: 2px 2px 2px #000000;
     size: 12px;
 
 }
+b{
+    text-shadow: 2px 2px 2px #000000;
+}
+li{
+    text-shadow: 2px 2px 2px #000000;
+}
+
+h2{
+    text-shadow: 2px 2px 2px #000000;
+}
+h3{
+    text-shadow: 2px 2px 2px #000000;
+}
+h4{
+    text-shadow: 2px 2px 2px #000000;
+}
+
+/*nav dropdown*/
+.dropbtn {
+    background-color: #d7314d;
+    text-shadow: 2px 2px 2px #000000;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.separator{
+    height: 50px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #7d96bf;
+}
+/*end*/
 .crossValidationResults{
     width: 55%;
     /*background: #ffffff;*/
-     /*background-color: #222233;*/
-    background-image: url("/../../images/octagon1.jpg") ;
-    background-repeat: no-repeat;
+     background-color: #222233;
+    /*background-image: url("/../../images/octagon1.jpg") ;*/
+    /*background-repeat: no-repeat;*/
     background-size: 100% 100%;
 
     border: 2px solid #9fadaa;
@@ -268,13 +331,16 @@ h1 {
     font-weight: 700;;
     border-radius:0;
     height: 48%;
-    padding-top: 0.15%;
-    padding-bottom: 0.15%;
+    padding-top: .5%;
+    /*padding-bottom: 0.15%;*/
+    /*padding: 16px;*/
+    font-size: 16px;
 }
 
 .navbar-custom .navbar-nav > li > a {
-    padding-top: 20px;
+    padding-top: 16px;
     color:#fff;
+    /*text-shadow: 2px 2px 1px #000000;*/
 }
 
 .navbar{
@@ -290,14 +356,14 @@ h1 {
     background-color: #7d96bf;
 }
 
+a{
+    cursor:pointer;
+}
 .navbar-custom .navbar-brand {
     color:#eeeeee;
 }
 .navbar-custom .navbar-toggle {
     background-color:#eeeeee;
-}
-.navbar-custom .icon-bar {
-    background-color:#33aa33;
 }
 
 #resultExplanation{
@@ -363,6 +429,14 @@ td img {
     margin: 0 auto;
 }
 
+.inputNode{
+    float: right;
+}
+
+.hiddenLayerDesc{
+    float:left ;
+    width: 60%;
+}
 #slides_control > div{
     height: 200px;
 }
@@ -408,6 +482,21 @@ td img {
     border-radius: 25px;
     float: left;
 
+}
+
+.modelImage{
+    float: left;
+}
+
+.howItWorksSection{
+    padding-bottom: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.modelExplanation{
+    float: right;
+    width: 50%;
 }
 
 .fighterName{

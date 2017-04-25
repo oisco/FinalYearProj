@@ -18,7 +18,7 @@ import javax.persistence.*;
                 "WHERE\n" +
                 "m.id=p.matchup_id" +
                         " and m.date<now()" +
-                        "order by m.date;", resultClass = Prediction.class),
+                        "order by m.date desc;", resultClass = Prediction.class),
 
 @NamedNativeQuery(name = "Prediction.getEventPredictions",
         query = "select p.winner_id from prediction p,matchup m,fighter f where p.matchup_id=m.id and m.event_id=?1 and p.winner_id=f.id ORDER BY p.winner_id ASC;"),

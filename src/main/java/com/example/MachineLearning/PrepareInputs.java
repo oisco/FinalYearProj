@@ -125,8 +125,6 @@ public ArrayList<Input> listGetClassStats(List<Object[]> matchups, int clas){
          fighter1_submissionsaverage=fighter1_submissionsaverage-fighter2_submissionsaverage;//NOT USED
         fighter1_UFCFinishPct= fighter1_UFCFinishPct-fighter2_UFCFinishPct;///actually finishes!
         fighter1UFCWinPct=(fighter1UFCWinPct-fighter1UFCLossPct)-(fighter2UFCWinPct-fighter2UFCLossPct);
-//        fighter1UFCLossPct=(fighter1UFCWinPct-fighter1UFCLossPct)-(fighter2UFCWinPct-fighter2UFCLossPct);///not used
-//                fighter1UFCLossPct-fighter2UFCLossPct;
 
         Input in=new Input(matchupId,totalFights,fighterwinPct, fighter1height,  fighter1reach, weightClass, fighter1_strikingaccuracy, fighter1_sapm, fighter1_slpm, fighter1_strikingdefense, fighter1_takedownaverage, fighter1_takedownaccuracy, fighter1_takedowndefense, fighter1_submissionsaverage,fighter1_UFCFinishPct,fighter1UFCWinPct,fighter1UFCLossPct,currentFighterId,clas);
         inputs.add(in);

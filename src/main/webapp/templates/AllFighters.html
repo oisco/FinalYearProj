@@ -1,4 +1,5 @@
 <div class="container">
+    <div class="separator"></div>
     <h1 align="center" class="title">All Fighters</h1>
     <form>
         <div class="form-group">
@@ -13,9 +14,7 @@
             <tr><th>Fighter Name</th><th>Fighter Image</th></tr>
             <tr  ng-click="vm.goToFighter(fighter[0])" ng-repeat="fighter in vm.fighters | filter:searchFish">
                 <td>
-                    <div class="fighterName">
-                                    <div class="stats"><h4>{{fighter[1]}} {{fighter[2]}}</h4></td><td><img src={{fighter[3]}}></td></div>
-                </div>
+                    <h4>{{fighter[1]}} {{fighter[2]}}</h4></td><td><img src={{fighter[3]}}></td>
                 <td>
                     <button type="button" class="btn btn-default" ng-click="vm.goToFighter(fighter[0])">View Fighter</button>
                 </td>

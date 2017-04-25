@@ -49,12 +49,7 @@ public class StartupService {
     TestingResultRepository testingResultRepository;
     @Autowired
     NewsRepository newsRepository;
-    //service to populate db with data from UFC API on startup if database is currently empty
-
-//    @PostConstruct
-//    public void test(){
-//        matchupRepository.findMLClass0Inputs();
-//    }
+    //service to populate db with data from UFC API and recreate and retest the algorithm
    @PostConstruct
     public void onStartup() {
 
@@ -72,10 +67,11 @@ public class StartupService {
 
        //if there has been any events since the last update --> get its results, recreate the perceptron model on the latest set, test it, and use it to product future matchups
        if(eventsToUpdate.size()>0){
-           calculateStats.getFighterStatsAtTimeOfMatchup();
+//           calculateStats.getFighterStatsAtTimeOfMatchup();
            testingResultRepository.deleteAll();
            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
-           int setToDelete[]={0,600,1200,1800};
+//           int setToDelete[]={0,600,1200,1800};
+           int setToDelete[]={0,300,600,900,1200,1500};
            double results[]=new double[setToDelete.length];
            //CREATE THE ACTUAL PERCEPTRON INPUTS AND SAVE IN AARF FORMAT (WEKA LIBRARY FORMAT)
            createArffMLInputs();
@@ -132,8 +128,11 @@ public class StartupService {
         if (fighter != null) {
             //avoid duplicate links to matchups when loading data from api
                 fighter.getMatchups().add(m);
-                //update the fighter with latest reach and height
+                //update the fighter with latest reach and height and fill in the blanks with missing images
                 if(fighter.getId()==m.getFighter1_id()){
+                    if(m.getFighter1_profile_image()==null){
+                        m.setFighter1_profile_image(fighter.getThumbnail());
+                    }
                     if(m.getFighter1reach()>0 && m.getFighter1height()>0)
                     {
                         fighter.setHeight(m.getFighter1height());
@@ -143,6 +142,10 @@ public class StartupService {
                         m.setFighter1height(fighter.getHeight());
                     }
                 }else{
+                    if(m.getFighter2_profile_image()==null){
+                        m.setFighter2_profile_image(fighter.getThumbnail());
+                    }
+                    
                     if(m.getFighter2reach()>0 && m.getFighter2height()>0)
                     {
                         fighter.setHeight(m.getFighter2height());
@@ -153,8 +156,17 @@ public class StartupService {
                         m.setFighter2height(fighter.getHeight());
                     }
                 }
-                fighterRepository.save(fighter);
-            }
+
+                m.setFighter1IsActive(true);
+                m.setFighter2IsActive(true);
+
+                //dont add the matchup if the fighter already has a link to it
+                if(fighter.getMatchups().indexOf(m)<=0){
+                    fighterRepository.save(fighter);
+                }
+                matchupRepository.save(m);
+
+        }
     }
 
     public void saveMatchups(Matchup[] matchups,Event event){
