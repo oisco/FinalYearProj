@@ -18,23 +18,26 @@ public class PrepareInputs {
 
     PrepareInputs(){}
 
-    //
+    //the below methods query to find the winners and losers stats from each matchup,
+    // the results are passed to compareFighterStatsToOpponent() where each an Input object is created
+    //the input object holds all of the matchups information from the perspective of each fighter relative
+    // to his/her opponent  e.g. +2 height -1 reach etc.
+
     public List<Input> getClass0Inputs(){
      List<Object[]> losers=matchupRepository.findMLClass0Inputs();
-        return listGetClassStats(losers,0);
+        return compareFighterStatsToOpponent(losers,0);
     }
 
-    ///class 1 (winners)--> status reach,record and height in comparison to their opponents
     public List<Input> getClass1Inputs(){
         List<Object[]> winners=matchupRepository.findMLClass1Inputs();
-        return listGetClassStats(winners,1);
+        return compareFighterStatsToOpponent(winners,1);
         
     }
 
 //create inputs for upcoming matchups to predict
     public List<Input> createFutureMatchupInputs(){
         List<Object[]> futureMatchups=matchupRepository.findFutureMatchupsToPredict();
-        return listGetClassStats(futureMatchups,1);
+        return compareFighterStatsToOpponent(futureMatchups,1);
         
     }
 
@@ -59,12 +62,11 @@ public class PrepareInputs {
             draws=Integer.parseInt(wld[2]);
         }
 
-        //find wins as a % of total fights
         int[] totalfights=new int[]{(wins+losses+draws),wins};
         return totalfights;
     }
 
-public ArrayList<Input> listGetClassStats(List<Object[]> matchups, int clas){
+public ArrayList<Input> compareFighterStatsToOpponent(List<Object[]> matchups, int clas){
     //find reach advantage/disadvantage
     ArrayList<Input> inputs=new ArrayList<>();
     for (int i=0;i<matchups.size();i++){
@@ -111,6 +113,8 @@ public ArrayList<Input> listGetClassStats(List<Object[]> matchups, int clas){
         double fighter2winPct=getFighterWinPct(fighter2record);
         int totalFights2=getTotalFightsAndWins(fighter2record)[0];
 
+        //the instance must be prepared in the format of  height advantage reach advantage etc
+        // i.e. each fighter in the matchups stats must be presented to the algorithm relative the their opponent
         totalFights =totalFights-totalFights2;
         fighterwinPct=fighterwinPct-fighter2winPct;
          fighter1height=fighter1height-fighter2height;

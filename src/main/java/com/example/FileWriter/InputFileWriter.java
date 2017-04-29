@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class CsvFileWriter {
+public class InputFileWriter {
 
     //Delimiter used in CSV file
     private static final String COMMA_DELIMITER = ",";
@@ -19,7 +19,7 @@ public class CsvFileWriter {
     public PrepareInputs prepareInputs;
 
     private FileWriter fileWriter;
-    public CsvFileWriter(){}
+    public InputFileWriter(){}
 
     public void setFileWriter(String filepath){
         try {
@@ -28,7 +28,7 @@ public class CsvFileWriter {
             e.printStackTrace();
         }
     }
-    public void writeCsvFile(boolean past) {
+    public void writeAarfFile(boolean past) {
 
         try {
             //Write the CSV file header
@@ -83,6 +83,7 @@ public class CsvFileWriter {
     public void createPastMatchupData()  {
         //get the winners (class1 matchup instances)
         List<Input> cl1Inputs=prepareInputs.getClass1Inputs();
+        //same for losers
         List<Input> cl0Inputs=prepareInputs.getClass0Inputs();
         try {
             writeFile(cl0Inputs);
@@ -97,6 +98,7 @@ public class CsvFileWriter {
         writeFile(futureMatchups);
     }
 
+    //wirte the instance values to the file
     public void writeFile(List<Input> inputs) throws IOException {
         for (Input input : inputs) {
             fileWriter.append(String.valueOf(input.getMatchupId()));

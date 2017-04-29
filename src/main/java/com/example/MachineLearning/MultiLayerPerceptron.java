@@ -4,7 +4,6 @@ import com.example.DAO.*;
 import com.example.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import weka.classifiers.Evaluation;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Attribute;
@@ -57,9 +56,10 @@ public class MultiLayerPerceptron {
             p++;
             FileReader trainreader = null;
             try {
+                //retrive the training instances from the file
                 trainreader = new FileReader("src/main/resources/PerceptronInputs/PastMatchups.arff");
             train = new Instances(trainreader);
-                train.sort(0);
+                train.sort(0);//sort by matchup id --group all instances of the same matchup together
 
                 //below is used to remove records from the data set in order to determine the learning curve
                 for(int i=0;i<offset;i++){
@@ -70,21 +70,17 @@ public class MultiLayerPerceptron {
                 //below will find the best size for each test set based on the amount of records
                 testSize=(numInstances-(((numInstances/2)%numberOfFolds)*2))/numberOfFolds;
 
-//                int modulus=numInstances%numberOfFolds;
-////                //add the modulus to the first test set
-//                if(p==1){
-//                  testSize+=modulus;jdsbckc
-//                }
-
-                //below will  create a test set from the total/training set at a specified index and remove said test set from the training set
+                //below will  create a test set from the total/training set at a specified index
+                // and removes said test set from the training set
             Instances test=new Instances(train,  startingPoint,  testSize);
                 //remove test instances from training set
             for (int i=0;i<testSize;i++){
                 train.delete(startingPoint);
             }
 
-            int y=0;
-            foldPctCorrect+=trainAndTest(train,test);//trains on one set ,tests on another and returns the % of matchups predicted correctly on the test set
+                //trains on one set ,tests on another and
+                // returns the % of matchups predicted correctly on the test set
+            foldPctCorrect+=trainAndTest(train,test);
             startingPoint+=testSize;
                 fold++;
 
@@ -97,21 +93,26 @@ public class MultiLayerPerceptron {
 
         }while (startingPoint<=numInstances-testSize);
 
+        //save the total % of accuracy from the above cross fold validation to be used as a learning curve point
         LearningCurveResult learningCurveResult=new LearningCurveResult();
         learningCurveResult.setAccuracy((foldPctCorrect/p));
         learningCurveResult.setNumberOfFights(numInstances/2);
         learningCurveResultRepository.save(learningCurveResult);
+
         System.out.println("full amt %: "+(foldPctCorrect/p)+"%");
-        return (foldPctCorrect/p);
+
+        return (foldPctCorrect/fold);//average accuracy out of 10 folds
     }
 
     public float trainAndTest(Instances train,Instances test)
     {
         try{
-            buildPerceptronModel();
-            //build on training se
+            setPerceptronConfiguration();
 
+            //build the model on the training set --this is where the backpropagation, updating of weights etc occurs
             fc.buildClassifier(train);
+
+            //from here the model is trained and can be used to clssify unseen instances
 
             //sort by matchupId
             train.sort(train.attribute(0));
@@ -119,32 +120,22 @@ public class MultiLayerPerceptron {
             int numCorrect=trainPerceptron(train,fc);
 
             //evauluate training data
-            Evaluation eval = new Evaluation(train);
-//            train.sort(train.attribute(0));
-//            train.deleteAttributeAt(0);
-//            eval.evaluateModel(mlp,train);
-//            System.out.println(eval.errorRate()); //Printing Training Mean root squared Error
-//            System.out.println(eval.toSummaryString()); //Summary of Training
-//            System.out.println(eval.numInstances()/2); //Summary of Training
-            System.out.println("fold:"+fold+" train set CORRECT"+numCorrect+" TOTAL: "+eval.numInstances()/2+" PCT:"+(numCorrect/((train.size()/2)/100.0f)));
+            System.out.println("fold:"+fold+" train set CORRECT"+numCorrect+" TOTAL: "+train.numInstances()/2+" PCT:"+(numCorrect/((train.size()/2)/100.0f)));
 
 
 System.out.println("--------------------------------TEST SET---------------------------------------------");
             test.setClassIndex(test.numAttributes()-1);
-//             Attribute clas2=test.attribute(15);
-//            test.setClass(clas2);
+
             //Predict Part
             numCorrect=0;
-            test.sort(test.attribute(0));
-            for (int i = 0; i < test.numInstances(); i=i+2) {
+            test.sort(test.attribute(0));//sort all records based on their matchup id
+            for (int i = 0; i < test.numInstances(); i=i+2) {//
                 double pred = fc.classifyInstance(test.instance(i));
-//                System.out.print("ID: " + test.instance(i).value(0));
-//                System.out.print(", actual: " + test.instance(i).classValue());
-//                System.out.println(", predicted: " + pred);
-                if(i+1!=test.size())
+                if(i+1!=test.size())//avoid out of bounds
                     if (test.get(i).value(0)==test.get(i+1).value(0)) {//2 records of same matchup
                         //is the loser 
-                        if(test.get(i).classValue()==0) {
+                        if(test.get(i).classValue()==0) {//the instance we are looking at is the loser
+                            //was this instance predicted with a lower class value than the other instance
                             if(fc.classifyInstance(test.instance(i))<fc.classifyInstance(test.instance(i+1))) {
                                 numCorrect++;
                                 totalCorrect+=numCorrect;
@@ -156,12 +147,13 @@ System.out.println("--------------------------------TEST SET--------------------
                         }
                         else {//is of class 1 winner
                             if(fc.classifyInstance(test.instance(i))>fc.classifyInstance(test.instance(i+1)))
+                            //was this instance predicted with a higher class value than the other instance
                             {
                                 numCorrect++;
                                 totalCorrect+=numCorrect;
                                 savePrediction(test.instance(i),true);
                             }
-                            else {
+                            else {//if it wasnt then the prediction is wrong
                                 savePrediction(test.instance(i+1),false);
                             }
                         }
@@ -185,28 +177,14 @@ System.out.println("--------------------------------TEST SET--------------------
         return 0;
     }
 
-    private void buildPerceptronModel() throws Exception {
+    private void setPerceptronConfiguration() throws Exception {
         // filter
         Remove rm = new Remove();
         //remove fighter and matchup id
         rm.setAttributeIndices("1,2");
-        // classifier1
         mlp = new MultilayerPerceptron();
 
-       //best
-//        mlp.setOptions(Utils.splitOptions(" -L 0.3 -M 0.2 -N 1000 -V 0 -S 0 -E 20 -H \"6,3\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-      //59.24
-//        mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-     //58 good curve   mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.1 -N 1000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-   //60.5 ok curve
-//        mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.05 -N 1000 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-   //60.5 best     mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.1 -N 500 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-   //60.5 best stick with
-//        mlp.setOptions(Utils.splitOptions(" -L 0.1 -M 0.1 -N 500 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-
-      //actual best
-        mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.1 -N 500 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
-        mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.1 -N 500 -V 0 -S 0 -E 20 -H \"5\" -R")); //k-10 59.77--perfect distribution, ensible amount of nodes ---PERFORMS WELL IN SUMLATION
+        mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.1 -N 500 -V 0 -S 0 -E 20 -H \"5\" -R"));
         Attribute clas=train.attribute(train.numAttributes()-1); //win/lose class
         train.setClass(clas);
         // meta-classifier
@@ -217,13 +195,9 @@ System.out.println("--------------------------------TEST SET--------------------
 
     private int trainPerceptron(Instances train, FilteredClassifier fc) throws Exception {
         int numCorrect=0;
-        int predictedTheSame=0;
 
         for (int i = 0; i < train.numInstances(); i++) {
-            double pred = fc.classifyInstance(train.instance(i));
-//                System.out.print("ID: " + train.instance(i).value(0));
-//                System.out.print(", actual: " + train.instance(i).classValue());
-//                System.out.println(", predicted: " + pred);
+
             if(i+1!=train.size())//avoid out of bounds
                 if (train.get(i).value(0)==train.get(i+1).value(0)) {//two records of the same matchup id
                     if(train.get(i).classValue()==0) {//the first instance is a loser
@@ -257,7 +231,7 @@ System.out.println("--------------------------------TEST SET--------------------
             matchupsToPredict.sort(0);
 
             //build perceptron on full training set
-            buildPerceptronModel();
+            setPerceptronConfiguration();
             fc.buildClassifier(train);
 
             matchupsToPredict.setClassIndex(matchupsToPredict.numAttributes()-1);

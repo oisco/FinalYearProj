@@ -5,7 +5,7 @@ import com.example.Entity.Event;
 import com.example.Entity.Fighter;
 import com.example.Entity.Matchup;
 import com.example.Entity.News;
-import com.example.FileWriter.CsvFileWriter;
+import com.example.FileWriter.InputFileWriter;
 import com.example.MachineLearning.CalculateStats;
 import com.example.MachineLearning.MultiLayerPerceptron;
 import com.google.gson.*;
@@ -40,7 +40,7 @@ public class StartupService {
     @Autowired
     CalculateStats calculateStats;
     @Autowired
-    CsvFileWriter csvFileWriter;
+    InputFileWriter inputFileWriter;
     @Autowired
     MultiLayerPerceptron multiLayerPerceptron;
     @Autowired
@@ -67,16 +67,16 @@ public class StartupService {
 
        //if there has been any events since the last update --> get its results, recreate the perceptron model on the latest set, test it, and use it to product future matchups
        if(eventsToUpdate.size()>0){
-//           calculateStats.getFighterStatsAtTimeOfMatchup();
+           calculateStats.getFighterStatsAtTimeOfMatchup();
            testingResultRepository.deleteAll();
            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
-//           int setToDelete[]={0,600,1200,1800};
-           int setToDelete[]={0,300,600,900,1200,1500};
+           int setToDelete[]={0,300,600,900,1200,1500};//DATA SET SIZES TO USE TO DETERMINE LEARNING CURVE,
            double results[]=new double[setToDelete.length];
            //CREATE THE ACTUAL PERCEPTRON INPUTS AND SAVE IN AARF FORMAT (WEKA LIBRARY FORMAT)
            createArffMLInputs();
            for(int i=setToDelete.length-1;i >= 0;i--){
-               //save the results if we are cross validating using the full data set--his will be used as an indicator for current accuracy
+               //save the results if we are cross validating using the full data set
+               // this will be used as an indicator for current accuracy
                if(i==0){
                    predictionRepository.deleteAll();
                    testingResultRepository.getRidOfFoldResult("FoldResult");
@@ -90,7 +90,7 @@ public class StartupService {
 
            multiLayerPerceptron.PredictUpcoming();
            for (int i=0;i<results.length;i++){
-               System.out.println(i+" months ago "+results[i]+"%");
+               System.out.println("learning curve "+results[i]+"%");
            }
        }
    }
@@ -116,10 +116,10 @@ public class StartupService {
        newsRepository.save(Arrays.asList(news));
    }
     private void createArffMLInputs() {
-        csvFileWriter.setFileWriter("src/main/resources/PerceptronInputs/PastMatchups.arff");
-        csvFileWriter.writeCsvFile(true);
-        csvFileWriter.setFileWriter("src/main/resources/PerceptronInputs/FutureMatchups.arff");
-        csvFileWriter.writeCsvFile(false);
+        inputFileWriter.setFileWriter("src/main/resources/PerceptronInputs/PastMatchups.arff");
+        inputFileWriter.writeAarfFile(true);
+        inputFileWriter.setFileWriter("src/main/resources/PerceptronInputs/FutureMatchups.arff");
+        inputFileWriter.writeAarfFile(false);
 
     }
 
@@ -178,9 +178,7 @@ public class StartupService {
                 //predict the matchup if it has not taken place
             Date currentDate = new Date();
             if (currentDate.compareTo(event.getEvent_date())<0) {
-//                Predictor predictor = new Predictor();
-                    //before predicting the fight ensure we have a profile for each fighter(in the case of newcomers create one)
-                int fighter1Id=matchups[p].getFighter1_id();
+              int fighter1Id=matchups[p].getFighter1_id();
                 int fighter2Id=matchups[p].getFighter2_id();
 
                 Fighter fighter1=fighterRepository.findOne(fighter1Id);

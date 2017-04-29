@@ -13,7 +13,6 @@
             <table class="table ">
                 <tr><th>Fights</th><th></th><th></th><th>Method of victory</th></tr>
                 <tr height="180" ng-repeat="matchup in vm.event.matchups">
-                    <!--<td ng-class="cellClass(matchup.fighter1_id,matchup.fighter1_is_winner)">-->
                     <td>
                         <div class="main">
                             <div class="sidebar">
@@ -52,7 +51,6 @@
                                 <div ng-show="matchup.fighter2height>0"><b>Height :</b>{{matchup.fighter2height}}
                                 </div>
                                 <div ng-show="matchup.fighter2reach>0"><b>Reach :</b>{{matchup.fighter2reach}}</div>
-                                <br>
                             </div>
                             <div class="page-wrap"><img ng-src="{{matchup.fighter2_profile_image}}" height="120">
                                 <div ng-if="matchup.fighter2_is_winner">

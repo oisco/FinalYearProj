@@ -36,8 +36,6 @@ public class EventUpdater {
         Event[] events = responseEntity.getBody();
         Date now = new Date();
 
-        //nb delete all upcoming matchups
-
         boolean allUpcomingEvents=true;
 
         int i=0;
@@ -60,7 +58,7 @@ public class EventUpdater {
     }
 
 //    @PostConstruct
-    //this method deletes all upcoming matchups,
+    //this method deletes all upcoming matchups before each event is refreshed ,
     //the reason for this is to ensure if fights are cancelled or opponents are replaced this will be reflected
     public void removeAllUpcomingMatchups(){
         predictionRepository.deleteAll();

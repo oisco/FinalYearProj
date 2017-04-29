@@ -32,7 +32,7 @@ angular.module('app').controller("ViewLearningCurveController", function ($scope
             data: {
                 labels: vm.labels,
                 datasets: [{
-                    label: '% of matchups predicted correctly per data set size',
+                    label: 'Accuracy % per data set size',
                     data: vm.values,
                     backgroundColor: "rgba(153,255,51,0.4)"
                     }]
@@ -47,7 +47,7 @@ angular.module('app').controller("ViewLearningCurveController", function ($scope
                     },
                     scaleLabel: {
                         display: true,
-                        labelString: '% Correct',
+                        labelString: '% accuracy using cross fold validation',
                         fontColor: "#AACCFF"
                     }
                 }],
