@@ -5,9 +5,7 @@
             <div class="sidebar">
                 <b>Name :</b>
                 <b><a ng-click="vm.goToFighter(vm.matchup.fighter1_id)">{{vm.matchup.fighter1_first_name}} {{vm.matchup.fighter1_last_name}}</a></b>
-                <br>
-                <b>Height :</b>{{vm.matchup.fighter1height}}
-                <br>
+                <div ng-show="vm.matchup.fighter1height>0"><b>Height :</b>{{vm.matchup.fighter1height}}</div>
                 <div ng-show="vm.matchup.fighter1reach>0"><b>Reach :</b>{{vm.matchup.fighter1reach}}</div>
                 <div ng-show="vm.fighter1.rank!==''"><b>Rank:</b> {{vm.fighter1.rank}}</div>
                 </div>

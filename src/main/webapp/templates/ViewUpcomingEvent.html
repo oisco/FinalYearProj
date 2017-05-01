@@ -3,7 +3,7 @@
         <div class="eventImage">
             <img src="{{vm.event.feature_image}}">
         </div>
-        <div class="eventInfo">
+        <div class="eventInfo" align="center">
             <h2 align="center">{{vm.event.base_title}}</h2>
             <h2 align="center">{{vm.event.title_tag_line}}</h2>
             <p align="center">{{vm.event.event_date |date}}</p><p align="center">{{vm.event.location}}</p>
@@ -24,19 +24,22 @@
                                         <b>Record :</b>{{matchup.fighter1record}}
                                     </div>
                                 <div class="page-wrap">
-                                    <img id="fighter" ng-src="{{matchup.fighter1_profile_image}}" height="120">
+                                            <img id="fighter" ng-src="{{matchup.fighter1_profile_image}}" height="120">
+                                    <div ng-hide="vm.loserLabelClass({{matchup.fighter1_id}}) && vm.loserLabelClass({{matchup.fighter2_id}})">
                                         <div ng-class="vm.labelClass({{matchup.fighter1_id}})">
                                             <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
                                             <h1>Predicted Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
                                         </div>
-                                    <div ng-show="vm.loserLabelClass({{matchup.fighter1_id}})" CLASS="loserribbon">
-                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
-                                        <h1>Predicted Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
-                                    </div>
+                                        <div ng-show="vm.loserLabelClass({{matchup.fighter1_id}})" CLASS="loserribbon">
+                                            <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                            <h1>Predicted Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                        </div>
                                     </div>
                                 </div>
+                                </div>
                         </td>
-                        <td><img src="images/versus.png" class="versus"> </td>
+                        <td><img src="images/versus.png" class="versus">
+                        </td>
                         <td ng-class="vm.cellClass(matchup.fighter2_id)">
                             <div class="main">
                                 <div class="sidebar">
@@ -46,18 +49,26 @@
                                     <b>Record :</b>{{matchup.fighter2record}}
                                 </div>
                                 <div class="page-wrap"><img ng-src="{{matchup.fighter2_profile_image}}" height="120">
-                                    <div ng-class="vm.labelClass({{matchup.fighter2_id}})">
-                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
-                                        <h1>Predicted Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
-                                    </div>
-                                    <div ng-show="vm.loserLabelClass({{matchup.fighter2_id}})" CLASS="loserribbon">
-                                        <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
-                                        <h1>Predicted Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
-                                    </div>
-                                </div>
+                                    <div ng-hide="vm.loserLabelClass({{matchup.fighter2_id}}) && vm.loserLabelClass({{matchup.fighter1_id}})">
+
+                                        <div ng-class="vm.labelClass({{matchup.fighter2_id}})">
+                                                    <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                                    <h1>Predicted Winner</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                                </div>
+                                                <div ng-show="vm.loserLabelClass({{matchup.fighter2_id}})" CLASS="loserribbon">
+                                                    <div class="ribbon-stitches-top"></div><strong class="ribbon-content">
+                                                    <h1>Predicted Loser</h1></strong><div class="ribbon-stitches-bottom"></div>
+                                                </div>
+                                        </div>
+                                     </div>
                             </div>
                         </td>
-                        <td> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Fight Breakdown</button></td>
+                        <td> <button type="button" class="btn btn-info"  ng-click="vm.goToMatchup(matchup.id)">View Fight Breakdown</button>
+                            <div ng-show="vm.loserLabelClass({{matchup.fighter2_id}}) && vm.loserLabelClass({{matchup.fighter1_id}})">
+                                <!--<div ng-switch-when="true">-->
+                                    <div class="cantPredict">There is not enough background data on both fighters in order to make a prediction </div>
+                                </div>
+                        </td>
                     </tr>
                 </table>
 

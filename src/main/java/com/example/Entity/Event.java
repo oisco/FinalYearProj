@@ -1,8 +1,6 @@
 package com.example.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.springframework.data.jpa.repository.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +16,7 @@ import java.util.List;
                 @NamedNativeQuery(name = "Event.findNextEvent", query = "select * from event where event_date> NOW() order by event_date limit 1", resultClass = Event.class),
                 @NamedNativeQuery(name = "Event.findPastEvents", query = "select id,base_title,title_tag_line,event_date from event where event_date< NOW()  order by event_date desc"),
                 @NamedNativeQuery(name = "Event.findToGetMatchups", query = "select * from event where id not in(select distinct(event_id) from matchup) AND EVENT_DATE<NOW() ORDER BY(id) DESC;" ,resultClass = Event.class),
-        @NamedNativeQuery(name = "Event.findUpcomingEvents", query = "select id,base_title,title_tag_line,event_date from event where event_date> NOW()  order by event_date asc ")})
+        @NamedNativeQuery(name = "Event.findUpcomingEvents", query = "select id,base_title,title_tag_line,event_date from event where event_date> NOW()  order by event_date asc  limit 7")})
 public class Event {
     @Id
     private int id;

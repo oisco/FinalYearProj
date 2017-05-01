@@ -25,7 +25,6 @@ public class EventUpdater {
     @Autowired
     PredictionRepository predictionRepository;
 
-//    @PostConstruct
     public void refreshEvents(){
         //remove all upcoming matchups to accomodate for fight card changes (rplacement,cancellation, etc.)
 
@@ -57,7 +56,6 @@ public class EventUpdater {
 
     }
 
-//    @PostConstruct
     //this method deletes all upcoming matchups before each event is refreshed ,
     //the reason for this is to ensure if fights are cancelled or opponents are replaced this will be reflected
     public void removeAllUpcomingMatchups(){

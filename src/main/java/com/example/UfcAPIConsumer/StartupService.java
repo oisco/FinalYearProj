@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -50,20 +49,20 @@ public class StartupService {
     @Autowired
     NewsRepository newsRepository;
     //service to populate db with data from UFC API and recreate and retest the algorithm
-   @PostConstruct
+//   @PostConstruct
     public void onStartup() {
 
             //find any past events to update
 
        //see if there was any event since the last time the schedular was ran
        ArrayList<Event> eventsToUpdate=new ArrayList<Event>();
-//       eventsToUpdate.add(eventRepository.findOne(617917));
-       //uncommment below
+       eventsToUpdate.add(eventRepository.findOne(617917));
+       //GET ANY RESULTS OF EVENTS FROM THE PAST WEEK
            eventsToUpdate=eventRepository.findToUpdate();
-//       for (int i=0;i<eventsToUpdate.size();i++){
-//           getEventInfo(eventsToUpdate.get(i));
-//       }
-//        getNews();
+       for (int i=0;i<eventsToUpdate.size();i++){
+           getEventInfo(eventsToUpdate.get(i));
+       }
+        getNews();
 
        //if there has been any events since the last update --> get its results, recreate the perceptron model on the latest set, test it, and use it to product future matchups
        if(eventsToUpdate.size()>0){
@@ -72,7 +71,7 @@ public class StartupService {
            //REMOVE RECORDS TO DETERMINE LEARNING CURVE
            int setToDelete[]={0,300,600,900,1200,1500};//DATA SET SIZES TO USE TO DETERMINE LEARNING CURVE,
            double results[]=new double[setToDelete.length];
-           //CREATE THE ACTUAL PERCEPTRON INPUTS AND SAVE IN AARF FORMAT (WEKA LIBRARY FORMAT)
+           //CREATE THE ACTUAL PERCEPTRON INPUTS(past matchups and future matchups in defferent files) AND SAVE IN AARF FORMAT (WEKA LIBRARY FORMAT)
            createArffMLInputs();
            for(int i=setToDelete.length-1;i >= 0;i--){
                //save the results if we are cross validating using the full data set
@@ -216,6 +215,22 @@ public class StartupService {
                     resultRepository.save(matchups[p].getResult());
                     if(m!=null){
                             matchups[p]=m;
+                    }
+                    //update fighter records
+                    if(m.isFighter1_is_winner()){
+                        Fighter winner=fighterRepository.findOne(m.getFighter1_id());
+                        winner.setWins(winner.getWins()+1);
+                        Fighter loser=fighterRepository.findOne(m.getFighter2_id());
+                        loser.setLosses(loser.getLosses()+1);
+                        fighterRepository.save(winner); fighterRepository.save(loser);
+                    }
+                    else
+                    if(m.isFighter2_is_winner()){
+                        Fighter winner=fighterRepository.findOne(m.getFighter2_id());
+                        winner.setWins(winner.getWins()+1);
+                        Fighter loser=fighterRepository.findOne(m.getFighter1_id());
+                        loser.setLosses(loser.getLosses()+1);
+                        fighterRepository.save(winner); fighterRepository.save(loser);
                     }
                     matchupRepository.save(matchups[p]);
                     addMatchupToFighter(matchups[p].getFighter1_id(), matchups[p]);

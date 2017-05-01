@@ -95,7 +95,9 @@ public class MultiLayerPerceptron {
 
         //save the total % of accuracy from the above cross fold validation to be used as a learning curve point
         LearningCurveResult learningCurveResult=new LearningCurveResult();
-        learningCurveResult.setAccuracy((foldPctCorrect/p));
+        double accuracy = Math.round((foldPctCorrect/p) * 100.0) / 100.0;
+
+        learningCurveResult.setAccuracy(accuracy); //average of 10 folds
         learningCurveResult.setNumberOfFights(numInstances/2);
         learningCurveResultRepository.save(learningCurveResult);
 
@@ -184,6 +186,7 @@ System.out.println("--------------------------------TEST SET--------------------
         rm.setAttributeIndices("1,2");
         mlp = new MultilayerPerceptron();
 
+        //L-LEARNING RATE, M-MOMENTUM H-HIDDEN LAYER
         mlp.setOptions(Utils.splitOptions(" -L 0.15 -M 0.1 -N 500 -V 0 -S 0 -E 20 -H \"5\" -R"));
         Attribute clas=train.attribute(train.numAttributes()-1); //win/lose class
         train.setClass(clas);
@@ -221,6 +224,7 @@ System.out.println("--------------------------------TEST SET--------------------
         //rebuild perceptron on full data set and test on future matchups
         try {
 
+            //USE FULL SET OF PAST MATCHUPS FOR TRAINING
             FileReader trainreader = new FileReader("src/main/resources/PerceptronInputs/PastMatchups.arff");
             train = new Instances(trainreader);
             numInstances=train.numInstances();
@@ -239,8 +243,8 @@ System.out.println("--------------------------------TEST SET--------------------
             for(int i=0;i<matchupsToPredict.numInstances();i+=2){
 
                 int matchupId= (int) matchupsToPredict.instance(i).value(0);
-                double pred=fc.classifyInstance(matchupsToPredict.instance(i));
-                double pred2=fc.classifyInstance(matchupsToPredict.instance(i+1));
+                double pred=fc.classifyInstance(matchupsToPredict.instance(i));//FIGHER 1 IN MATCHUPS CHANCE OF WINNING
+                double pred2=fc.classifyInstance(matchupsToPredict.instance(i+1));//FIGHTER 2 IN MATCHUP
                 System.out.println("matchupId: "+matchupId+"first matchup predicted"+pred+" fighterId"+matchupsToPredict.instance(i).value(1));
                 System.out.println("matchupId: "+matchupId+"first matchup predicted"+pred2+" fighterId"+matchupsToPredict.instance(i+1).value(1));
                 Prediction p;
@@ -269,7 +273,7 @@ System.out.println("--------------------------------TEST SET--------------------
     private void savePrediction(Instance instance,boolean wasCorrect) {
         Prediction prediction=new Prediction();
         int matchupId= (int) instance.value(0);
-        int fighterId= (int) instance.value(1);//actual winner
+        int fighterId= (int) instance.value(1);//PREDICTED winner
         Matchup matchup =matchupRepository.findOne(matchupId);
         Fighter fighter=fighterRepository.findOne(fighterId);
 

@@ -1,14 +1,10 @@
 package com.example.Controller;
 
-import com.example.Services.EventService;
 import com.example.Entity.Event;
-import com.example.Entity.Fighter;
-import com.example.Entity.Matchup;
 import com.example.Services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +24,6 @@ public class EventController {
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public List<Event> getAll(){
-        
         return eventService.findAll();
     }
 

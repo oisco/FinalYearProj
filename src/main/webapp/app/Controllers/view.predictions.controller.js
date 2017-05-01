@@ -27,11 +27,9 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
             vm.predictions=response.data;
             limit=vm.predictions.length;
             setUpGraphData();
-            setTimeout(function(){
                 setUpGraph();
                 createDoughnutChart();
-            }, 2000);//slight delay needed before displaying graph due to size of request
-        })
+       })
     }
 
     function createDoughnutChart() {
@@ -44,10 +42,10 @@ angular.module('app').controller("ViewAllPredictionsController", function ($scop
         //accuracy is the average of each fold result from full set cross validation
         vm.accuracy=total/vm.foldResult.length;
 
+        vm.accuracy=Math.round(vm.accuracy * 100) / 100;//round for display purposes
         var pctCorrect=vm.accuracy;
         var pctIncorrect=100-vm.accuracy;
 
-        vm.accuracy=Math.round(vm.accuracy * 100) / 100;//round for display purposes
         var data = {
             labels: [
                 "Correct",
